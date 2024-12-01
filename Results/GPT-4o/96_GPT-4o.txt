@@ -1,0 +1,128 @@
+('user', 'Set image width to \\pu{150 nm} and D gain to 15 in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+Based on the user's request, the task involves adjusting settings in the AFM software. Therefore, the appropriate worker to act next is the 'AFM_Handler'.
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_hguQdN0eDlzlqcyUWlXoFlp8)
+ Call ID: call_hguQdN0eDlzlqcyUWlXoFlp8
+  Args:
+    query: set image width
+  Document_Retriever (call_72XSNrakDgOfVd7kpDaHeIza)
+ Call ID: call_72XSNrakDgOfVd7kpDaHeIza
+  Args:
+    query: set D gain
+================================= Tool Message =================================
+Name: Document_Retriever
+
+''''''Python code to change afm image scan parameters and Optimization parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+'''Remove comments and update only requested parameters; leave other untouched.'''
+
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # s
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 5 #%
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_b4dyn0ewnaZUfCGThnP5LToW)
+ Call ID: call_b4dyn0ewnaZUfCGThnP5LToW
+  Args:
+    code: ''''''Python code to change afm image scan parameters and Optimization parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+'''Remove comments and update only requested parameters; leave other untouched.'''
+
+# Set scan parameters
+scan.ImageWidth = 150e-9 # [m]
+
+# Set Z controller parameters
+zcontrol.DGain = 15
+
+del spm
+Error: unterminated triple-quoted string literal (detected at line 23) (<string>, line 15)
+================================= Tool Message =================================
+Name: Code_Executor
+
+unterminated triple-quoted string literal (detected at line 23) (<string>, line 15)
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems there was an issue with the code execution due to an unterminated triple-quoted string. Let me correct the code and try again.
+Tool Calls:
+  Code_Executor (call_EpVsoiUJ4SWapDe0zEDNldxi)
+ Call ID: call_EpVsoiUJ4SWapDe0zEDNldxi
+  Args:
+    code: # Python code to change afm image scan parameters and Optimization parameters (P/I/D-gain)
+
+#imports
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+# Set scan parameters
+scan.ImageWidth = 150e-9 # [m]
+
+# Set Z controller parameters
+zcontrol.DGain = 15
+
+del spm
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+FINAL ANSWER: The AFM's image width has been set to 150 nm and the D gain has been set to 15 successfully.
+total steps: 8
+
+Total time taken: 17.37 seconds

@@ -1,0 +1,69 @@
+('user', 'Retract the AFM tip from the sample surface.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_BvTMZRWZL33Fq8oXSODqhaTV)
+ Call ID: call_BvTMZRWZL33Fq8oXSODqhaTV
+  Args:
+    query: Retract AFM tip
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_aqfUSdNl1WaS1JU3TpCqDpLb)
+ Call ID: call_aqfUSdNl1WaS1JU3TpCqDpLb
+  Args:
+    code: import nanosurf
+import time
+
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+
+approach.StartRetract()
+
+while approach.Status==1 or approach.Status==2:
+    print('Retracting... ')
+    time.sleep(1)
+print('Retraction finished')
+
+del spm
+Connected to running app: CX
+Retraction finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The AFM tip has been successfully retracted from the sample surface.
+total steps: 6
+
+Total time taken: 6.04 seconds

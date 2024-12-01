@@ -1,0 +1,58 @@
+('user', 'Initiate the scanning process in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+The AFM_Handler should act next to initiate the scanning process in the AFM software.
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_4W6IeR5rHzJTqBul9TcIZIcD)
+ Call ID: call_4W6IeR5rHzJTqBul9TcIZIcD
+  Args:
+    query: scanning process initiation
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''initiate/start or terminate/stop image scanning process'''
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+
+# Start scan
+# scan.StartFrameDown() #Scanning from up to down or top to bottom
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+
+#scan.stop() #stop sacn
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",(scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_bOyeUG2BWabge2c9b1C63tOp)
+ Call ID: call_bOyeUG2BWabge2c9b1C63tOp
+  Args:
+    code: spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+scan.StartFrameUp()
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The scanning process has been initiated in the AFM software.
+total steps: 6
+
+Total time taken: 5.31 seconds

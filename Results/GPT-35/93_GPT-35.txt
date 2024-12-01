@@ -1,0 +1,80 @@
+('user', 'Change the cantilever tip to ANSCM in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_NKpCbFZq0vQcanZJg73mF0fp)
+ Call ID: call_NKpCbFZq0vQcanZJg73mF0fp
+  Args:
+    query: Change cantilever tip to ANSCM
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_vGhtn1JcK3UdtPzm1n6p7gkK)
+ Call ID: call_vGhtn1JcK3UdtPzm1n6p7gkK
+  Args:
+    code: # Operating mode
+opmode.OperatingMode = spm.OperatingMode.DynamicAFM
+# Set cantilever tip to ANSCM
+tip.CantileverByGUID = spm.CantileverGUID.ANSCM
+Error: name 'spm' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'spm' is not defined
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I made an error in executing the code. Let me correct it and run it again.
+Tool Calls:
+  Code_Executor (call_vBfZRvL6sDCIPH3ebRid43Uz)
+ Call ID: call_vBfZRvL6sDCIPH3ebRid43Uz
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()
+opmode = spm.application.OperatingMode
+head = spm.application.ScanHead
+
+# Set cantilever tip to ANSCM
+head.CantileverByGUID = spm.CantileverGUID.ANSCM
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The cantilever tip has been successfully changed to ANSCM in the AFM software.
+total steps: 8
+
+Total time taken: 9.77 seconds

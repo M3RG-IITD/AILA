@@ -1,0 +1,124 @@
+('user', "Capture an AFM image with dimensions $\\pu{500 nm} \times \\pu{500 nm}$ at a scan angle of $ 5 degrees $, using the following parameters: P gain = 100, I gain = 5000, D gain = 0, and setpoint = 0.1 V with the filename 'Test.' Then, open the latest file in the current folder; from that file, extract the Z-axis backward image data, plot it, and save the plot as '75_Test_GPT-35.png'.")
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_X5MNBeXfJAhI69r99ociwpSm)
+ Call ID: call_X5MNBeXfJAhI69r99ociwpSm
+  Args:
+    query: AFM parameters for setting image dimensions and scan angle
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_bXUlJGLg4PzgRgJTpYJOYmMS)
+ Call ID: call_bXUlJGLg4PzgRgJTpYJOYmMS
+  Args:
+    code: import nanosurf
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+zcontrol = application.ZController
+
+# Set scan parameters
+scan.ImageWidth = 500e-9  # 500 nm
+scan.ImageHeight = 500e-9  # 500 nm
+scan.SlopeX = 5.0  # 5 degrees
+
+# Set Z controller parameters
+zcontrol.PGain = 100
+zcontrol.IGain = 5000
+zcontrol.DGain = 0
+zcontrol.SetPoint = 0.1
+
+spm.SaveImage('Test')
+del spm
+Connected to running app: CX
+Error: 'SPM' object has no attribute 'SaveImage'
+================================= Tool Message =================================
+Name: Code_Executor
+
+'SPM' object has no attribute 'SaveImage'
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems there was an issue with the `SaveImage` method. Let me modify the code to save the image with the correct method and adjust the parameters accordingly.
+Tool Calls:
+  Document_Retriever (call_zwtJMCa4ckz3PQ1D77GUi2Ku)
+ Call ID: call_zwtJMCa4ckz3PQ1D77GUi2Ku
+  Args:
+    query: AFM save image command
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm

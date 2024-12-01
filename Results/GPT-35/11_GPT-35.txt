@@ -1,0 +1,74 @@
+('user', 'Bring the AFM tip to the sample surface.')
+================================== Ai Message ==================================
+Name: AILA
+
+I am an AI assistant and do not have the physical capability to interact with the AFM system. 
+Based on the conversation above, the next worker who should act is the AFM_Handler.
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_EN9vjKk7PHUoIDefshmtHcGX)
+ Call ID: call_EN9vjKk7PHUoIDefshmtHcGX
+  Args:
+    query: Approach the AFM tip to the sample surface
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() ##retract the tip
+approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_racrmPok9zRBvoOYUINonuOs)
+ Call ID: call_racrmPok9zRBvoOYUINonuOs
+  Args:
+    code: import nanosurf
+import time
+
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+
+approach.StartApproach()
+
+while approach.Status==1 or approach.Status==2:
+    print('Approaching... ')
+    time.sleep(1)
+
+print('Approach completed')
+
+del spm
+Connected to running app: CX
+Approaching... 
+Approaching... 
+Approaching... 
+Approach completed
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The AFM tip has been successfully approached to the sample surface.
+total steps: 6
+
+Total time taken: 10.33 seconds

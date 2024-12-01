@@ -1,0 +1,87 @@
+('user', 'Set image width to \\pu{150 nm} and P gain to 500 in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_i0glgG2MNjeJgX736HwcfZwE)
+ Call ID: call_i0glgG2MNjeJgX736HwcfZwE
+  Args:
+    query: set image width
+  Document_Retriever (call_fukynr4AxDz8djuA1cOChDEh)
+ Call ID: call_fukynr4AxDz8djuA1cOChDEh
+  Args:
+    query: set P gain
+================================= Tool Message =================================
+Name: Document_Retriever
+
+''''''Python code to change afm image scan parameters and Optimization parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+'''Remove comments and update only requested parameters; leave other untouched.'''
+
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # s
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 5 #%
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_wmiePMyZ3GErpvndwk8p0sTa)
+ Call ID: call_wmiePMyZ3GErpvndwk8p0sTa
+  Args:
+    code: import nanosurf
+
+# Load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+# All variables
+scan = application.Scan
+zcontrol = application.ZController
+
+# Set scan parameters
+scan.ImageWidth = 150e-9  # [m] for 150 nm
+
+# Set Z controller parameters
+zcontrol.PGain = 500
+
+del spm
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+FINAL ANSWER: The image width has been set to 150 nm and the P gain to 500 in the AFM software.
+total steps: 6
+
+Total time taken: 7.55 seconds

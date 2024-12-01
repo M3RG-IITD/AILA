@@ -1,0 +1,68 @@
+('user', 'Change the cantilever tip to MFMR in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+Based on the request to change the cantilever tip to MFMR in the AFM software, the appropriate worker to act next is the 'AFM_Handler'. 
+
+Let's have the 'AFM_Handler' take the next action.
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_JuGouu5X3Xd87cAUWt1wwmgP)
+ Call ID: call_JuGouu5X3Xd87cAUWt1wwmgP
+  Args:
+    query: change cantilever tip to MFMR
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file and udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+'''Remove comments and update only requested parameters; leave other untouched.'''
+
+# Operating mode
+#opmode.OperatingMode = spm.OperatingMode.DynamicAFM #set any of: '.ContPhase' for Static mode, '.DynamicAFM' for Dynamic mode, '.ForceModulation', '.LateralForce' for Contact mode, '.PhaseContrast' for tapping mode imaging 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+# head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #set any of: '.Multi75Al_G', '.ContAl_G', '.Tap190Al_G'
+
+del spm
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_13YiaWK3V3DegvNg9eBfUD9h)
+ Call ID: call_13YiaWK3V3DegvNg9eBfUD9h
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+head = application.ScanHead
+
+# Choose cantilever
+head.CantileverByGUID = spm.CantileverGUID.MFMR  # Changing cantilever tip to MFMR
+
+del spm
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+FINAL ANSWER: The cantilever tip has been successfully changed to MFMR in the AFM software.
+total steps: 6
+
+Total time taken: 6.82 seconds

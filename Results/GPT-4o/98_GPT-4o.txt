@@ -1,0 +1,119 @@
+('user', 'Set image width to \\pu{250 nm}, I gain to 250, and D gain to 50 in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_tRTeKG30HI6LHCbWSyPiQKre)
+ Call ID: call_tRTeKG30HI6LHCbWSyPiQKre
+  Args:
+    query: set image width to 250 nm
+  Document_Retriever (call_fGcpY9KaE9D8bc7qMev33pWE)
+ Call ID: call_fGcpY9KaE9D8bc7qMev33pWE
+  Args:
+    query: set I gain to 250
+  Document_Retriever (call_ISXeBu5g2jOOu33QGrD2QiFg)
+ Call ID: call_ISXeBu5g2jOOu33QGrD2QiFg
+  Args:
+    query: set D gain to 50
+================================= Tool Message =================================
+Name: Document_Retriever
+
+''''''Python code to change afm image scan parameters and Optimization parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+'''Remove comments and update only requested parameters; leave other untouched.'''
+
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # s
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 5 #%
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I have retrieved the code necessary to change the AFM image scan parameters and optimization parameters (P/I/D-gain). Here's how to modify and execute the code:
+
+```python
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+zcontrol = application.ZController
+
+# Set scan parameters
+scan.ImageWidth = 250e-9 # [m] (set to 250 nm)
+
+# Set Z controller parameters
+zcontrol.IGain = 250
+zcontrol.DGain = 50
+
+del spm
+```
+
+I will now execute the code to apply these settings.
+Tool Calls:
+  Code_Executor (call_nkQiofhhYMzHzTK1yhbmm3O6)
+ Call ID: call_nkQiofhhYMzHzTK1yhbmm3O6
+  Args:
+    code: #imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+zcontrol = application.ZController
+
+# Set scan parameters
+scan.ImageWidth = 250e-9 # [m] (set to 250 nm)
+
+# Set Z controller parameters
+zcontrol.IGain = 250
+zcontrol.DGain = 50
+
+del spm
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+FINAL ANSWER: The AFM image width has been set to 250 nm, the I gain to 250, and the D gain to 50 successfully. If you need further adjustments or scans, feel free to ask!
+total steps: 6
+
+Total time taken: 13.91 seconds

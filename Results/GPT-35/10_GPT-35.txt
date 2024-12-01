@@ -1,0 +1,101 @@
+('user', 'Set overscan to $5 %$ the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_OSGcXdaEtMO7FDYs2WzlPRyk)
+ Call ID: call_OSGcXdaEtMO7FDYs2WzlPRyk
+  Args:
+    query: Set overscan to 5%
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_UygsXECkrhdbuvwRETFj8bO7)
+ Call ID: call_UygsXECkrhdbuvwRETFj8bO7
+  Args:
+    code: scan.Overscan = 5
+Error: name 'scan' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'scan' is not defined
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems there was an issue with the code execution as the 'scan' variable was not defined. Let me correct this and execute the code again.
+Tool Calls:
+  Code_Executor (call_jpIWgeNqw7D8uJk7fmJGMYaq)
+ Call ID: call_jpIWgeNqw7D8uJk7fmJGMYaq
+  Args:
+    code: scan = application.Scan
+scan.Overscan = 5
+Error: name 'application' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'application' is not defined
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems the 'application' variable was also not defined. Let me include the necessary initialization of the 'application' variable and execute the code again.
+Tool Calls:
+  Code_Executor (call_WmFN7yfs5QWnqad1dUw5jFqm)
+ Call ID: call_WmFN7yfs5QWnqad1dUw5jFqm
+  Args:
+    code: import nanosurf
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+scan.Overscan = 5
+del spm
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I have successfully set the overscan to 5% in the AFM software.
+total steps: 10
+
+Total time taken: 7.88 seconds

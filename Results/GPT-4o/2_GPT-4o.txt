@@ -1,0 +1,77 @@
+('user', 'Set the P gain to 100 in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+'AFM_Handler' should act next.
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_FE5VdzNIAzwEAJ3JBne9Mhe2)
+ Call ID: call_FE5VdzNIAzwEAJ3JBne9Mhe2
+  Args:
+    query: P gain AFM parameter setting
+================================= Tool Message =================================
+Name: Document_Retriever
+
+''''''Python code to change afm image scan parameters and Optimization parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+'''Remove comments and update only requested parameters; leave other untouched.'''
+
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # s
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 5 #%
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_vvU29fSvkrBqNMAQmaaVbgLO)
+ Call ID: call_vvU29fSvkrBqNMAQmaaVbgLO
+  Args:
+    code: import nanosurf
+
+# Load application
+spm = nanosurf.SPM()
+application = spm.application
+
+# Set Z controller P gain to 100
+zcontrol = application.ZController
+zcontrol.PGain = 100
+
+del spm
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+FINAL ANSWER: The P gain has been successfully set to 100 in the AFM software.
+total steps: 6
+
+Total time taken: 10.28 seconds

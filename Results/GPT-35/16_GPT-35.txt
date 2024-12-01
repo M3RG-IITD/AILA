@@ -1,0 +1,68 @@
+('user', 'Change the cantilever tip to Dyn190Al in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+Sure, I will forward this task to the AFM_Handler for implementation.
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_CJTxmh4eu2O5g4JtLtSDzWkz)
+ Call ID: call_CJTxmh4eu2O5g4JtLtSDzWkz
+  Args:
+    query: Dyn190Al cantilever tip change
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file and udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+'''Remove comments and update only requested parameters; leave other untouched.'''
+
+# Operating mode
+#opmode.OperatingMode = spm.OperatingMode.DynamicAFM #set any of: '.ContPhase' for Static mode, '.DynamicAFM' for Dynamic mode, '.ForceModulation', '.LateralForce' for Contact mode, '.PhaseContrast' for tapping mode imaging 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+# head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #set any of: '.Multi75Al_G', '.ContAl_G', '.Tap190Al_G'
+
+del spm
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_SONAGzYl2eEN5LiTMOdmI8u1)
+ Call ID: call_SONAGzYl2eEN5LiTMOdmI8u1
+  Args:
+    code: # Update the cantilever tip to Dyn190Al in the AFM software
+
+import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+head = application.ScanHead
+
+head.CantileverByGUID = spm.CantileverGUID.Dyn190Al
+
+# Delete the spm object to release resources
+del spm
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The cantilever tip has been successfully changed to Dyn190Al in the AFM software.
+total steps: 6
+
+Total time taken: 5.55 seconds
