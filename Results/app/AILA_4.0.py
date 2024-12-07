@@ -111,7 +111,7 @@ def Image_Analyzer(path: str = None, filename: str = None, dynamic_code: str = N
     """
     Display and return the image data from the given path. If a filename is provided, return the image data
     from that specific file. If no filename is provided, return the image data from the latest image file
-    in the directory. If dynamic_code is provided, it will be executed to process the image data.
+    in the directory. If dynamic_code is provided, it will be executed to process the image data. Don’t install any Python library or any softwere.
     
     Additionally, calculate the following if requested:
     - Average Friction
