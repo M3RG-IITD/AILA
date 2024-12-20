@@ -45,7 +45,7 @@ from langchain_openai import ChatOpenAI
 from langchain_openai import OpenAIEmbeddings
 
 
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "YOUR_API_KEY"
 
 
 llm = ChatOpenAI(model="gpt-4o")
