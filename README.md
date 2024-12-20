@@ -72,9 +72,10 @@ AILA requires Python and the Streamlit library to run. Please ensure Python is i
 
 ## **Benchmark Data and Results**
 
-The benchmark data and results for AILA are available in the `Results` folder. Navigate to the following GitHub repository to access them:
+The benchmark data and results for AILA are available in the `Data` and `Results` folders. Navigate to the following GitHub repository to access them:
 
 [AILA Results Folder](https://github.com/M3RG-IITD/AILA/tree/main/Results/)
+[AILA Results Data](https://github.com/M3RG-IITD/AILA/tree/main/Data/)
 
 - **Data Folder:** Contains all input data files used for benchmarking.
 - **Results Folder:** Contains the output results of the AILA framework.
