@@ -37,7 +37,7 @@ AILA requires Python and the Streamlit library to run. Please ensure Python is i
 
 3. **Run the Application:**
    - Double-click `run_app.bat` to launch the main application.
-   - To view the questions, double-click `run_bat`.
+   - To view the questions, double-click `run_bat.bat`.
 
 ### **Mac**
 
