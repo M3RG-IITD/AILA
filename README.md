@@ -63,7 +63,7 @@ AILA requires Python and the Streamlit library to run. Please ensure Python is i
      ```bash
      streamlit run afm_data_json.py
      ```
-   - To launch the main application, navigate to the results folder and run the Streamlit script:
+   - To launch the main application, navigate to the 'Results' folder and run the Streamlit script:
      ```bash
      streamlit run afm_data_json.py
      ```
