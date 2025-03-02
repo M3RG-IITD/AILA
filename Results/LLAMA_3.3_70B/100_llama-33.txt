@@ -1,0 +1,72 @@
+('user', 'Withdraw the AFM tip from the sample surface.')
+================================== Ai Message ==================================
+Name: AILA
+
+To withdraw the AFM tip from the sample surface, the 'AFM_Handler' is the appropriate worker. 
+
+The next action should be: 'AFM_Handler'
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_g83h)
+ Call ID: call_g83h
+  Args:
+    code: afm.tip.withdraw()
+Error: name 'afm' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'afm' is not defined
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_m451)
+ Call ID: call_m451
+  Args:
+    query: AFM tip withdrawal code
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_n8rd)
+ Call ID: call_n8rd
+  Args:
+    code: import nanosurf
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+approach.StartWithdraw()
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The AFM tip has been successfully withdrawn from the sample surface.
+total steps: 8
+
+Total time taken: 7.00 seconds

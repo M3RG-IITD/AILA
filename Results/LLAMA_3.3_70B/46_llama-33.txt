@@ -1,0 +1,74 @@
+('user', 'Change the AFM operation mode to dynamic mode in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+To change the AFM operation mode to dynamic mode, the AFM_Handler should act next. The AFM_Handler is responsible for controlling the AFM machine, including changing the operation mode.
+
+Selected worker: AFM_Handler
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_0k93)
+ Call ID: call_0k93
+  Args:
+    query: change AFM operation mode to dynamic mode
+  Code_Executor (call_r2cx)
+ Call ID: call_r2cx
+  Args:
+    code: AFM.set_operation_mode('dynamic')
+Error: name 'AFM' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'AFM' is not defined
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_rc70)
+ Call ID: call_rc70
+  Args:
+    query: change operation mode in AFM software using python
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_2enm)
+ Call ID: call_2enm
+  Args:
+    code: import nanosurf; spm = nanosurf.SPM(); application = spm.application; opmode = application.OperatingMode; opmode.OperatingMode = spm.OperatingMode.DynamicAFM
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The operation mode of the AFM has been successfully changed to dynamic mode.
+total steps: 8
+
+Total time taken: 8.00 seconds

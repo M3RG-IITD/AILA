@@ -395,7 +395,7 @@ def agent_node(state, agent, name):
     if isinstance(result, ToolMessage):
         pass
     else:
-        result = AIMessage(**result.dict(exclude={"type", "name"}), name=name)
+        result = AIMessage(**result.model_dump(exclude={"type", "name"}), name=name)
     return {
         "messages": [result],
         # Since we have a strict workflow, we can

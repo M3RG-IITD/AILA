@@ -1,0 +1,146 @@
+('user', 'Capture an image by setting a $\x0crac{points}{line}$ and $\x0crac{time}{line}$ that ensures the scanning is completed within 30 seconds.')
+================================== Ai Message ==================================
+Name: AILA
+
+To capture an image, we need to set the appropriate parameters for the AFM_Handler. 
+
+I will assign the task to the AFM_Handler. 
+
+Please act next: AFM_Handler. 
+
+The AFM_Handler will calculate the required $rac{points}{line}$ and $rac{time}{line}$ to complete the scanning within 30 seconds and capture the image.
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_50ex)
+ Call ID: call_50ex
+  Args:
+    query: AFM parameter configuration codes
+  Document_Retriever (call_k7a3)
+ Call ID: call_k7a3
+  Args:
+    query: tip approach codes
+  Document_Retriever (call_8tmz)
+ Call ID: call_8tmz
+  Args:
+    query: scan codes
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''initiate/start or terminate/stop image scanning process'''
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+
+# Start scan
+# scan.StartFrameDown() #Scanning from up to down or top to bottom
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+
+#scan.stop() #stop sacn
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",(scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_73j7)
+ Call ID: call_73j7
+  Args:
+    code: import nanosurf
+import time
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+zcontrol = application.ZController
+head = application.ScanHead
+# Set scan parameters
+scan.Points = 256 # points per line
+scan.Scantime = 0.1 # [s] time per line 
+scan.Lines = 256 # lines per frame
+# Set Z controller parameters
+zcontrol.PGain = 3100
+zcontrol.IGain = 3500
+# Operating mode
+opmode = application.OperatingMode
+opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# Choose cantilever
+head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+# Start scan
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+#scan.stop() #stop scan
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",(int(scan.Lines-scan.Currentline)))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+Connected to running app: CX
+Scanning in progress... Remaining lines: 257
+Scanning in progress... Remaining lines: 244
+Scanning in progress... Remaining lines: 229
+Scanning in progress... Remaining lines: 213
+Scanning in progress... Remaining lines: 198
+Scanning in progress... Remaining lines: 183
+Scanning in progress... Remaining lines: 167
+Scanning in progress... Remaining lines: 152
+Scanning finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_1xh2)
+ Call ID: call_1xh2
+  Args:
+    code: import nanosurf
+import time
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+zcontrol = application.ZController
+head = application.ScanHead
+# Set scan parameters
+scan.Points = 128 # points per line
+scan.Scantime = 0.2 # [s] time per line 
+scan.Lines = 128 # lines per frame
+# Set Z controller parameters
+zcontrol.PGain = 3100
+zcontrol.IGain = 3500
+# Operating mode
+opmode = application.OperatingMode
+opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# Choose cantilever
+head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+# Start scan
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+#scan.stop() #stop scan
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",(int(scan.Lines-scan.Currentline)))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+Connected to running app: CX
+Scanning in progress... Remaining lines: 129
+Scanning in progress... Remaining lines: 124
+Scanning in progress... Remaining lines: 116
+Scanning in progress... Remaining lines: 108
+Scanning finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully

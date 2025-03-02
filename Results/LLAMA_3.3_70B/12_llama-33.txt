@@ -1,0 +1,57 @@
+('user', 'Retract the AFM tip from the sample surface.')
+================================== Ai Message ==================================
+Name: AILA
+
+To retract the AFM tip from the sample surface, the 'AFM_Handler' is the appropriate worker. 
+
+The next action should be: 'AFM_Handler'
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_js1x)
+ Call ID: call_js1x
+  Args:
+    query: retract AFM tip code
+  Code_Executor (call_s6cv)
+ Call ID: call_s6cv
+  Args:
+    code: retrieved_code
+Error: name 'retrieved_code' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'retrieved_code' is not defined
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_tkr4)
+ Call ID: call_tkr4
+  Args:
+    query: retract AFM tip code
+  Code_Executor (call_shea)
+ Call ID: call_shea
+  Args:
+    code: import nanosurf
+import time
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+approach.StartRetract()
+while approach.Status==1 or approach.Status==2:
+        print("Retracting... ")
+        time.sleep(1)
+print("finished")
+del spm
+Connected to running app: CX
+finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The AFM tip has been successfully retracted from the sample surface.
+total steps: 6
+
+Total time taken: 9.08 seconds

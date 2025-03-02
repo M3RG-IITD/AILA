@@ -1,0 +1,93 @@
+('user', 'Set image rotation to \\pu{20 degree} in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+To set the image rotation to 20 degrees in the AFM software, the AFM_Handler should act next. The AFM_Handler is responsible for controlling the AFM machine and capturing images, which includes adjusting settings such as image rotation.
+
+Selected action: AFM_Handler
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_mn60)
+ Call ID: call_mn60
+  Args:
+    query: set image rotation to 20 degrees in AFM software using python
+  Code_Executor (call_p7r2)
+ Call ID: call_p7r2
+  Args:
+    code: import nanosurf
+image_rotation = 20
+current_session = nanosurf.AFM_Handler()
+current_session.set_image_rotation(image_rotation)
+Error: module 'nanosurf' has no attribute 'AFM_Handler'
+================================= Tool Message =================================
+Name: Code_Executor
+
+module 'nanosurf' has no attribute 'AFM_Handler'
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_bzn8)
+ Call ID: call_bzn8
+  Args:
+    query: set image rotation to 20 degrees in AFM software using python with nanosurf library
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_k97q)
+ Call ID: call_k97q
+  Args:
+    code: import nanosurf
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+scan.Rotation = 20
+del spm
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The image rotation in the AFM software has been successfully set to 20 degrees.
+total steps: 8
+
+Total time taken: 8.00 seconds

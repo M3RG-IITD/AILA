@@ -1,0 +1,412 @@
+('user', 'Optimize the values of the P, I, and D gains using a genetic algorithm. Do not correct the baseline.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+[{'text': ": I'll help you optimize the PID gains using a genetic algorithm. Let me retrieve the relevant code and then execute it.", 'type': 'text'}, {'id': 'toolu_011oxrHX2cXDu3PAodax8TGr', 'input': {'query': 'genetic algorithm PID optimization code'}, 'name': 'Document_Retriever', 'type': 'tool_use'}]
+Tool Calls:
+  Document_Retriever (toolu_011oxrHX2cXDu3PAodax8TGr)
+ Call ID: toolu_011oxrHX2cXDu3PAodax8TGr
+  Args:
+    query: genetic algorithm PID optimization code
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+[{'text': 'Let me retrieve additional information about genetic algorithm implementation for PID optimization.', 'type': 'text'}, {'id': 'toolu_01QWZitfPfo52SAkkAwByZSf', 'input': {'query': 'genetic algorithm implementation for PID optimization'}, 'name': 'Document_Retriever', 'type': 'tool_use'}]
+Tool Calls:
+  Document_Retriever (toolu_01QWZitfPfo52SAkkAwByZSf)
+ Call ID: toolu_01QWZitfPfo52SAkkAwByZSf
+  Args:
+    query: genetic algorithm implementation for PID optimization
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+[{'text': "I notice that the documentation doesn't provide the specific genetic algorithm implementation for PID optimization. Let me implement a basic genetic algorithm to optimize the PID gains while ensuring safe operation of the AFM:", 'type': 'text'}, {'id': 'toolu_01CnNAb5vEuXPZGvSauAjd9p', 'input': {'code': 'import nanosurf\nimport numpy as np\nfrom deap import base, creator, tools, algorithms\nimport random\nimport time\n\n# Initialize AFM\nspm = nanosurf.SPM()\napplication = spm.application\nzcontrol = application.ZController\n\n# Define fitness evaluation function\ndef evaluate_pid(individual):\n    p_gain, i_gain, d_gain = individual\n    \n    # Set the PID gains\n    zcontrol.PGain = p_gain\n    zcontrol.IGain = i_gain\n    zcontrol.DGain = d_gain\n    \n    # Wait for system to stabilize\n    time.sleep(0.5)\n    \n    # Get error signal over time\n    error_samples = []\n    for _ in range(10):\n        error_samples.append(abs(zcontrol.Error))\n        time.sleep(0.1)\n    \n    # Calculate fitness (lower is better)\n    fitness = np.mean(error_samples)\n    return (fitness,)\n\n# Genetic Algorithm Setup\ncreator.create("FitnessMin", base.Fitness, weights=(-1.0,))\ncreator.create("Individual", list, fitness=creator.FitnessMin)\n\ntoolbox = base.Toolbox()\n\n# Define genes (PID values)\ntoolbox.register("p_gain", random.uniform, 2000, 4000)\ntoolbox.register("i_gain", random.uniform, 2500, 4500)\ntoolbox.register("d_gain", random.uniform, 0, 100)\n\n# Structure initializers\ntoolbox.register("individual", tools.initCycle, creator.Individual,\n                 (toolbox.p_gain, toolbox.i_gain, toolbox.d_gain), n=1)\ntoolbox.register("population", tools.initRepeat, list, toolbox.individual)\n\ntoolbox.register("evaluate", evaluate_pid)\ntoolbox.register("mate", tools.cxTwoPoint)\ntoolbox.register("mutate", tools.mutGaussian, mu=0, sigma=[200, 200, 10], indpb=0.2)\ntoolbox.register("select", tools.selTournament, tournsize=3)\n\n# Create population and evolve\npopulation = toolbox.population(n=20)\nNGEN = 10\n\ntry:\n    for gen in range(NGEN):\n        offspring = algorithms.varAnd(population, toolbox, cxpb=0.7, mutpb=0.3)\n        fits = toolbox.map(toolbox.evaluate, offspring)\n        for fit, ind in zip(fits, offspring):\n            ind.fitness.values = fit\n        population = toolbox.select(offspring, k=len(population))\n        \n        # Get best individual\n        best_ind = tools.selBest(population, k=1)[0]\n        print(f"Generation {gen}: Best PID = {best_ind}, Fitness = {best_ind.fitness.values[0]}")\n\n    # Set the best found PID values\n    best_individual = tools.selBest(population, k=1)[0]\n    zcontrol.PGain = best_individual[0]\n    zcontrol.IGain = best_individual[1]\n    zcontrol.DGain = best_individual[2]\n    \n    print(f"\\nOptimization complete!")\n    print(f"Best PID values found:")\n    print(f"P-gain: {best_individual[0]:.2f}")\n    print(f"I-gain: {best_individual[1]:.2f}")\n    print(f"D-gain: {best_individual[2]:.2f}")\n\nfinally:\n    # Clean up\n    del spm'}, 'name': 'Code_Executor', 'type': 'tool_use'}]
+Tool Calls:
+  Code_Executor (toolu_01CnNAb5vEuXPZGvSauAjd9p)
+ Call ID: toolu_01CnNAb5vEuXPZGvSauAjd9p
+  Args:
+    code: import nanosurf
+import numpy as np
+from deap import base, creator, tools, algorithms
+import random
+import time
+
+# Initialize AFM
+spm = nanosurf.SPM()
+application = spm.application
+zcontrol = application.ZController
+
+# Define fitness evaluation function
+def evaluate_pid(individual):
+    p_gain, i_gain, d_gain = individual
+    
+    # Set the PID gains
+    zcontrol.PGain = p_gain
+    zcontrol.IGain = i_gain
+    zcontrol.DGain = d_gain
+    
+    # Wait for system to stabilize
+    time.sleep(0.5)
+    
+    # Get error signal over time
+    error_samples = []
+    for _ in range(10):
+        error_samples.append(abs(zcontrol.Error))
+        time.sleep(0.1)
+    
+    # Calculate fitness (lower is better)
+    fitness = np.mean(error_samples)
+    return (fitness,)
+
+# Genetic Algorithm Setup
+creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
+creator.create("Individual", list, fitness=creator.FitnessMin)
+
+toolbox = base.Toolbox()
+
+# Define genes (PID values)
+toolbox.register("p_gain", random.uniform, 2000, 4000)
+toolbox.register("i_gain", random.uniform, 2500, 4500)
+toolbox.register("d_gain", random.uniform, 0, 100)
+
+# Structure initializers
+toolbox.register("individual", tools.initCycle, creator.Individual,
+                 (toolbox.p_gain, toolbox.i_gain, toolbox.d_gain), n=1)
+toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+
+toolbox.register("evaluate", evaluate_pid)
+toolbox.register("mate", tools.cxTwoPoint)
+toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=[200, 200, 10], indpb=0.2)
+toolbox.register("select", tools.selTournament, tournsize=3)
+
+# Create population and evolve
+population = toolbox.population(n=20)
+NGEN = 10
+
+try:
+    for gen in range(NGEN):
+        offspring = algorithms.varAnd(population, toolbox, cxpb=0.7, mutpb=0.3)
+        fits = toolbox.map(toolbox.evaluate, offspring)
+        for fit, ind in zip(fits, offspring):
+            ind.fitness.values = fit
+        population = toolbox.select(offspring, k=len(population))
+        
+        # Get best individual
+        best_ind = tools.selBest(population, k=1)[0]
+        print(f"Generation {gen}: Best PID = {best_ind}, Fitness = {best_ind.fitness.values[0]}")
+
+    # Set the best found PID values
+    best_individual = tools.selBest(population, k=1)[0]
+    zcontrol.PGain = best_individual[0]
+    zcontrol.IGain = best_individual[1]
+    zcontrol.DGain = best_individual[2]
+    
+    print(f"\nOptimization complete!")
+    print(f"Best PID values found:")
+    print(f"P-gain: {best_individual[0]:.2f}")
+    print(f"I-gain: {best_individual[1]:.2f}")
+    print(f"D-gain: {best_individual[2]:.2f}")
+
+finally:
+    # Clean up
+    del spm
+Error: No module named 'deap'
+================================= Tool Message =================================
+Name: Code_Executor
+
+No module named 'deap'
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+[{'text': 'I apologize for the error. It seems the DEAP library is not installed in the environment. Let me modify the code to use a simpler optimization approach:', 'type': 'text'}, {'id': 'toolu_016ZhgtqeCEV5qKdKS5ZYZY8', 'input': {'code': 'import nanosurf\nimport numpy as np\nimport random\nimport time\n\n# Initialize AFM\nspm = nanosurf.SPM()\napplication = spm.application\nzcontrol = application.ZController\n\ndef evaluate_pid(p_gain, i_gain, d_gain):\n    # Set the PID gains\n    zcontrol.PGain = p_gain\n    zcontrol.IGain = i_gain\n    zcontrol.DGain = d_gain\n    \n    # Wait for system to stabilize\n    time.sleep(0.5)\n    \n    # Get error signal over time\n    error_samples = []\n    for _ in range(10):\n        error_samples.append(abs(zcontrol.Error))\n        time.sleep(0.1)\n    \n    # Calculate fitness (lower is better)\n    return np.mean(error_samples)\n\n# Simple genetic algorithm implementation\npopulation_size = 20\ngenerations = 10\nmutation_rate = 0.3\n\n# Initialize population with random PID values\npopulation = []\nfor _ in range(population_size):\n    p = random.uniform(2000, 4000)\n    i = random.uniform(2500, 4500)\n    d = random.uniform(0, 100)\n    fitness = evaluate_pid(p, i, d)\n    population.append(((p, i, d), fitness))\n\ntry:\n    for gen in range(generations):\n        # Sort population by fitness\n        population.sort(key=lambda x: x[1])\n        \n        # Select best individuals\n        elite = population[:population_size//2]\n        \n        # Create new population\n        new_population = []\n        new_population.extend(elite)\n        \n        # Create offspring through mutation\n        while len(new_population) < population_size:\n            parent = random.choice(elite)\n            if random.random() < mutation_rate:\n                p = parent[0][0] + random.gauss(0, 200)\n                i = parent[0][1] + random.gauss(0, 200)\n                d = parent[0][2] + random.gauss(0, 10)\n                \n                # Ensure values stay within bounds\n                p = max(2000, min(4000, p))\n                i = max(2500, min(4500, i))\n                d = max(0, min(100, d))\n                \n                fitness = evaluate_pid(p, i, d)\n                new_population.append(((p, i, d), fitness))\n            else:\n                new_population.append(parent)\n        \n        population = new_population\n        \n        # Print best solution in current generation\n        best = min(population, key=lambda x: x[1])\n        print(f"Generation {gen + 1}:")\n        print(f"Best PID = P:{best[0][0]:.2f}, I:{best[0][1]:.2f}, D:{best[0][2]:.2f}")\n        print(f"Fitness = {best[1]:.6f}\\n")\n\n    # Set the best found PID values\n    best_solution = min(population, key=lambda x: x[1])\n    zcontrol.PGain = best_solution[0][0]\n    zcontrol.IGain = best_solution[0][1]\n    zcontrol.DGain = best_solution[0][2]\n    \n    print("Optimization complete!")\n    print(f"Best PID values found:")\n    print(f"P-gain: {best_solution[0][0]:.2f}")\n    print(f"I-gain: {best_solution[0][1]:.2f}")\n    print(f"D-gain: {best_solution[0][2]:.2f}")\n    print(f"Final fitness: {best_solution[1]:.6f}")\n\nfinally:\n    # Clean up\n    del spm'}, 'name': 'Code_Executor', 'type': 'tool_use'}]
+Tool Calls:
+  Code_Executor (toolu_016ZhgtqeCEV5qKdKS5ZYZY8)
+ Call ID: toolu_016ZhgtqeCEV5qKdKS5ZYZY8
+  Args:
+    code: import nanosurf
+import numpy as np
+import random
+import time
+
+# Initialize AFM
+spm = nanosurf.SPM()
+application = spm.application
+zcontrol = application.ZController
+
+def evaluate_pid(p_gain, i_gain, d_gain):
+    # Set the PID gains
+    zcontrol.PGain = p_gain
+    zcontrol.IGain = i_gain
+    zcontrol.DGain = d_gain
+    
+    # Wait for system to stabilize
+    time.sleep(0.5)
+    
+    # Get error signal over time
+    error_samples = []
+    for _ in range(10):
+        error_samples.append(abs(zcontrol.Error))
+        time.sleep(0.1)
+    
+    # Calculate fitness (lower is better)
+    return np.mean(error_samples)
+
+# Simple genetic algorithm implementation
+population_size = 20
+generations = 10
+mutation_rate = 0.3
+
+# Initialize population with random PID values
+population = []
+for _ in range(population_size):
+    p = random.uniform(2000, 4000)
+    i = random.uniform(2500, 4500)
+    d = random.uniform(0, 100)
+    fitness = evaluate_pid(p, i, d)
+    population.append(((p, i, d), fitness))
+
+try:
+    for gen in range(generations):
+        # Sort population by fitness
+        population.sort(key=lambda x: x[1])
+        
+        # Select best individuals
+        elite = population[:population_size//2]
+        
+        # Create new population
+        new_population = []
+        new_population.extend(elite)
+        
+        # Create offspring through mutation
+        while len(new_population) < population_size:
+            parent = random.choice(elite)
+            if random.random() < mutation_rate:
+                p = parent[0][0] + random.gauss(0, 200)
+                i = parent[0][1] + random.gauss(0, 200)
+                d = parent[0][2] + random.gauss(0, 10)
+                
+                # Ensure values stay within bounds
+                p = max(2000, min(4000, p))
+                i = max(2500, min(4500, i))
+                d = max(0, min(100, d))
+                
+                fitness = evaluate_pid(p, i, d)
+                new_population.append(((p, i, d), fitness))
+            else:
+                new_population.append(parent)
+        
+        population = new_population
+        
+        # Print best solution in current generation
+        best = min(population, key=lambda x: x[1])
+        print(f"Generation {gen + 1}:")
+        print(f"Best PID = P:{best[0][0]:.2f}, I:{best[0][1]:.2f}, D:{best[0][2]:.2f}")
+        print(f"Fitness = {best[1]:.6f}\n")
+
+    # Set the best found PID values
+    best_solution = min(population, key=lambda x: x[1])
+    zcontrol.PGain = best_solution[0][0]
+    zcontrol.IGain = best_solution[0][1]
+    zcontrol.DGain = best_solution[0][2]
+    
+    print("Optimization complete!")
+    print(f"Best PID values found:")
+    print(f"P-gain: {best_solution[0][0]:.2f}")
+    print(f"I-gain: {best_solution[0][1]:.2f}")
+    print(f"D-gain: {best_solution[0][2]:.2f}")
+    print(f"Final fitness: {best_solution[1]:.6f}")
+
+finally:
+    # Clean up
+    del spm
+Connected to running app: CX
+Error: name 'zcontrol' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'zcontrol' is not defined
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+[{'text': 'I apologize for the error. Let me correct the code:', 'type': 'text'}, {'id': 'toolu_01ETiq3u2r2VqX4GFKXBZog4', 'input': {'code': 'import nanosurf\nimport numpy as np\nimport random\nimport time\n\nclass PIDOptimizer:\n    def __init__(self):\n        self.spm = nanosurf.SPM()\n        self.application = self.spm.application\n        self.zcontrol = self.application.ZController\n\n    def evaluate_pid(self, p_gain, i_gain, d_gain):\n        # Set the PID gains\n        self.zcontrol.PGain = p_gain\n        self.zcontrol.IGain = i_gain\n        self.zcontrol.DGain = d_gain\n        \n        # Wait for system to stabilize\n        time.sleep(0.5)\n        \n        # Get error signal over time\n        error_samples = []\n        for _ in range(10):\n            error_samples.append(abs(self.zcontrol.Error))\n            time.sleep(0.1)\n        \n        # Calculate fitness (lower is better)\n        return np.mean(error_samples)\n\n    def optimize(self):\n        population_size = 20\n        generations = 10\n        mutation_rate = 0.3\n\n        # Initialize population with random PID values\n        population = []\n        for _ in range(population_size):\n            p = random.uniform(2000, 4000)\n            i = random.uniform(2500, 4500)\n            d = random.uniform(0, 100)\n            fitness = self.evaluate_pid(p, i, d)\n            population.append(((p, i, d), fitness))\n\n        try:\n            for gen in range(generations):\n                # Sort population by fitness\n                population.sort(key=lambda x: x[1])\n                \n                # Select best individuals\n                elite = population[:population_size//2]\n                \n                # Create new population\n                new_population = []\n                new_population.extend(elite)\n                \n                # Create offspring through mutation\n                while len(new_population) < population_size:\n                    parent = random.choice(elite)\n                    if random.random() < mutation_rate:\n                        p = parent[0][0] + random.gauss(0, 200)\n                        i = parent[0][1] + random.gauss(0, 200)\n                        d = parent[0][2] + random.gauss(0, 10)\n                        \n                        # Ensure values stay within bounds\n                        p = max(2000, min(4000, p))\n                        i = max(2500, min(4500, i))\n                        d = max(0, min(100, d))\n                        \n                        fitness = self.evaluate_pid(p, i, d)\n                        new_population.append(((p, i, d), fitness))\n                    else:\n                        new_population.append(parent)\n                \n                population = new_population\n                \n                # Print best solution in current generation\n                best = min(population, key=lambda x: x[1])\n                print(f"Generation {gen + 1}:")\n                print(f"Best PID = P:{best[0][0]:.2f}, I:{best[0][1]:.2f}, D:{best[0][2]:.2f}")\n                print(f"Fitness = {best[1]:.6f}\\n")\n\n            # Set the best found PID values\n            best_solution = min(population, key=lambda x: x[1])\n            self.zcontrol.PGain = best_solution[0][0]\n            self.zcontrol.IGain = best_solution[0][1]\n            self.zcontrol.DGain = best_solution[0][2]\n            \n            print("Optimization complete!")\n            print(f"Best PID values found:")\n            print(f"P-gain: {best_solution[0][0]:.2f}")\n            print(f"I-gain: {best_solution[0][1]:.2f}")\n            print(f"D-gain: {best_solution[0][2]:.2f}")\n            print(f"Final fitness: {best_solution[1]:.6f}")\n\n        finally:\n            # Clean up\n            del self.spm\n\n# Run the optimization\noptimizer = PIDOptimizer()\noptimizer.optimize()'}, 'name': 'Code_Executor', 'type': 'tool_use'}]
+Tool Calls:
+  Code_Executor (toolu_01ETiq3u2r2VqX4GFKXBZog4)
+ Call ID: toolu_01ETiq3u2r2VqX4GFKXBZog4
+  Args:
+    code: import nanosurf
+import numpy as np
+import random
+import time
+
+class PIDOptimizer:
+    def __init__(self):
+        self.spm = nanosurf.SPM()
+        self.application = self.spm.application
+        self.zcontrol = self.application.ZController
+
+    def evaluate_pid(self, p_gain, i_gain, d_gain):
+        # Set the PID gains
+        self.zcontrol.PGain = p_gain
+        self.zcontrol.IGain = i_gain
+        self.zcontrol.DGain = d_gain
+        
+        # Wait for system to stabilize
+        time.sleep(0.5)
+        
+        # Get error signal over time
+        error_samples = []
+        for _ in range(10):
+            error_samples.append(abs(self.zcontrol.Error))
+            time.sleep(0.1)
+        
+        # Calculate fitness (lower is better)
+        return np.mean(error_samples)
+
+    def optimize(self):
+        population_size = 20
+        generations = 10
+        mutation_rate = 0.3
+
+        # Initialize population with random PID values
+        population = []
+        for _ in range(population_size):
+            p = random.uniform(2000, 4000)
+            i = random.uniform(2500, 4500)
+            d = random.uniform(0, 100)
+            fitness = self.evaluate_pid(p, i, d)
+            population.append(((p, i, d), fitness))
+
+        try:
+            for gen in range(generations):
+                # Sort population by fitness
+                population.sort(key=lambda x: x[1])
+                
+                # Select best individuals
+                elite = population[:population_size//2]
+                
+                # Create new population
+                new_population = []
+                new_population.extend(elite)
+                
+                # Create offspring through mutation
+                while len(new_population) < population_size:
+                    parent = random.choice(elite)
+                    if random.random() < mutation_rate:
+                        p = parent[0][0] + random.gauss(0, 200)
+                        i = parent[0][1] + random.gauss(0, 200)
+                        d = parent[0][2] + random.gauss(0, 10)
+                        
+                        # Ensure values stay within bounds
+                        p = max(2000, min(4000, p))
+                        i = max(2500, min(4500, i))
+                        d = max(0, min(100, d))
+                        
+                        fitness = self.evaluate_pid(p, i, d)
+                        new_population.append(((p, i, d), fitness))
+                    else:
+                        new_population.append(parent)
+                
+                population = new_population
+                
+                # Print best solution in current generation
+                best = min(population, key=lambda x: x[1])
+                print(f"Generation {gen + 1}:")
+                print(f"Best PID = P:{best[0][0]:.2f}, I:{best[0][1]:.2f}, D:{best[0][2]:.2f}")
+                print(f"Fitness = {best[1]:.6f}\n")
+
+            # Set the best found PID values
+            best_solution = min(population, key=lambda x: x[1])
+            self.zcontrol.PGain = best_solution[0][0]
+            self.zcontrol.IGain = best_solution[0][1]
+            self.zcontrol.DGain = best_solution[0][2]
+            
+            print("Optimization complete!")
+            print(f"Best PID values found:")
+            print(f"P-gain: {best_solution[0][0]:.2f}")
+            print(f"I-gain: {best_solution[0][1]:.2f}")
+            print(f"D-gain: {best_solution[0][2]:.2f}")
+            print(f"Final fitness: {best_solution[1]:.6f}")
+
+        finally:
+            # Clean up
+            del self.spm
+
+# Run the optimization
+optimizer = PIDOptimizer()
+optimizer.optimize()

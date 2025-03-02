@@ -1,0 +1,101 @@
+('user', 'Set the I gain to 1000 in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+To set the I gain to 1000 in the AFM software, the AFM_Handler should act next. The AFM_Handler is responsible for controlling the AFM machine, which includes setting parameters such as the I gain.
+
+So, the next step is: AFM_Handler.
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_1xbn)
+ Call ID: call_1xbn
+  Args:
+    query: set I gain code
+  Code_Executor (call_6she)
+ Call ID: call_6she
+  Args:
+    code: set_igain(1000)
+Error: name 'set_igain' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'set_igain' is not defined
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_2xec)
+ Call ID: call_2xec
+  Args:
+    query: I gain parameter code
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_254k)
+ Call ID: call_254k
+  Args:
+    code: zcontrol.IGain = 1000
+Error: name 'zcontrol' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'zcontrol' is not defined
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_tmn0)
+ Call ID: call_tmn0
+  Args:
+    query: zcontrol code
+  Code_Executor (call_5hes)
+ Call ID: call_5hes
+  Args:
+    code: import nanosurf; spm = nanosurf.SPM(); application = spm.application; zcontrol = application.ZController; zcontrol.IGain = 1000
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The I gain has been successfully set to 1000 in the AFM software.
+total steps: 10
+
+Total time taken: 9.53 seconds

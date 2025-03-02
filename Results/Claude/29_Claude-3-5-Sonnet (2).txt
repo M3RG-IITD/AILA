@@ -1,0 +1,50 @@
+('user', 'Capture an image by setting a time per line that ensures the scanning is completed within 30 seconds')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+[{'text': ": I'll help you capture an image with appropriate time per line settings. Let me break this down into steps:\n\n1. First, let me check the documentation for setting scan parameters and time per line:", 'type': 'text'}, {'id': 'toolu_01TJuunZdhVVyL7uYVXE9sRV', 'input': {'query': 'set time per line scan parameters'}, 'name': 'Document_Retriever', 'type': 'tool_use'}]
+Tool Calls:
+  Document_Retriever (toolu_01TJuunZdhVVyL7uYVXE9sRV)
+ Call ID: toolu_01TJuunZdhVVyL7uYVXE9sRV
+  Args:
+    query: set time per line scan parameters
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
