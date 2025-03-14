@@ -33,7 +33,7 @@ Run the following command to install all necessary dependencies:
 pip install streamlit matplotlib langchain_chroma langchain NSFopen scikit-image pymoo langchain_openai langgraph
 ```
 
-### **Run AFM Bench Tasks**
+### **Display AFM Bench Tasks**
 1. Navigate to the `Data` folder:
    ```bash
    cd Data
