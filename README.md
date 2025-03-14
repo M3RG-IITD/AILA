@@ -21,62 +21,53 @@ AILA requires Python and the Streamlit library to run. Please ensure Python 3.10
 
 ## **Installation Instructions**
 
-#### **View AFM Bench Tasks**
+### **Clone the Repository**
+```bash
+git clone https://github.com/M3RG-IITD/AILA.git
+cd AILA
+```
 
-1. **Clone the Repository:**
+### **Install Required Packages**
+Run the following command to install all necessary dependencies:
+```bash
+pip install streamlit matplotlib langchain_chroma langchain NSFopen scikit-image pymoo langchain_openai langgraph
+```
+
+### **Run AFM Bench Tasks**
+1. Navigate to the `Data` folder:
    ```bash
-   git clone https://github.com/M3RG-IITD/AILA.git
-   cd AILA
    cd Data
    ```
-
-2. **Install Streamlit:**
-   Install the Streamlit library using pip:
-   ```bash
-   pip install streamlit
-   ```
-
-3. **Run AFM Bench Tasks:**
+2. Run the AFM Bench Tasks using Streamlit:
    ```bash
    streamlit run task.py
    ```
    Wait a few minutes as it will take some time to load all the files.
 
-#### **Run AILA**
-
-1. **Clone the Repository:**
+### **Run AILA**
+1. Navigate back to the AILA main directory:
    ```bash
-   git clone https://github.com/M3RG-IITD/AILA.git
-   cd AILA
+   cd ..
    ```  
-
-2. **Navigate to the Folder "app"**
+2. Enter the "app" folder:
    ```bash
    cd app
    ```
-
-3. **Install Streamlit:**
-   ```bash
-   pip install streamlit
-   ```
-
-4. **Run the Application:**
+3. Run the AILA application:
    ```bash
    streamlit run app.py
    ```
-
-5. **LLM Model Setup:**
+4. **LLM Model Setup:**
    - Open the corresponding script in the "app" folder for the desired LLM model:
      - **"AILA_claude-3-son.py"** for Claude
      - **"AILA_3.5.py"** for GPT-3.5
      - **"AILA_4.0.py"** for GPT-4.0
      - **"AILA_llama_3.3.py"** for Llama
-   - Search for "YOUR_API_KEY" in the script and paste your OpenAI API key into the embedding model and corresponding LLM model sections.
+   - Search for `YOUR_API_KEY` in the script and paste your OpenAI API key into the embedding model and corresponding LLM model sections.
 
 ---
 
 ## **Benchmark Data and Results**
-
 The benchmark data and results for AILA are available in the `Data` and `Results` folders. Navigate to the following GitHub repository to access them:
 
 - **[Data Folder](https://github.com/M3RG-IITD/AILA/tree/main/Data/afm_qs/):** Contains all input data files used for benchmarking.

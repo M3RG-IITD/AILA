@@ -1,18 +1,9 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # AILA (Artificially Intelligent laboratory Assitant)
-# 
-# AILA (Artificially Intelligent Laboratory Assistant) is an advanced multi-agent system developed by the NT(M3)RG lab—a collaboration between the Multiphysics & Multiscale Mechanics Research Group (M3RG) and the Nanoscale Tribology, Mechanics & Microscopy of Materials (NTM3) Group—at the Indian Institute of Technology Delhi. AILA autonomously manages Atomic Force Microscope (AFM) imaging and analysis using a sophisticated combination of large language models (LLMs) and specially designed tools. This system is compatible with various AFM instruments, including DriveAFM by Nanosurf, offering seamless image optimization and capturing through a Python API. AILA represents a significant leap in laboratory automation, enabling precise and efficient AFM operations with minimal human intervention.
-
-# In[1]:
-
 import getpass
 import os
 import functools
 import operator
 import glob
-# import nanosurf #change
+#import nanosurf
 import time
 import numpy as np
 import matplotlib.pyplot as plt
@@ -77,7 +68,7 @@ Document_Retriever = create_retriever_tool(
     "managing an AFM (Atomic Force Microscope) machine, which is connected to a database. "
     "The tool also includes the AFM software manual for guidance."
     "However, it does not contain any code related to displaying/optimizing images."
-    "Single query allowed. but multiple calls allowed",
+    "Single query allowed at one. but multiple call allowed",
 )
 
 
@@ -111,7 +102,7 @@ def Image_Analyzer(path: str = None, filename: str = None, dynamic_code: str = N
     """
     Display and return the image data from the given path. If a filename is provided, return the image data
     from that specific file. If no filename is provided, return the image data from the latest image file
-    in the directory. If dynamic_code is provided, it will be executed to process the image data. Don’t install any Python library or any softwere.
+    in the directory. If dynamic_code is provided, it will be executed to process the image data.
     
     Additionally, calculate the following if requested:
     - Average Friction
@@ -618,7 +609,7 @@ def print_stream(stream):
 
 start_time = time.time()
 recursion_limit=30
-inputs = {"messages": [("user", "hi")]}
+inputs = {"messages": [("user", "hhhh")]}
 print_stream(graph.stream(inputs, stream_mode="values",  config= config))
 
 
