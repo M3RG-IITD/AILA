@@ -15,17 +15,17 @@ AILA (Artificially Intelligent Laboratory Assistant) is a streamlined framework 
 ---
 
 ## **Getting Started**
-AILA requires Python and the Streamlit library to run. Please ensure Python is installed on your system before proceeding. You can download it from [python.org](https://www.python.org/).
+AILA requires Python and the Streamlit library to run. Please ensure Python 3.10 or higher is installed on your system before proceeding. You can download it from [python.org](https://www.python.org/). It is highly recommended to use a new virtual environment.
 
 ---
 
 ## **Installation Instructions**
 
-### **Windows**
+#### **View AFM Bench Tasks**
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/imandal98/AFMBench.git
+   git clone https://github.com/M3RG-IITD/AILA.git
    cd AFMBench
    ```
 
@@ -35,38 +35,42 @@ AILA requires Python and the Streamlit library to run. Please ensure Python is i
    pip install streamlit
    ```
 
-3. **Run the Application:**
-   - Double-click `run_app.bat` to launch the main application.
-   - To view the questions, double-click `run_bat.bat`.
+3. **Run AFM Bench Tasks:**
+   ```bash
+   streamlit run task.py
+   ```
+   Wait a few minutes as it will take some time to load all the files.
 
-### **Mac**
+#### **Run AILA**
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/imandal98/AFMBench.git
+   git clone https://github.com/M3RG-IITD/AILA.git
    cd AFMBench
+   ```  
+
+2. **Navigate to the Folder "app"**
+   ```bash
+   cd app
    ```
 
-2. **Install Streamlit:**
-   Install the Streamlit library using pip:
+3. **Install Streamlit:**
    ```bash
    pip install streamlit
-   ```
-
-3. **Navigate to the Data Folder:**
-   ```bash
-   cd Data
    ```
 
 4. **Run the Application:**
-   - To view the questions, execute the following command:
-     ```bash
-     streamlit run afm_data_json.py
-     ```
-   - To launch the main application, navigate to the 'Results' folder and run the Streamlit script:
-     ```bash
-     streamlit run app.py
-     ```
+   ```bash
+   streamlit run app.py
+   ```
+
+5. **LLM Model Setup:**
+   - Open the corresponding script in the "app" folder for the desired LLM model:
+     - **"AILA_claude-3-son.py"** for Claude
+     - **"AILA_3.5.py"** for GPT-3.5
+     - **"AILA_4.0.py"** for GPT-4.0
+     - **"AILA_llama_3.3.py"** for Llama
+   - Search for "YOUR_API_KEY" in the script and paste your OpenAI API key into the embedding model and corresponding LLM model sections.
 
 ---
 
@@ -74,13 +78,13 @@ AILA requires Python and the Streamlit library to run. Please ensure Python is i
 
 The benchmark data and results for AILA are available in the `Data` and `Results` folders. Navigate to the following GitHub repository to access them:
 
-- **[Data Folder](https://github.com/M3RG-IITD/AILA/tree/main/Data/afm_qs/):** Contains all input data files used for benchmarking. 
+- **[Data Folder](https://github.com/M3RG-IITD/AILA/tree/main/Data/afm_qs/):** Contains all input data files used for benchmarking.
 - **[Results Folder](https://github.com/M3RG-IITD/AILA/tree/main/Results/):** Contains the output results of the AILA framework.
 
 ---
 
 ## **Support**
-If you encounter any issues or have questions, please open an issue on the [GitHub Repository](https://github.com/imandal98/AFMBench) or contact the project maintainer.
+If you encounter any issues or have questions, please open an issue on the [GitHub Repository](https://github.com/M3RG-IITD/AILA) or contact the project maintainer.
 
 ---
 
