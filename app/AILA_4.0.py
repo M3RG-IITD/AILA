@@ -618,7 +618,7 @@ def print_stream(stream):
 
 start_time = time.time()
 recursion_limit=30
-inputs = {"messages": [("user", "Experiment Instructions: Step 1: Set the image size to 1000 nm. Set the P-gain to 100, I-gain to 2000, and D-gain to 10. Set the setpoint to 50 mV and capture an image. Step 2: Calculate the average friction value from the most recent saved file in the current folder. Step 3: Increase the setpoint by 50 mV, capture a new image, and calculate the average friction from the latest saved file in the current folder. Step 4: Compare the new average friction with the previous one. If the new average friction is more than \\pu{50 %} greater than the previous value, stop the experiment. Otherwise, repeat Step 3 and Step 4. Step 5: Plot a graph of the setpoint versus the average friction over the course of the experiment.")]}
+inputs = {"messages": [("user", "hi")]}
 print_stream(graph.stream(inputs, stream_mode="values",  config= config))
 
 

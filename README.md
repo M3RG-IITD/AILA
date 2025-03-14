@@ -26,7 +26,8 @@ AILA requires Python and the Streamlit library to run. Please ensure Python 3.10
 1. **Clone the Repository:**
    ```bash
    git clone https://github.com/M3RG-IITD/AILA.git
-   cd AFMBench
+   cd AILA
+   cd Data
    ```
 
 2. **Install Streamlit:**
@@ -46,7 +47,7 @@ AILA requires Python and the Streamlit library to run. Please ensure Python 3.10
 1. **Clone the Repository:**
    ```bash
    git clone https://github.com/M3RG-IITD/AILA.git
-   cd AFMBench
+   cd AILA
    ```  
 
 2. **Navigate to the Folder "app"**
