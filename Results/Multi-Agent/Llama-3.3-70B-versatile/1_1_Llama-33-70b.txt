@@ -1,0 +1,180 @@
+('user', 'Set image size as $100 \times 100 \\pu{nm}$ in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 288, 'total_tokens': 292, 'completion_time': 0.024030263, 'prompt_time': 0.021334996, 'queue_time': 0.058918808, 'total_time': 0.045365259}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_ks51)
+ Call ID: call_ks51
+  Args:
+    code: AFM_Handler.set_scan_size(100e-9, 100e-9)
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 48, 'prompt_tokens': 702, 'total_tokens': 750, 'completion_time': 0.174545455, 'prompt_time': 0.074577069, 'queue_time': 0.06464947800000001, 'total_time': 0.249122524}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'AFM_Handler' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'AFM_Handler' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_m7d3)
+ Call ID: call_m7d3
+  Args:
+    query: set scan size in AFM software using python API
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 26, 'prompt_tokens': 758, 'total_tokens': 784, 'completion_time': 0.102658434, 'prompt_time': 0.113658178, 'queue_time': 0.05412925199999999, 'total_time': 0.216316612}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_hwdn)
+ Call ID: call_hwdn
+  Args:
+    code: application.Scan.ImageWidth = 100e-9
+application.Scan.ImageHeight = 100e-9
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 36, 'prompt_tokens': 1092, 'total_tokens': 1128, 'completion_time': 0.130909091, 'prompt_time': 0.495297549, 'queue_time': 0.06438936500000003, 'total_time': 0.62620664}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'application' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'application' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_tpaq)
+ Call ID: call_tpaq
+  Args:
+    query: initialize AFM application using python API
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 23, 'prompt_tokens': 1145, 'total_tokens': 1168, 'completion_time': 0.083636364, 'prompt_time': 0.10170214, 'queue_time': 0.05885075100000001, 'total_time': 0.185338504}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_tg9s)
+ Call ID: call_tg9s
+  Args:
+    code: import nanosurf
+spm = nanosurf.SPM()
+application = spm.application
+application.Scan.ImageWidth = 100e-9
+application.Scan.ImageHeight = 100e-9
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 56, 'prompt_tokens': 1476, 'total_tokens': 1532, 'completion_time': 0.203636364, 'prompt_time': 0.125222643, 'queue_time': 0.055323575000000014, 'total_time': 0.328859007}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The image size has been set to $100 \times 100 \pu{nm}$ in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 25, 'prompt_tokens': 1545, 'total_tokens': 1570, 'completion_time': 0.090909091, 'prompt_time': 0.120146975, 'queue_time': 0.06744990199999999, 'total_time': 0.211056066}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 12
+Total Tokens: 7224
+Prompt Tokens: 7006
+Completion Tokens: 218
+Total Cost (USD): $0.0
+
+Total time taken: 11.61 seconds

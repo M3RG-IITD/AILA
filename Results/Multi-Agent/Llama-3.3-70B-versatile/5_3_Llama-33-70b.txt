@@ -1,0 +1,157 @@
+('user', 'Set the $\x0crac{time}{line}$ to \\pu{1 s} in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 289, 'total_tokens': 293, 'completion_time': 0.029662102, 'prompt_time': 0.019295274, 'queue_time': 0.07300037, 'total_time': 0.048957376}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_e24h)
+ Call ID: call_e24h
+  Args:
+    query: set time per line AFM code
+  Code_Executor (call_601q)
+ Call ID: call_601q
+  Args:
+    code: AFM_Handler.set_parameter("time_per_line", 1)
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 61, 'prompt_tokens': 703, 'total_tokens': 764, 'completion_time': 0.221818182, 'prompt_time': 0.064258064, 'queue_time': 0.05937068799999999, 'total_time': 0.286076246}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'AFM_Handler' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'AFM_Handler' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_xw2t)
+ Call ID: call_xw2t
+  Args:
+    query: set time per line AFM code
+  Code_Executor (call_g9sj)
+ Call ID: call_g9sj
+  Args:
+    code: scan.Scantime = 1
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 44, 'prompt_tokens': 1080, 'total_tokens': 1124, 'completion_time': 0.16, 'prompt_time': 0.077716683, 'queue_time': 0.054319717000000003, 'total_time': 0.237716683}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'scan' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'scan' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_4jhc)
+ Call ID: call_4jhc
+  Args:
+    query: set time per line AFM code
+  Code_Executor (call_pv9y)
+ Call ID: call_pv9y
+  Args:
+    code: import nanosurf; spm = nanosurf.SPM(); application = spm.application; scan = application.Scan; scan.Scantime = 1
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 69, 'prompt_tokens': 1445, 'total_tokens': 1514, 'completion_time': 0.250909091, 'prompt_time': 0.108395122, 'queue_time': 0.054254287, 'total_time': 0.359304213}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_yn9q)
+ Call ID: call_yn9q
+  Args:
+    query: AFM set time per line code confirmation
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 24, 'prompt_tokens': 1831, 'total_tokens': 1855, 'completion_time': 0.087272727, 'prompt_time': 0.133831863, 'queue_time': 0.056779544000000015, 'total_time': 0.22110459}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_jpzm)
+ Call ID: call_jpzm
+  Args:
+    code: import nanosurf; spm = nanosurf.SPM(); application = spm.application; scan = application.Scan; print(scan.Scantime)
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 45, 'prompt_tokens': 2163, 'total_tokens': 2208, 'completion_time': 0.163636364, 'prompt_time': 0.154878125, 'queue_time': 0.056349075, 'total_time': 0.318514489}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+1.0
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The time per line in the AFM software has been set to 1 s.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 18, 'prompt_tokens': 2221, 'total_tokens': 2239, 'completion_time': 0.070328359, 'prompt_time': 0.167501118, 'queue_time': 0.05588659799999998, 'total_time': 0.237829477}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 12
+Total Tokens: 9997
+Prompt Tokens: 9732
+Completion Tokens: 265
+Total Cost (USD): $0.0
+
+Total time taken: 7.17 seconds

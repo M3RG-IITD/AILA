@@ -1,0 +1,94 @@
+================================ Human Message =================================
+
+Initiate the scanning process in the AFM software.
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Tool Calls:
+  Document_Retriever (call_v6rj)
+ Call ID: call_v6rj
+  Args:
+    query: initiate scanning process
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 20, 'prompt_tokens': 2635, 'total_tokens': 2655, 'completion_time': 0.07822207, 'prompt_time': 0.191518744, 'queue_time': -0.32626755399999996, 'total_time': 0.269740814}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''initiate/start or terminate/stop image scanning process'''
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+
+# Start scan
+# scan.StartFrameDown() #Scanning from up to down or top to bottom
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+
+#scan.stop() #stop sacn
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",(scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Tool Calls:
+  Code_Executor (call_gxgm)
+ Call ID: call_gxgm
+  Args:
+    code: import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+
+# Start scan
+# scan.StartFrameDown() #Scanning from up to down or top to bottom
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+
+#scan.stop() #stop sacn
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",scan.Lines-scan.Currentline)
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 178, 'prompt_tokens': 1514, 'total_tokens': 1692, 'completion_time': 0.647272727, 'prompt_time': 0.114468519, 'queue_time': 0.059109150999999985, 'total_time': 0.761741246}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Scanning in progress... Remaining lines: 11
+Scanning finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+
+The scanning process in the AFM software has been initiated. The code has been executed successfully, and the scanning is in progress. The script will continue to run until the scanning is finished.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 39, 'prompt_tokens': 1705, 'total_tokens': 1744, 'completion_time': 0.141818182, 'prompt_time': 0.132830069, 'queue_time': 0.05526804100000002, 'total_time': 0.274648251}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 5
+Total Tokens: 6091
+Prompt Tokens: 5854
+Completion Tokens: 237
+Total Cost (USD): $0.0
+
+Total time taken: 7.99 seconds

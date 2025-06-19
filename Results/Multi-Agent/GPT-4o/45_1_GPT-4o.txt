@@ -1,0 +1,115 @@
+('user', 'Set the image size to $150 \times 100 \\pu{nm}$, P gain to 75, I gain to 4500, D gain to 0, and $\x0crac{time}{line}$ to \\pu{1 s} in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 280, 'total_tokens': 284, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_a6889ffe71', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_RjLUgTroTVIo5Q6J6pTJd973)
+ Call ID: call_RjLUgTroTVIo5Q6J6pTJd973
+  Args:
+    query: set image size to 150 x 100 nm
+  Document_Retriever (call_IBBAtED1QSQzjbkfgHx6Mc4Q)
+ Call ID: call_IBBAtED1QSQzjbkfgHx6Mc4Q
+  Args:
+    query: set P gain to 75
+  Document_Retriever (call_hfGxBAO730Bgv7xxuPoT4UAf)
+ Call ID: call_hfGxBAO730Bgv7xxuPoT4UAf
+  Args:
+    query: set I gain to 4500
+  Document_Retriever (call_aVsUaFnx4CIWnm6AApOSGYPk)
+ Call ID: call_aVsUaFnx4CIWnm6AApOSGYPk
+  Args:
+    query: set D gain to 0
+  Document_Retriever (call_bOiIP1AJKXKPawy0qxThVHmC)
+ Call ID: call_bOiIP1AJKXKPawy0qxThVHmC
+  Args:
+    query: set time per line to 1 s
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 129, 'prompt_tokens': 480, 'total_tokens': 609, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''initiate/start or terminate/stop image scanning process'''
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+
+# Start scan
+# scan.StartFrameDown() #Scanning from up to down or top to bottom
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+
+#scan.stop() #stop sacn
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",(scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_nnHFar6eIMBmVRb8Dx3mqBUv)
+ Call ID: call_nnHFar6eIMBmVRb8Dx3mqBUv
+  Args:
+    code: # Imports
+import nanosurf
+
+# Load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+# All variables
+scan = application.Scan
+zcontrol = application.ZController
+
+# Set scan parameters
+scan.ImageWidth = 150e-9  # [m] for 150 nm
+scan.ImageHeight = 100e-9  # [m] for 100 nm
+scan.Scantime = 1  # [s] time per line
+
+# Set Z controller parameters
+zcontrol.PGain = 75
+zcontrol.IGain = 4500
+zcontrol.DGain = 0
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 175, 'prompt_tokens': 2072, 'total_tokens': 2247, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+FINAL ANSWER: The AFM image size has been set to \(150 \times 100 \, \text{nm}\), the P gain to 75, I gain to 4500, D gain to 0, and the time per line to \(1 \, \text{s}\).
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 64, 'prompt_tokens': 2262, 'total_tokens': 2326, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 2048}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 6
+Total Tokens: 5466
+Prompt Tokens: 5094
+Completion Tokens: 372
+Total Cost (USD): $0.013895000000000001
+
+Total time taken: 16.62 seconds

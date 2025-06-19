@@ -1,0 +1,129 @@
+('user', 'Change the AFM operation mode to dynamic mode in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+The next worker to act should be the AFM_Handler to change the AFM operation mode to dynamic mode in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 28, 'prompt_tokens': 238, 'total_tokens': 266, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_k9KLFSCN3jcLAHAuPFkHjmgM)
+ Call ID: call_k9KLFSCN3jcLAHAuPFkHjmgM
+  Args:
+    query: Change AFM operation mode to dynamic mode
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 24, 'prompt_tokens': 464, 'total_tokens': 488, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_7NmlFcsp5UFGdmBMghAMjmNp)
+ Call ID: call_7NmlFcsp5UFGdmBMghAMjmNp
+  Args:
+    code: opmode.OperatingMode = spm.OperatingMode.DynamicAFM
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 29, 'prompt_tokens': 784, 'total_tokens': 813, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'spm' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'spm' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered an issue as the `spm` object was not defined before setting the operating mode. Let me correct the code and re-execute to change the AFM operation mode to dynamic mode.
+Tool Calls:
+  Code_Executor (call_xiakwfwi2s20fiIab2eKYuEQ)
+ Call ID: call_xiakwfwi2s20fiIab2eKYuEQ
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+opmode = application.OperatingMode
+	opmode.OperatingMode = spm.OperatingMode.DynamicAFM
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 100, 'prompt_tokens': 832, 'total_tokens': 932, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: unexpected indent (<string>, line 6)
+================================= Tool Message =================================
+Name: Code_Executor
+
+unexpected indent (<string>, line 6)
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered another issue with indentation in the code. Let me correct it and execute the code again to change the AFM operation mode to dynamic mode.
+Tool Calls:
+  Code_Executor (call_dqiuaeZHK7QH1xKJdVrQbAEs)
+ Call ID: call_dqiuaeZHK7QH1xKJdVrQbAEs
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+opmode = application.OperatingMode
+opmode.OperatingMode = spm.OperatingMode.DynamicAFM
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 90, 'prompt_tokens': 959, 'total_tokens': 1049, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The AFM operation mode has been successfully changed to dynamic mode in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 20, 'prompt_tokens': 1070, 'total_tokens': 1090, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 10
+Total Tokens: 4638
+Prompt Tokens: 4347
+Completion Tokens: 291
+Total Cost (USD): $0.00261
+
+Total time taken: 9.35 seconds

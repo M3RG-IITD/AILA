@@ -1,0 +1,184 @@
+('user', 'Set image width to \\pu{250 nm}, D gain to 250, and P gain to 5000 in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 295, 'total_tokens': 299, 'completion_time': 0.016935229, 'prompt_time': 0.019670115, 'queue_time': 0.05359119999999999, 'total_time': 0.036605344}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_w28v)
+ Call ID: call_w28v
+  Args:
+    query: set image width, D gain, and P gain in AFM software using python API
+  Code_Executor (call_xf1f)
+ Call ID: call_xf1f
+  Args:
+    code: AFM_Handler.set_d_gain(250)
+AFM_Handler.set_p_gain(5000)
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 72, 'prompt_tokens': 709, 'total_tokens': 781, 'completion_time': 0.261818182, 'prompt_time': 0.052809404, 'queue_time': 0.054564241000000006, 'total_time': 0.314627586}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'AFM_Handler' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'AFM_Handler' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_vv6h)
+ Call ID: call_vv6h
+  Args:
+    query: set image width in AFM software using python API
+  Code_Executor (call_310y)
+ Call ID: call_310y
+  Args:
+    code: scan.ImageWidth = 250e-9
+  Code_Executor (call_npvr)
+ Call ID: call_npvr
+  Args:
+    code: zcontrol.DGain = 250
+  Code_Executor (call_9n2p)
+ Call ID: call_9n2p
+  Args:
+    code: zcontrol.PGain = 5000
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 92, 'prompt_tokens': 1103, 'total_tokens': 1195, 'completion_time': 0.334545455, 'prompt_time': 0.078196321, 'queue_time': 0.05407997699999999, 'total_time': 0.412741776}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'scan' is not defined
+Error: name 'zcontrol' is not defined
+Error: name 'zcontrol' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'zcontrol' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_b769)
+ Call ID: call_b769
+  Args:
+    query: get python code for setting image width, D gain, and P gain in AFM software
+  Code_Executor (call_7f2h)
+ Call ID: call_7f2h
+  Args:
+    code: import nanosurf
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+zcontrol = application.ZController
+scan.ImageWidth = 250e-9
+zcontrol.DGain = 250
+zcontrol.PGain = 5000
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 106, 'prompt_tokens': 1544, 'total_tokens': 1650, 'completion_time': 0.385454545, 'prompt_time': 0.10731991, 'queue_time': 0.06128027900000001, 'total_time': 0.492774455}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_d4yg)
+ Call ID: call_d4yg
+  Args:
+    query: verify image width, D gain, and P gain in AFM software using python API
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 33, 'prompt_tokens': 1967, 'total_tokens': 2000, 'completion_time': 0.12, 'prompt_time': 0.150719965, 'queue_time': 0.05545307099999999, 'total_time': 0.270719965}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_681d)
+ Call ID: call_681d
+  Args:
+    code: import nanosurf
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+zcontrol = application.ZController
+print(scan.ImageWidth)
+print(zcontrol.DGain)
+print(zcontrol.PGain)
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 65, 'prompt_tokens': 2308, 'total_tokens': 2373, 'completion_time': 0.236363636, 'prompt_time': 0.176107376, 'queue_time': 0.054747203999999994, 'total_time': 0.412471012}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+2.5e-07
+250.0
+5000.0
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The image width is set to 250 nm, D gain is set to 250, and P gain is set to 5000 in the AFM software. The values have been verified using the Python API.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 44, 'prompt_tokens': 2386, 'total_tokens': 2430, 'completion_time': 0.16, 'prompt_time': 0.170115639, 'queue_time': 0.06113854099999999, 'total_time': 0.330115639}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 12
+Total Tokens: 10728
+Prompt Tokens: 10312
+Completion Tokens: 416
+Total Cost (USD): $0.0
+
+Total time taken: 8.40 seconds

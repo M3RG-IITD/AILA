@@ -1,0 +1,82 @@
+('user', 'Retract the AFM tip from the sample surface.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 277, 'total_tokens': 281, 'completion_time': 0.017652015, 'prompt_time': 0.017716465, 'queue_time': 0.053640956000000004, 'total_time': 0.03536848}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_0820)
+ Call ID: call_0820
+  Args:
+    query: retract AFM tip code
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 64, 'prompt_tokens': 691, 'total_tokens': 755, 'completion_time': 0.267219494, 'prompt_time': 0.054596764, 'queue_time': 0.05476775600000001, 'total_time': 0.321816258}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_jc4k)
+ Call ID: call_jc4k
+  Args:
+    code: import nanosurf
+import time
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+approach.StartRetract()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 50, 'prompt_tokens': 860, 'total_tokens': 910, 'completion_time': 0.181818182, 'prompt_time': 0.079505647, 'queue_time': 0.05921715000000001, 'total_time': 0.261323829}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The AFM tip has been successfully retracted from the sample surface.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 15, 'prompt_tokens': 923, 'total_tokens': 938, 'completion_time': 0.054545455, 'prompt_time': 0.071793003, 'queue_time': 0.05351593700000001, 'total_time': 0.126338458}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 6
+Total Tokens: 2884
+Prompt Tokens: 2751
+Completion Tokens: 133
+Total Cost (USD): $0.0
+
+Total time taken: 5.86 seconds

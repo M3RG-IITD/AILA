@@ -1,0 +1,115 @@
+('user', 'Set overscan to $5 %$ the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+The AFM_Handler should act next to configure the overscan to 5% in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 23, 'prompt_tokens': 236, 'total_tokens': 259, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_lPIU7dYAn4kNvL4h3ZDoYstG)
+ Call ID: call_lPIU7dYAn4kNvL4h3ZDoYstG
+  Args:
+    query: Set overscan to 5% in AFM software
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 27, 'prompt_tokens': 457, 'total_tokens': 484, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_fxg7peixAQYwYAG36inLVhYe)
+ Call ID: call_fxg7peixAQYwYAG36inLVhYe
+  Args:
+    code: scan.Overscan = 5
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 22, 'prompt_tokens': 795, 'total_tokens': 817, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'scan' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'scan' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I made an error in executing the code directly without considering the scope of the variables. Let me correct that and execute the code properly.
+Tool Calls:
+  Code_Executor (call_LkSD9NeVSWUQEsg4ndaUh1rZ)
+ Call ID: call_LkSD9NeVSWUQEsg4ndaUh1rZ
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+application.Scan.Overscan = 5
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 78, 'prompt_tokens': 836, 'total_tokens': 914, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The overscan in the AFM software has been successfully set to 5%.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 18, 'prompt_tokens': 935, 'total_tokens': 953, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 8
+Total Tokens: 3427
+Prompt Tokens: 3259
+Completion Tokens: 168
+Total Cost (USD): $0.0018815
+
+Total time taken: 10.19 seconds

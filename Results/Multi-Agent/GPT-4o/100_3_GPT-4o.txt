@@ -1,0 +1,106 @@
+('user', 'Set image size as $150 \ttimes 150 \\pu{nm}$ and change the cantilever tip to Dyn190Al in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 3, 'prompt_tokens': 272, 'total_tokens': 275, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_9bddfca6e2', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_qd5EL4yTxOAROIQSoNK7L3Ir)
+ Call ID: call_qd5EL4yTxOAROIQSoNK7L3Ir
+  Args:
+    query: set image size 150 nm x 150 nm
+  Document_Retriever (call_lkbhXPlBxZg5y2FjqpsUjIIc)
+ Call ID: call_lkbhXPlBxZg5y2FjqpsUjIIc
+  Args:
+    query: change cantilever tip to Dyn190Al
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 64, 'prompt_tokens': 453, 'total_tokens': 517, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_55d88aaf2f', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_JrugHZgE08qoIM3QVOOtJSQ4)
+ Call ID: call_JrugHZgE08qoIM3QVOOtJSQ4
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+scan = application.Scan
+
+# Set scan parameters
+scan.ImageWidth = 150e-9 # [m]
+scan.ImageHeight = 150e-9 # [m]
+del spm
+  Code_Executor (call_58bfln5Sn8cEfZVqAXAhxqdf)
+ Call ID: call_58bfln5Sn8cEfZVqAXAhxqdf
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+head = application.ScanHead
+
+# Choose cantilever
+head.CantileverByGUID = spm.CantileverGUID.Dyn190Al
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 197, 'prompt_tokens': 1142, 'total_tokens': 1339, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_55d88aaf2f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+FINAL ANSWER: The image size has been set to \(150 \, \text{nm} \times 150 \, \text{nm}\), and the cantilever tip has been changed to Dyn190Al in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 51, 'prompt_tokens': 1363, 'total_tokens': 1414, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_9bddfca6e2', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 6
+Total Tokens: 3545
+Prompt Tokens: 3230
+Completion Tokens: 315
+Total Cost (USD): $0.011224999999999999
+
+Total time taken: 8.18 seconds

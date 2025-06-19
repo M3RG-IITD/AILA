@@ -1,0 +1,98 @@
+================================ Human Message =================================
+
+Set image size as $100 	imes 100 \pu{nm}$ in the AFM software.
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Tool Calls:
+  Document_Retriever (call_6CCr5XAgLh300mreNzuFZz5u)
+ Call ID: call_6CCr5XAgLh300mreNzuFZz5u
+  Args:
+    query: Set image size to 100 x 100 nm in AFM software
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 29, 'prompt_tokens': 635, 'total_tokens': 664, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Tool Calls:
+  Code_Executor (call_YlRcOOWgLpav17i9Y3fHGrM8)
+ Call ID: call_YlRcOOWgLpav17i9Y3fHGrM8
+  Args:
+    code: import nanosurf
+
+# Load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+# Access scan parameters
+scan = application.Scan
+
+# Set image size to 100 x 100 nm
+scan.ImageWidth = 100e-9  # [m]
+scan.ImageHeight = 100e-9  # [m]
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 115, 'prompt_tokens': 975, 'total_tokens': 1090, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+
+The image size has been set to \(100 \times 100 \, \text{nm}\) in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 28, 'prompt_tokens': 1102, 'total_tokens': 1130, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 1024}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 5
+Total Tokens: 2884
+Prompt Tokens: 2712
+Completion Tokens: 172
+Total Cost (USD): $0.007220000000000001
+
+Total time taken: 9.70 seconds

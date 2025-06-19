@@ -1,0 +1,236 @@
+('user', 'Capture an AFM image with dimensions $\\pu{500 nm} \times \\pu{500 nm}$ using the following parameters: P gain = 100, I gain = 5000, D gain = 0. Then, open the latest file in the current folder, extract the Z-axis forward image data from that file, and calculate the maximum height of any point in the image.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 322, 'total_tokens': 326, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_rT6fomorniM4h3oDD1YWsRGr)
+ Call ID: call_rT6fomorniM4h3oDD1YWsRGr
+  Args:
+    query: AFM image capture parameters
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 21, 'prompt_tokens': 505, 'total_tokens': 526, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_uxAvy6m95AUu262oIuoMpyT2)
+ Call ID: call_uxAvy6m95AUu262oIuoMpyT2
+  Args:
+    code: # Set scan parameters
+scan.ImageWidth = 500e-9 
+scan.ImageHeight = 500e-9 
+
+# Set Z controller parameters
+zcontrol.PGain = 100
+zcontrol.IGain = 5000
+zcontrol.DGain = 0
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 74, 'prompt_tokens': 837, 'total_tokens': 911, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'scan' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'scan' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems there was an issue with accessing the `scan` variable. Let me correct that and try setting the scan parameters again.
+Tool Calls:
+  Code_Executor (call_Tqns0Xo5jDf37bdxv5PwEJe9)
+ Call ID: call_Tqns0Xo5jDf37bdxv5PwEJe9
+  Args:
+    code: scan.ImageWidth = 500e-9 
+scan.ImageHeight = 500e-9 
+zcontrol.PGain = 100
+zcontrol.IGain = 5000
+zcontrol.DGain = 0
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 89, 'prompt_tokens': 930, 'total_tokens': 1019, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'scan' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'scan' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I apologize for the oversight in setting the scan parameters. Let me include the necessary setup to ensure the variables are defined correctly.
+Tool Calls:
+  Code_Executor (call_pfAOpuUZXGtbiCIap1rv6nzj)
+ Call ID: call_pfAOpuUZXGtbiCIap1rv6nzj
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+zcontrol = application.ZController
+
+scan.ImageWidth = 500e-9
+scan.ImageHeight = 500e-9
+zcontrol.PGain = 100
+zcontrol.IGain = 5000
+zcontrol.DGain = 0
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 126, 'prompt_tokens': 1044, 'total_tokens': 1170, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_L5a0CowI85GUwxgUZOPn4yAy)
+ Call ID: call_L5a0CowI85GUwxgUZOPn4yAy
+  Args:
+    query: extract Z-axis forward image data
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 22, 'prompt_tokens': 1191, 'total_tokens': 1213, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_TX6xzzhMGXuV0goLoBRvW3Dh)
+ Call ID: call_TX6xzzhMGXuV0goLoBRvW3Dh
+  Args:
+    code: max_height
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 101, 'prompt_tokens': 1524, 'total_tokens': 1625, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'max_height' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'max_height' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I need to retrieve the code for extracting the Z-axis forward image data first before attempting to calculate the maximum height of any point in the image. Let's retrieve that code.
+Tool Calls:
+  AFM_Handler.functions.Code_Executor (call_4IIj7ufeMP0RDd9trktTSypo)
+ Call ID: call_4IIj7ufeMP0RDd9trktTSypo
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+image = application.Image
+image.LoadLast()
+data = image.GetData()
+
+max_height = data.max()
+  AFM_Handler.functions.Document_Retriever (call_vuvRi2PelqWNPuwtA6QCXmy1)
+ Call ID: call_vuvRi2PelqWNPuwtA6QCXmy1
+  Args:
+    query: extract Z-axis forward image data
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 137, 'prompt_tokens': 1561, 'total_tokens': 1698, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: AFM_Handler.functions.Document_Retriever
+
+Error: AFM_Handler.functions.Document_Retriever is not a valid tool, try one of [Document_Retriever, Code_Executor].
+
+.............................Metadata..............................
+{}

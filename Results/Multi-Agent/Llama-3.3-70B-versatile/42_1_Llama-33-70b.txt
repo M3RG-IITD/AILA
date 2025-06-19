@@ -1,0 +1,509 @@
+('user', 'Capture an image by scanning from the down direction.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 276, 'total_tokens': 280, 'completion_time': 0.017074556, 'prompt_time': 0.017507102, 'queue_time': 0.056126778, 'total_time': 0.034581658}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_pn94)
+ Call ID: call_pn94
+  Args:
+    query: down direction scan code
+  Code_Executor (call_2s7g)
+ Call ID: call_2s7g
+  Args:
+    code: retrieved_code_with_down_direction_scan_parameters
+  Document_Retriever (call_je6k)
+ Call ID: call_je6k
+  Args:
+    query: approach tip code
+  Code_Executor (call_z815)
+ Call ID: call_z815
+  Args:
+    code: retrieved_code_to_approach_tip
+  Code_Executor (call_rwje)
+ Call ID: call_rwje
+  Args:
+    code: retrieved_code_with_down_direction_scan_parameters
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 107, 'prompt_tokens': 1379, 'total_tokens': 1486, 'completion_time': 0.389090909, 'prompt_time': 0.096992752, 'queue_time': -0.6825935320000001, 'total_time': 0.486083661}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'retrieved_code_with_down_direction_scan_parameters' is not defined
+Error: name 'retrieved_code_to_approach_tip' is not defined
+Error: name 'retrieved_code_with_down_direction_scan_parameters' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'retrieved_code_with_down_direction_scan_parameters' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_pgqe)
+ Call ID: call_pgqe
+  Args:
+    query: down direction scan code
+  Document_Retriever (call_8z03)
+ Call ID: call_8z03
+  Args:
+    query: approach tip code
+  Code_Executor (call_r0yd)
+ Call ID: call_r0yd
+  Args:
+    code: import nanosurf
+import time
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+scan.StartFrameDown()
+scanning = scan.IsScanning
+while scanning:
+        print("Scanning in progress... Remaining lines:", (scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+  Code_Executor (call_ajym)
+ Call ID: call_ajym
+  Args:
+    code: import nanosurf
+import time
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+approach.StartApproach()
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 236, 'prompt_tokens': 1178, 'total_tokens': 1414, 'completion_time': 0.858181818, 'prompt_time': 0.083424091, 'queue_time': 0.055323599, 'total_time': 0.941605909}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Connected to running app: CX
+Error: (-2147352567, 'Exception occurred.', (1001, 'Nanosurf CX', 'Cannot start approach!', None, 0, 0), None)
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 1
+Scanning in progress... Remaining lines: 2
+Scanning in progress... Remaining lines: 3
+Scanning in progress... Remaining lines: 5
+Scanning in progress... Remaining lines: 6
+Scanning in progress... Remaining lines: 8
+Scanning in progress... Remaining lines: 9
+Scanning finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+(-2147352567, 'Exception occurred.', (1001, 'Nanosurf CX', 'Cannot start approach!', None, 0, 0), None)
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_k442)
+ Call ID: call_k442
+  Args:
+    query: error handling for approach and scan
+  Code_Executor (call_ftcy)
+ Call ID: call_ftcy
+  Args:
+    code: import nanosurf
+import time
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+approach = application.Approach
+try:
+    approach.StartApproach()
+    while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+    print("Approach finished")
+    scan.StartFrameDown()
+    scanning = scan.IsScanning
+    while scanning:
+        print("Scanning in progress... Remaining lines:", (scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+    print("Scanning finished")
+except Exception as e:
+    print("Error occurred: ", str(e))
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 208, 'prompt_tokens': 1778, 'total_tokens': 1986, 'completion_time': 0.756363636, 'prompt_time': 0.129831427, 'queue_time': 0.056537542999999996, 'total_time': 0.886195063}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Approaching... 
+Approaching... 
+Approach finished
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 1
+Scanning finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_nrrp)
+ Call ID: call_nrrp
+  Args:
+    query: error handling for approach and scan
+  Code_Executor (call_0bhd)
+ Call ID: call_0bhd
+  Args:
+    code: import nanosurf
+import time
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+approach = application.Approach
+try:
+    approach.StartApproach()
+    while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+    print("Approach finished")
+    scan.StartFrameDown()
+    scanning = scan.IsScanning
+    while scanning:
+        print("Scanning in progress... Remaining lines:", (scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+    print("Scanning finished")
+except Exception as e:
+    print("Error occurred: ", str(e))
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 208, 'prompt_tokens': 2171, 'total_tokens': 2379, 'completion_time': 0.756363636, 'prompt_time': 0.155395564, 'queue_time': 0.056920736, 'total_time': 0.9117592}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Approaching... 
+Approaching... 
+Approach finished
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 1
+Scanning in progress... Remaining lines: 2
+Scanning in progress... Remaining lines: 3
+Scanning finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_5way)
+ Call ID: call_5way
+  Args:
+    query: down direction scan code
+  Document_Retriever (call_zqxw)
+ Call ID: call_zqxw
+  Args:
+    query: approach tip code
+  Code_Executor (call_3txf)
+ Call ID: call_3txf
+  Args:
+    code: import nanosurf
+import time
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+approach = application.Approach
+try:
+    approach.StartApproach()
+    while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+    print("Approach finished")
+    scan.StartFrameDown()
+    scanning = scan.IsScanning
+    while scanning:
+        print("Scanning in progress... Remaining lines:", (scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+    print("Scanning finished")
+except Exception as e:
+    print("Error occurred: ", str(e))
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 225, 'prompt_tokens': 2564, 'total_tokens': 2789, 'completion_time': 0.818181818, 'prompt_time': 0.193579108, 'queue_time': 0.05634492399999999, 'total_time': 1.011760926}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Approaching... 
+Approaching... 
+Approach finished
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 1
+Scanning in progress... Remaining lines: 2
+Scanning finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_d367)
+ Call ID: call_d367
+  Args:
+    query: down direction scan code
+  Document_Retriever (call_6m02)
+ Call ID: call_6m02
+  Args:
+    query: approach tip code
+  Code_Executor (call_b7gc)
+ Call ID: call_b7gc
+  Args:
+    code: import nanosurf
+import time
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+approach = application.Approach
+try:
+    approach.StartApproach()
+    while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+    print("Approach finished")
+    scan.StartFrameDown()
+    scanning = scan.IsScanning
+    while scanning:
+        print("Scanning in progress... Remaining lines:", (scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+    print("Scanning finished")
+except Exception as e:
+    print("Error occurred: ", str(e))
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 225, 'prompt_tokens': 3112, 'total_tokens': 3337, 'completion_time': 0.818181818, 'prompt_time': 0.301138001, 'queue_time': 0.055920248000000006, 'total_time': 1.119319819}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Approaching... 
+Approaching... 
+Approach finished
+Scanning in progress... Remaining lines: 11
+Scanning finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_6jc3)
+ Call ID: call_6jc3
+  Args:
+    query: down direction scan code
+  Document_Retriever (call_mmew)
+ Call ID: call_mmew
+  Args:
+    query: approach tip code
+  Code_Executor (call_abfa)
+ Call ID: call_abfa
+  Args:
+    code: import nanosurf
+import time
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+approach = application.Approach
+try:
+    approach.StartApproach()
+    while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+    print("Approach finished")
+    scan.StartFrameDown()
+    scanning = scan.IsScanning
+    while scanning:
+        print("Scanning in progress... Remaining lines:", (scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+    print("Scanning finished")
+except Exception as e:
+    print("Error occurred: ", str(e))
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 225, 'prompt_tokens': 3660, 'total_tokens': 3885, 'completion_time': 0.818181818, 'prompt_time': 0.265897152, 'queue_time': 0.10139431699999996, 'total_time': 1.08407897}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Approaching... 
+Approaching... 
+Approach finished
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 1
+Scanning finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_7p3n)
+ Call ID: call_7p3n
+  Args:
+    query: down direction scan code
+  Document_Retriever (call_w2zx)
+ Call ID: call_w2zx
+  Args:
+    query: approach tip code
+  Code_Executor (call_62sf)
+ Call ID: call_62sf
+  Args:
+    code: import nanosurf
+import time
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+approach = application.Approach
+try:
+    approach.StartApproach()
+    while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+    print("Approach finished")
+    scan.StartFrameDown()
+    scanning = scan.IsScanning
+    while scanning:
+        print("Scanning in progress... Remaining lines:", (scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+    print("Scanning finished")
+except Exception as e:
+    print("Error occurred: ", str(e))
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 225, 'prompt_tokens': 4208, 'total_tokens': 4433, 'completion_time': 0.818181818, 'prompt_time': 0.302297237, 'queue_time': 0.101109483, 'total_time': 1.1204790550000001}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Approaching... 
+Approaching... 
+Approach finished
+Scanning in progress... Remaining lines: 11
+Scanning finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_j3z9)
+ Call ID: call_j3z9
+  Args:
+    query: down direction scan code
+  Document_Retriever (call_g82b)
+ Call ID: call_g82b
+  Args:
+    query: approach tip code
+  Code_Executor (call_7qny)
+ Call ID: call_7qny
+  Args:
+    code: import nanosurf
+import time
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+approach = application.Approach
+try:
+    approach.StartApproach()
+    while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+    print("Approach finished")
+    scan.StartFrameDown()
+    scanning = scan.IsScanning
+    while scanning:
+        print("Scanning in progress... Remaining lines:", (scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+    print("Scanning finished")
+except Exception as e:
+    print("Error occurred: ", str(e))
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 225, 'prompt_tokens': 4756, 'total_tokens': 4981, 'completion_time': 0.818181818, 'prompt_time': 0.346706302, 'queue_time': 0.09997993799999999, 'total_time': 1.16488812}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Approaching... 
+Approaching... 
+Approach finished
+Scanning in progress... Remaining lines: 11
+Scanning finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_bsy5)
+ Call ID: call_bsy5
+  Args:
+    query: down direction scan code
+  Document_Retriever (call_6ke3)
+ Call ID: call_6ke3
+  Args:
+    query: approach tip code
+  Code_Executor (call_ypdg)
+ Call ID: call_ypdg
+  Args:
+    code: import nanosurf
+import time
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+approach = application.Approach
+try:
+    approach.StartApproach()
+    while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+    print("Approach finished")
+    scan.StartFrameDown()
+    scanning = scan.IsScanning
+    while scanning:
+        print("Scanning in progress... Remaining lines:", (scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+    print("Scanning finished")
+except Exception as e:
+    print("Error occurred: ", str(e))
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 225, 'prompt_tokens': 5304, 'total_tokens': 5529, 'completion_time': 0.818181818, 'prompt_time': 0.379929626, 'queue_time': 0.11273496299999997, 'total_time': 1.198111444}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}

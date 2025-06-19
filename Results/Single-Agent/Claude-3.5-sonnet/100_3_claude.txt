@@ -1,0 +1,146 @@
+================================ Human Message =================================
+
+Set image size as $150 	imes 150 \pu{nm}$ and change the cantilever tip to Dyn190Al in the AFM software.
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+
+[{'text': "I'll help you set the image size and change the cantilever tip. Let me retrieve the relevant code for these operations.", 'type': 'text'}, {'id': 'toolu_01QGT1XLzzacevFZDgaLvVFQ', 'input': {'query': 'set image size and change cantilever tip'}, 'name': 'Document_Retriever', 'type': 'tool_use'}]
+Tool Calls:
+  Document_Retriever (toolu_01QGT1XLzzacevFZDgaLvVFQ)
+ Call ID: toolu_01QGT1XLzzacevFZDgaLvVFQ
+  Args:
+    query: set image size and change cantilever tip
+
+.............................Metadata..............................
+{'id': 'msg_01JALq5Y2TGqvJLcd93rzV18', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'tool_use', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 1168, 'output_tokens': 90}}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+
+[{'text': 'Now, let me retrieve the code for setting the scan size.', 'type': 'text'}, {'id': 'toolu_01AjVSyJnreVyNy1KzKiRAbo', 'input': {'query': 'set scan size area dimensions'}, 'name': 'Document_Retriever', 'type': 'tool_use'}]
+Tool Calls:
+  Document_Retriever (toolu_01AjVSyJnreVyNy1KzKiRAbo)
+ Call ID: toolu_01AjVSyJnreVyNy1KzKiRAbo
+  Args:
+    query: set scan size area dimensions
+
+.............................Metadata..............................
+{'id': 'msg_01Qkc4gWLSh2Q77DiEqihDpk', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'tool_use', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 1630, 'output_tokens': 74}}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+
+[{'text': "I'll now combine and modify these codes to set the image size to 150 nm × 150 nm and change the cantilever tip to Dyn190Al. Here's the execution:", 'type': 'text'}, {'id': 'toolu_01RfZpQa9RVq6dpYPjJoDmY2', 'input': {'code': 'import nanosurf\n\nspm = nanosurf.SPM()\napplication = spm.application\nscan = application.Scan\nhead = application.ScanHead\n\n# Set scan size to 150 nm × 150 nm (converting to meters)\nscan.ImageWidth = 150e-9  # 150 nm in meters\nscan.ImageHeight = 150e-9  # 150 nm in meters\n\n# Change cantilever tip to Dyn190Al\nhead.CantileverByGUID = spm.CantileverGUID.Dyn190Al\n\ndel spm'}, 'name': 'Code_Executor', 'type': 'tool_use'}]
+Tool Calls:
+  Code_Executor (toolu_01RfZpQa9RVq6dpYPjJoDmY2)
+ Call ID: toolu_01RfZpQa9RVq6dpYPjJoDmY2
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+head = application.ScanHead
+
+# Set scan size to 150 nm × 150 nm (converting to meters)
+scan.ImageWidth = 150e-9  # 150 nm in meters
+scan.ImageHeight = 150e-9  # 150 nm in meters
+
+# Change cantilever tip to Dyn190Al
+head.CantileverByGUID = spm.CantileverGUID.Dyn190Al
+
+del spm
+
+.............................Metadata..............................
+{'id': 'msg_01Rz9ieMfzywxe4Ejy94UUw3', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'tool_use', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 2082, 'output_tokens': 237}}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+
+I've executed the code that:
+1. Sets the image size to 150 nm × 150 nm by setting both ImageWidth and ImageHeight to 150e-9 meters
+2. Changes the cantilever tip to Dyn190Al
+
+The changes have been successfully applied to the AFM software. Is there anything else you would like me to help you with?
+
+.............................Metadata..............................
+{'id': 'msg_01P3VaLNtVLAirBRTpMCQSz9', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'end_turn', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 2333, 'output_tokens': 85}}
+
+Total Steps: 7
+Total Tokens: 7699
+Prompt Tokens: 7213
+Completion Tokens: 486
+Total Cost (USD): $0.0
+
+Total time taken: 21.45 seconds

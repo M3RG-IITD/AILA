@@ -1,0 +1,598 @@
+('user', 'Capture an image by setting a $\x0crac{time}{line}$ that ensures the scanning is completed within 30 seconds.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 248, 'total_tokens': 252, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_YLDrOb1CAtskZiSNDmvxoglm)
+ Call ID: call_YLDrOb1CAtskZiSNDmvxoglm
+  Args:
+    query: setting scan time
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 19, 'prompt_tokens': 450, 'total_tokens': 469, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''initiate/start or terminate/stop image scanning process'''
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+
+# Start scan
+# scan.StartFrameDown() #Scanning from up to down or top to bottom
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+
+#scan.stop() #stop sacn
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",(scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_oWUu3RPaDTRx8kD5eKHVDxeA)
+ Call ID: call_oWUu3RPaDTRx8kD5eKHVDxeA
+  Args:
+    code: scan.SetLines(50)
+scan.time_per_line = 0.6
+scan.time = 30
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 37, 'prompt_tokens': 648, 'total_tokens': 685, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'scan' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'scan' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems there was an issue with the previous execution. Let me correct it and try again.
+Tool Calls:
+  Code_Executor (call_8fJX4py2GOAOLZQRLWZs8Qw7)
+ Call ID: call_8fJX4py2GOAOLZQRLWZs8Qw7
+  Args:
+    code: scan.SetLines(50)
+scan.time_per_line = 0.6
+scan.time = 30
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 58, 'prompt_tokens': 704, 'total_tokens': 762, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'scan' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'scan' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I made an error in referencing the scan object. Let me retrieve the correct code to set the scan time per line and total scan time.
+Tool Calls:
+  Document_Retriever (call_4ZCMxgCZ73eZRO6iUs2NWECO)
+ Call ID: call_4ZCMxgCZ73eZRO6iUs2NWECO
+  Args:
+    query: set scan time parameters
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 50, 'prompt_tokens': 787, 'total_tokens': 837, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_csvYpnw8wMYPjl2dnzFhUHXE)
+ Call ID: call_csvYpnw8wMYPjl2dnzFhUHXE
+  Args:
+    code: scan.time = 30
+scan.time_per_line = 0.6
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 30, 'prompt_tokens': 1154, 'total_tokens': 1184, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'scan' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'scan' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It appears that there was an issue with the code execution again. Let me make the necessary correction and rerun the code.
+Tool Calls:
+  Code_Executor (call_TNRNXd3o1LjX3QrdXd44kF1v)
+ Call ID: call_TNRNXd3o1LjX3QrdXd44kF1v
+  Args:
+    code: scan = application.Scan
+  Code_Executor (call_k9FfhvKSYhZyQNoewEzuBisG)
+ Call ID: call_k9FfhvKSYhZyQNoewEzuBisG
+  Args:
+    code: scan.time = 30
+scan.time_per_line = 0.6
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 90, 'prompt_tokens': 1203, 'total_tokens': 1293, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'application' is not defined
+Error: name 'scan' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'scan' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems there was an error as the 'application' and 'scan' variables were not defined in the correct order. Let me retrieve the complete code to set the scan time parameters and then run it correctly.
+Tool Calls:
+  Document_Retriever (call_fv0uJEmbQ6tz1VBFugD4qjVH)
+ Call ID: call_fv0uJEmbQ6tz1VBFugD4qjVH
+  Args:
+    query: set scan time parameters
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 64, 'prompt_tokens': 1330, 'total_tokens': 1394, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_5XlKjZwZany1RBW2GdlKPyLJ)
+ Call ID: call_5XlKjZwZany1RBW2GdlKPyLJ
+  Args:
+    code: scan.time = 30
+scan.time_per_line = 0.6
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 30, 'prompt_tokens': 1711, 'total_tokens': 1741, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'scan' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'scan' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered the same issue again since the 'application' variable was deleted prematurely before setting the scan parameters. Let me retrieve the code once more and handle it correctly this time.
+Tool Calls:
+  Code_Executor (call_PLwCyHopN8VFXoae4tHUivuq)
+ Call ID: call_PLwCyHopN8VFXoae4tHUivuq
+  Args:
+    code: spm = nanosurf.SPM()
+  Code_Executor (call_OzBl1QekwwPjTmqxjCxVLdfJ)
+ Call ID: call_OzBl1QekwwPjTmqxjCxVLdfJ
+  Args:
+    code: application = spm.application
+  Code_Executor (call_3seBPn5zL1C3DBEjRWKXtyXH)
+ Call ID: call_3seBPn5zL1C3DBEjRWKXtyXH
+  Args:
+    code: scan = application.Scan
+  Code_Executor (call_iD4oNmbUzPoaIb4fhPmCdFgX)
+ Call ID: call_iD4oNmbUzPoaIb4fhPmCdFgX
+  Args:
+    code: scan.time = 30
+scan.time_per_line = 0.6
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 141, 'prompt_tokens': 1760, 'total_tokens': 1901, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'nanosurf' is not defined
+Error: name 'spm' is not defined
+Error: name 'application' is not defined
+Error: name 'scan' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'scan' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered an error as the necessary modules were not imported before running the code. Let me retrieve the complete code with all the required imports and execute it properly.
+Tool Calls:
+  Document_Retriever (call_kKnE9ycQqFcd5RXjpXDFfSS5)
+ Call ID: call_kKnE9ycQqFcd5RXjpXDFfSS5
+  Args:
+    query: set scan time parameters
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 54, 'prompt_tokens': 1958, 'total_tokens': 2012, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_lf5MC5SmtHqobUdyslo8JDov)
+ Call ID: call_lf5MC5SmtHqobUdyslo8JDov
+  Args:
+    code: spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+scan.time = 30
+scan.time_per_line = 0.6
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 50, 'prompt_tokens': 2329, 'total_tokens': 2379, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'nanosurf' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'nanosurf' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems the 'nanosurf' module was not defined before running the code. I will rectify this issue and execute the code to set the scan time parameters correctly.
+Tool Calls:
+  Document_Retriever (call_7VXUAbpMoYpsHIvHCs8uMQva)
+ Call ID: call_7VXUAbpMoYpsHIvHCs8uMQva
+  Args:
+    query: import nanosurf module
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 58, 'prompt_tokens': 2400, 'total_tokens': 2458, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_rWcgzGgFiCtjCNyX2aY2A3bm)
+ Call ID: call_rWcgzGgFiCtjCNyX2aY2A3bm
+  Args:
+    code: import nanosurf
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 19, 'prompt_tokens': 2610, 'total_tokens': 2629, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_0d9d0FkOYKQ1CGRcNzFZ45i4)
+ Call ID: call_0d9d0FkOYKQ1CGRcNzFZ45i4
+  Args:
+    code: spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+scan.time = 30
+scan.time_per_line = 0.6
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 50, 'prompt_tokens': 2644, 'total_tokens': 2694, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'nanosurf' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'nanosurf' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I mistakenly imported 'nanosurf' without assigning it to a variable. Let me correct this and try running the code again.
+Tool Calls:
+  Document_Retriever (call_gNkgIVUqpF7t0Yk0h3mjOIJb)
+ Call ID: call_gNkgIVUqpF7t0Yk0h3mjOIJb
+  Args:
+    query: import nanosurf module
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 49, 'prompt_tokens': 2715, 'total_tokens': 2764, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_2msJnKmfsoKazwQiHn1Pvekw)
+ Call ID: call_2msJnKmfsoKazwQiHn1Pvekw
+  Args:
+    code: import nanosurf
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+scan.time = 30
+scan.time_per_line = 0.6
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 55, 'prompt_tokens': 2916, 'total_tokens': 2971, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Error: Property '<unknown>.time' can not be set.
+================================= Tool Message =================================
+Name: Code_Executor
+
+Property '<unknown>.time' can not be set.
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered an error while setting the 'scan.time' property. Let me retrieve the correct code from the database to adjust the scan time parameters appropriately.
+Tool Calls:
+  Document_Retriever (call_yzz7S5YFGQCjaDYTJPoCbjpN)
+ Call ID: call_yzz7S5YFGQCjaDYTJPoCbjpN
+  Args:
+    query: set scan time and time per line for image capture
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 58, 'prompt_tokens': 2994, 'total_tokens': 3052, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''initiate/start or terminate/stop image scanning process'''
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+
+# Start scan
+# scan.StartFrameDown() #Scanning from up to down or top to bottom
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+
+#scan.stop() #stop sacn
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",(scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_J6mWzz1NrMjhHO6nJDu3m4tC)
+ Call ID: call_J6mWzz1NrMjhHO6nJDu3m4tC
+  Args:
+    code: scan = application.Scan
+scan.time = 30
+scan.time_per_line = 0.6
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 35, 'prompt_tokens': 3237, 'total_tokens': 3272, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'application' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'application' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered an error as the 'application' variable was not defined before setting the scan time parameters. Let me correct this and run the code again.
+Tool Calls:
+  Code_Executor (call_DP4jG1UGFSCn3IiAMdEb37K5)
+ Call ID: call_DP4jG1UGFSCn3IiAMdEb37K5
+  Args:
+    code: import nanosurf
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+scan.time = 30
+scan.time_per_line = 0.6
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 87, 'prompt_tokens': 3291, 'total_tokens': 3378, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Error: Property '<unknown>.time' can not be set.
+================================= Tool Message =================================
+Name: Code_Executor
+
+Property '<unknown>.time' can not be set.
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The property '<unknown>.time' cannot be set, which is causing an issue in adjusting the scan time parameters. Let me retrieve the correct code to resolve this issue and set the scan time and time per line appropriately.
+Tool Calls:
+  Document_Retriever (call_KKKe3n4FCuuLF1TbUh0ewjc3)
+ Call ID: call_KKKe3n4FCuuLF1TbUh0ewjc3
+  Args:
+    query: adjust scan time parameters for image capture
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 69, 'prompt_tokens': 3407, 'total_tokens': 3476, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}

@@ -1,0 +1,91 @@
+('user', 'Withdraw the AFM tip from the sample surface.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 233, 'total_tokens': 237, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_B3cf1K9Fye1mne4Lo49h2Lft)
+ Call ID: call_B3cf1K9Fye1mne4Lo49h2Lft
+  Args:
+    query: withdraw AFM tip from sample surface
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 23, 'prompt_tokens': 435, 'total_tokens': 458, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_qXgafpurDZx287H4pBTTGhpR)
+ Call ID: call_qXgafpurDZx287H4pBTTGhpR
+  Args:
+    code: import nanosurf
+import time
+
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+approach.StartWithdraw()
+
+while approach.Status == 1 or approach.Status == 2:
+    print('Withdrawing... ')
+    time.sleep(1)
+print('Withdrawal finished')
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 96, 'prompt_tokens': 604, 'total_tokens': 700, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Withdrawal finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The AFM tip has been successfully withdrawn from the sample surface.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 15, 'prompt_tokens': 715, 'total_tokens': 730, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 6
+Total Tokens: 2125
+Prompt Tokens: 1987
+Completion Tokens: 138
+Total Cost (USD): $0.0012005000000000002
+
+Total time taken: 7.70 seconds

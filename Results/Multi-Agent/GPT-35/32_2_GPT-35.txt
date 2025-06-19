@@ -1,0 +1,147 @@
+('user', "Set the file name to 'Glass_NAP_2024' in the AFM software.")
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 242, 'total_tokens': 246, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_Tp1Z9nUwYRURGSpECYFP0sKm)
+ Call ID: call_Tp1Z9nUwYRURGSpECYFP0sKm
+  Args:
+    query: set file name
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 19, 'prompt_tokens': 444, 'total_tokens': 463, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_YJ1QKyvKRuRk4TgQP5iwFfqy)
+ Call ID: call_YJ1QKyvKRuRk4TgQP5iwFfqy
+  Args:
+    code: file_name = 'Glass_NAP_2024'
+application.SetGalleryHistoryFilenameMask(file_name)
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 36, 'prompt_tokens': 759, 'total_tokens': 795, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'application' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'application' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_mFRtF9gg1bajuVc1Er4aZAby)
+ Call ID: call_mFRtF9gg1bajuVc1Er4aZAby
+  Args:
+    code: application = spm.application
+file_name = 'Glass_NAP_2024'
+application.SetGalleryHistoryFilenameMask(file_name)
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 42, 'prompt_tokens': 814, 'total_tokens': 856, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'spm' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'spm' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered an error due to the missing definition of the 'spm' variable. Let me correct that and try again.
+Tool Calls:
+  Code_Executor (call_5PqMRV1IxYerD0xphhnwrq2r)
+ Call ID: call_5PqMRV1IxYerD0xphhnwrq2r
+  Args:
+    code: spm = nanosurf.SPM()
+application = spm.application
+file_name = 'Glass_NAP_2024'
+application.SetGalleryHistoryFilenameMask(file_name)
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 77, 'prompt_tokens': 875, 'total_tokens': 952, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'nanosurf' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'nanosurf' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered an error due to the missing import statement for the 'nanosurf' package. Let me address this issue and try again.
+Tool Calls:
+  Code_Executor (call_77OTm65ZKiK6OVYm25kttQOj)
+ Call ID: call_77OTm65ZKiK6OVYm25kttQOj
+  Args:
+    code: import nanosurf
+spm = nanosurf.SPM()
+application = spm.application
+file_name = 'Glass_NAP_2024'
+application.SetGalleryHistoryFilenameMask(file_name)
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 86, 'prompt_tokens': 979, 'total_tokens': 1065, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The file name in the AFM software has been successfully set to 'Glass_NAP_2024'.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 23, 'prompt_tokens': 1086, 'total_tokens': 1109, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 12
+Total Tokens: 5486
+Prompt Tokens: 5199
+Completion Tokens: 287
+Total Cost (USD): $0.0030300000000000006
+
+Total time taken: 11.75 seconds

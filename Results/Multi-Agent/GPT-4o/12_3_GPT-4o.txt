@@ -1,0 +1,95 @@
+('user', 'Retract the AFM tip from the sample surface.')
+================================== Ai Message ==================================
+Name: AILA
+
+'AFM_Handler'
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 6, 'prompt_tokens': 232, 'total_tokens': 238, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_a6889ffe71', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_tdLeWphOIJqbxJwjhHIhSXCP)
+ Call ID: call_tdLeWphOIJqbxJwjhHIhSXCP
+  Args:
+    query: AFM retract tip code
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 21, 'prompt_tokens': 434, 'total_tokens': 455, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_RKHQY0BAsq1a0y9GNwzH7Agt)
+ Call ID: call_RKHQY0BAsq1a0y9GNwzH7Agt
+  Args:
+    code: import nanosurf
+import time
+
+# Load the SPM application
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+
+# Start retracting the tip
+approach.StartRetract()
+
+# Wait until the retraction is finished
+while approach.Status == 1 or approach.Status == 2:
+    print("Retracting... ")
+    time.sleep(1)
+print("Retraction finished")
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 122, 'prompt_tokens': 599, 'total_tokens': 721, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Retraction finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+FINAL ANSWER: The AFM tip has been successfully retracted from the sample surface.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 20, 'prompt_tokens': 736, 'total_tokens': 756, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 6
+Total Tokens: 2170
+Prompt Tokens: 2001
+Completion Tokens: 169
+Total Cost (USD): $0.0066925000000000005
+
+Total time taken: 8.98 seconds

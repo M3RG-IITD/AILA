@@ -1,0 +1,193 @@
+('user', 'Set setpoint to \\pu{1 V} in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 239, 'total_tokens': 243, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_ig6ovodQXgUkJjmoRDxdqueQ)
+ Call ID: call_ig6ovodQXgUkJjmoRDxdqueQ
+  Args:
+    query: set setpoint voltage in AFM software
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 24, 'prompt_tokens': 441, 'total_tokens': 465, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_DMP3vyIOG75Uhfz8TCKUBK0Q)
+ Call ID: call_DMP3vyIOG75Uhfz8TCKUBK0Q
+  Args:
+    code: spm = nanosurf.SPM()
+application = spm.application
+zcontrol = application.ZController
+zcontrol.SetPoint = 1
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 49, 'prompt_tokens': 776, 'total_tokens': 825, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'nanosurf' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'nanosurf' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems that there was an issue with accessing the `nanosurf` module. Let me retry the code execution with the correct module name.
+Tool Calls:
+  Code_Executor (call_dPQIHuZKrSDwCdgs4VWexLui)
+ Call ID: call_dPQIHuZKrSDwCdgs4VWexLui
+  Args:
+    code: import NANOSURF
+spm = NANOSURF.SPM()
+application = spm.application
+zcontrol = application.ZController
+zcontrol.SetPoint = 1
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 87, 'prompt_tokens': 846, 'total_tokens': 933, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: No module named 'NANOSURF'
+================================= Tool Message =================================
+Name: Code_Executor
+
+No module named 'NANOSURF'
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I apologize for the mistake in specifying the module name. Let me correct it and retry the execution.
+Tool Calls:
+  Document_Retriever (call_6Jr60HNFQPsC2HigTDpDoRAQ)
+ Call ID: call_6Jr60HNFQPsC2HigTDpDoRAQ
+  Args:
+    query: set setpoint voltage in AFM software
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 46, 'prompt_tokens': 961, 'total_tokens': 1007, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_8u4d8BAZ2HS79YhL3pCuHzHB)
+ Call ID: call_8u4d8BAZ2HS79YhL3pCuHzHB
+  Args:
+    code: import nanosurf
+spm = nanosurf.SPM()
+application = spm.application
+zcontrol = application.ZController
+zcontrol.SetPoint = 1
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 54, 'prompt_tokens': 1324, 'total_tokens': 1378, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The setpoint voltage in the AFM software has been successfully set to \(\pu{1 V}\).
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 24, 'prompt_tokens': 1393, 'total_tokens': 1417, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 12
+Total Tokens: 6268
+Prompt Tokens: 5980
+Completion Tokens: 288
+Total Cost (USD): $0.003422
+
+Total time taken: 11.32 seconds

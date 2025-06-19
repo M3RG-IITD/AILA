@@ -1,0 +1,104 @@
+('user', 'Set P gain to 150, I gain to 5000, and D gain to 5 in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler should act next to set the P gain to 150, I gain to 5000, and D gain to 5 in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 35, 'prompt_tokens': 247, 'total_tokens': 282, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_a6889ffe71', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_PRI63CNqHfp6WL71nfwYmbts)
+ Call ID: call_PRI63CNqHfp6WL71nfwYmbts
+  Args:
+    query: set P gain, I gain, D gain in AFM software
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 29, 'prompt_tokens': 478, 'total_tokens': 507, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_Ha0tkfPwM5rhCIhXND2i8C8B)
+ Call ID: call_Ha0tkfPwM5rhCIhXND2i8C8B
+  Args:
+    code: import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+zcontrol = application.ZController
+
+# Set Z controller parameters
+zcontrol.PGain = 150
+zcontrol.IGain = 5000
+zcontrol.DGain = 5
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 106, 'prompt_tokens': 821, 'total_tokens': 927, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+FINAL ANSWER
+The P gain has been set to 150, the I gain to 5000, and the D gain to 5 in the AFM software successfully.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 38, 'prompt_tokens': 942, 'total_tokens': 980, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 6
+Total Tokens: 2696
+Prompt Tokens: 2488
+Completion Tokens: 208
+Total Cost (USD): $0.0083
+
+Total time taken: 8.72 seconds

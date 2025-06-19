@@ -1,0 +1,156 @@
+('user', 'Set image rotation to \\pu{20 degree} in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 239, 'total_tokens': 243, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_aJKJx4jG6ZN2fX5WsoYIH2Oa)
+ Call ID: call_aJKJx4jG6ZN2fX5WsoYIH2Oa
+  Args:
+    query: Set image rotation in AFM software
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 23, 'prompt_tokens': 441, 'total_tokens': 464, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_lXapMqBBnKT7WzBYIMNcqpkv)
+ Call ID: call_lXapMqBBnKT7WzBYIMNcqpkv
+  Args:
+    code: scan.Rotation=20
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 20, 'prompt_tokens': 775, 'total_tokens': 795, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'scan' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'scan' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I need to initialize the necessary parameters before setting the image rotation. Let me correct this by running the initialization code first.
+Tool Calls:
+  Code_Executor (call_cgVjZeRFxqVrbzRGYLVIrvwB)
+ Call ID: call_cgVjZeRFxqVrbzRGYLVIrvwB
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 66, 'prompt_tokens': 814, 'total_tokens': 880, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_6EtVRZcpGrCbEYqOS9LLbMAi)
+ Call ID: call_6EtVRZcpGrCbEYqOS9LLbMAi
+  Args:
+    code: scan.Rotation = 20
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 21, 'prompt_tokens': 901, 'total_tokens': 922, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'scan' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'scan' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered an error in setting the rotation directly. I will correct this by reinitializing the parameters and then applying the rotation setting.
+Tool Calls:
+  Code_Executor (call_NTzFFLgBU4PBVpQh7xa0tEnZ)
+ Call ID: call_NTzFFLgBU4PBVpQh7xa0tEnZ
+  Args:
+    code: import nanosurf
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+scan.Rotation = 20
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 75, 'prompt_tokens': 941, 'total_tokens': 1016, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I have successfully set the image rotation to 20 degrees in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 19, 'prompt_tokens': 1037, 'total_tokens': 1056, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 12
+Total Tokens: 5376
+Prompt Tokens: 5148
+Completion Tokens: 228
+Total Cost (USD): $0.002916
+
+Total time taken: 12.95 seconds

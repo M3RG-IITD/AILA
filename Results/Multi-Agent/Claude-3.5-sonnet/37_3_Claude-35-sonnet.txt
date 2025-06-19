@@ -1,0 +1,94 @@
+('user', 'Change the cantilever tip to Tap190Al-G in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'id': 'msg_019o7cf1NZXJPYMXmwkA5ZjM', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'end_turn', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 295, 'output_tokens': 7}}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+[{'text': ": I'll help you change the cantilever tip settings to Tap190Al-G. Let me retrieve the relevant code for changing the cantilever type.", 'type': 'text'}, {'id': 'toolu_01C94eTW3AiftNvpb5AwDwQd', 'input': {'query': 'change cantilever type Tap190Al-G code'}, 'name': 'Document_Retriever', 'type': 'tool_use'}]
+Tool Calls:
+  Document_Retriever (toolu_01C94eTW3AiftNvpb5AwDwQd)
+ Call ID: toolu_01C94eTW3AiftNvpb5AwDwQd
+  Args:
+    query: change cantilever type Tap190Al-G code
+
+.............................Metadata..............................
+{'id': 'msg_01NfbgBNhB9pim8e1yJW3tkB', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'tool_use', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 836, 'output_tokens': 101}}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+[{'text': "Based on the retrieved code, I'll modify it to specifically change the cantilever type to Tap190Al-G and execute it:", 'type': 'text'}, {'id': 'toolu_017evR68NMVLydkPWdKZrTbs', 'input': {'code': 'import nanosurf\n\nspm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()\napplication = spm.application\nhead = application.ScanHead\n\n# Set cantilever to Tap190Al-G\nhead.CantileverByGUID = spm.CantileverGUID.Tap190Al_G\n\ndel spm'}, 'name': 'Code_Executor', 'type': 'tool_use'}]
+Tool Calls:
+  Code_Executor (toolu_017evR68NMVLydkPWdKZrTbs)
+ Call ID: toolu_017evR68NMVLydkPWdKZrTbs
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+head = application.ScanHead
+
+# Set cantilever to Tap190Al-G
+head.CantileverByGUID = spm.CantileverGUID.Tap190Al_G
+
+del spm
+
+.............................Metadata..............................
+{'id': 'msg_01CS918L4kTTn8aPdDKUuTvu', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'tool_use', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 1310, 'output_tokens': 180}}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+FINAL ANSWER: The cantilever tip has been successfully changed to Tap190Al-G in the AFM software. The change has been confirmed through the successful execution of the code. The system is now configured to use the Tap190Al-G cantilever tip for your measurements.
+
+Is there anything else you would like me to help you with regarding the AFM settings?
+
+.............................Metadata..............................
+{'id': 'msg_01ELf3hyCqywtSu4DxL3jCCf', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'end_turn', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 1504, 'output_tokens': 85}}
+
+Total Steps: 6
+Total Tokens: 4318
+Prompt Tokens: 3945
+Completion Tokens: 373
+Total Cost (USD): $0.0
+
+Total time taken: 17.70 seconds

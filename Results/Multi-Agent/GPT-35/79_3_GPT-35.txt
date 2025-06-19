@@ -1,0 +1,310 @@
+('user', "Capture an AFM image of size $\\pu{10000 nm} \times \\pu{10000 nm}$ with the file name '79_3_GPT-35'. Open the latest file from the current folder and plot \\pu{1000 nm} length line profile across a distinct step-edge feature and save it as '79_3_GPT-35.png'.")
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 319, 'total_tokens': 323, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_BmAtJyMvUbK410NfljG6Ttc7)
+ Call ID: call_BmAtJyMvUbK410NfljG6Ttc7
+  Args:
+    query: AFM image capture
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 20, 'prompt_tokens': 502, 'total_tokens': 522, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_gRjoFRVzyshAxvlFMG8gvoMq)
+ Call ID: call_gRjoFRVzyshAxvlFMG8gvoMq
+  Args:
+    code: # Set the scan parameters
+scan.ImageWidth = 10000e-9  # [m]
+scan.ImageHeight = 10000e-9  # [m]
+
+# Save the AFM image with the specified file name
+application.SaveImage('79_3_GPT-35')
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 78, 'prompt_tokens': 833, 'total_tokens': 911, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'scan' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'scan' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_lQgpndGJHFtcMJWKDgSBVBN5)
+ Call ID: call_lQgpndGJHFtcMJWKDgSBVBN5
+  Args:
+    query: Configure AFM image scan parameters
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 22, 'prompt_tokens': 930, 'total_tokens': 952, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_fnqn2xofVAkhgT84nCPDyfaJ)
+ Call ID: call_fnqn2xofVAkhgT84nCPDyfaJ
+  Args:
+    code: scan.ImageWidth = 10000e-9
+scan.ImageHeight = 10000e-9
+
+  Code_Executor (call_aksRwSGr48Xw4tXXFN4ycRIs)
+ Call ID: call_aksRwSGr48Xw4tXXFN4ycRIs
+  Args:
+    code: application.SaveImage('79_3_GPT-35')
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 78, 'prompt_tokens': 1263, 'total_tokens': 1341, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'scan' is not defined
+Error: name 'application' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'application' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_hG3y3rijisH3maakKJuwGZdm)
+ Call ID: call_hG3y3rijisH3maakKJuwGZdm
+  Args:
+    query: AFM approach tip to step-edge feature
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 24, 'prompt_tokens': 1372, 'total_tokens': 1396, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_bZCxT0vo7sip2OErCqvyamR9)
+ Call ID: call_bZCxT0vo7sip2OErCqvyamR9
+  Args:
+    code: # Approach the AFM tip to the step-edge feature
+approach.StartApproach()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 33, 'prompt_tokens': 1542, 'total_tokens': 1575, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'approach' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'approach' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered an error due to missing variable definitions in the code execution. Let me retrieve the necessary code for initiating the AFM tip approach to the step-edge feature.
+Tool Calls:
+  Document_Retriever (call_sHEO9QdC5bNeVqvv1IXCCpDu)
+ Call ID: call_sHEO9QdC5bNeVqvv1IXCCpDu
+  Args:
+    query: AFM approach tip
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 55, 'prompt_tokens': 1595, 'total_tokens': 1650, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_bWPC3jRLjb1vQA3zmUssgAZU)
+ Call ID: call_bWPC3jRLjb1vQA3zmUssgAZU
+  Args:
+    code: approach.StartApproach()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 21, 'prompt_tokens': 1802, 'total_tokens': 1823, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'approach' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'approach' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I will now define the 'approach' variable and execute the code to approach the AFM tip to the step-edge feature.
+Tool Calls:
+  Code_Executor (call_49VNTYk6apQYscoS93H7EsQc)
+ Call ID: call_49VNTYk6apQYscoS93H7EsQc
+  Args:
+    code: import nanosurf
+import time
+
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+
+approach.StartApproach()
+while approach.Status == 1 or approach.Status == 2:
+    print('Approaching...')
+    time.sleep(1)
+print('Approach finished.')
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 125, 'prompt_tokens': 1843, 'total_tokens': 1968, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Approaching...
+Approach finished.
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_GjpdfgrFXcDzz6XBtn9RnknB)
+ Call ID: call_GjpdfgrFXcDzz6XBtn9RnknB
+  Args:
+    query: AFM line profile scanning
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 21, 'prompt_tokens': 1989, 'total_tokens': 2010, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}

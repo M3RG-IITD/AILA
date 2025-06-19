@@ -1,0 +1,108 @@
+('user', "Open the file 'Sample.nid', and calculate the number of square grids present.")
+================================== Ai Message ==================================
+Name: AILA
+
+Data_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 3, 'prompt_tokens': 257, 'total_tokens': 260, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_d8864f8b6b', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: Data_Handler
+Tool Calls:
+  Image_Analyzer (call_qdovF4N6cnGq9kCWyiEkG3Uj)
+ Call ID: call_qdovF4N6cnGq9kCWyiEkG3Uj
+  Args:
+    filename: Sample.nid
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 18, 'prompt_tokens': 685, 'total_tokens': 703, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+File to display: C:\Users\Admin\Desktop\Automation\AILA2\AILA\Results\app\Sample.nid
+================================= Tool Message =================================
+Name: Image_Analyzer
+
+{'status': 'Success', 'message': 'Raw Image C:\\Users\\Admin\\Desktop\\Automation\\AILA2\\AILA\\Results\\app\\Sample.nid processed successfully.', 'image_data': array([[-1.52747456e-06, -1.53159352e-06, -1.53542614e-06, ...,
+        -1.61819168e-06, -1.61844534e-06, -1.61854673e-06],
+       [-1.53130350e-06, -1.53862473e-06, -1.53512662e-06, ...,
+        -1.60060875e-06, -1.60086814e-06, -1.60107922e-06],
+       [-1.54179710e-06, -1.54511466e-06, -1.54537657e-06, ...,
+        -1.57866546e-06, -1.57874458e-06, -1.57860948e-06],
+       ...,
+       [-1.52345309e-06, -1.52640938e-06, -1.52873405e-06, ...,
+        -1.56497940e-06, -1.56523233e-06, -1.56543161e-06],
+       [-1.51586977e-06, -1.51714279e-06, -1.51858777e-06, ...,
+        -1.59438757e-06, -1.59454311e-06, -1.59475572e-06],
+       [-1.54233678e-06, -1.54745911e-06, -1.55230800e-06, ...,
+        -1.59051084e-06, -1.59122948e-06, -1.59082858e-06]])}
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: Data_Handler
+
+The file 'Sample.nid' has been successfully processed and the raw image data is available. To calculate the number of square grids present in this image, I'll proceed by analyzing the structure of the grids within the image data. 
+
+Let's run the analysis to count the number of square grids.
+Tool Calls:
+  Image_Analyzer (call_9W5D89okEXyQYAA6XqU8zHmm)
+ Call ID: call_9W5D89okEXyQYAA6XqU8zHmm
+  Args:
+    filename: Sample.nid
+    dynamic_code: import numpy as np
+from scipy.ndimage import label
+
+# Apply a simple threshold to identify potential grid structures
+threshold_value = np.mean(image_data) + np.std(image_data)
+thresholded_data = image_data > threshold_value
+
+# Label connected regions in the thresholded data
+dilated_structure = np.ones((3, 3))
+labeled_array, num_features = label(thresholded_data, structure=dilated_structure)
+
+# Count number of distinct regions (potential grids)
+num_features
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 190, 'prompt_tokens': 1146, 'total_tokens': 1336, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+File to display: C:\Users\Admin\Desktop\Automation\AILA2\AILA\Results\app\Sample.nid
+Dynamic code executed successfully.
+================================= Tool Message =================================
+Name: Image_Analyzer
+
+{'status': 'Success', 'message': 'Raw Image C:\\Users\\Admin\\Desktop\\Automation\\AILA2\\AILA\\Results\\app\\Sample.nid processed successfully.', 'image_data': array([[-1.52747456e-06, -1.53159352e-06, -1.53542614e-06, ...,
+        -1.61819168e-06, -1.61844534e-06, -1.61854673e-06],
+       [-1.53130350e-06, -1.53862473e-06, -1.53512662e-06, ...,
+        -1.60060875e-06, -1.60086814e-06, -1.60107922e-06],
+       [-1.54179710e-06, -1.54511466e-06, -1.54537657e-06, ...,
+        -1.57866546e-06, -1.57874458e-06, -1.57860948e-06],
+       ...,
+       [-1.52345309e-06, -1.52640938e-06, -1.52873405e-06, ...,
+        -1.56497940e-06, -1.56523233e-06, -1.56543161e-06],
+       [-1.51586977e-06, -1.51714279e-06, -1.51858777e-06, ...,
+        -1.59438757e-06, -1.59454311e-06, -1.59475572e-06],
+       [-1.54233678e-06, -1.54745911e-06, -1.55230800e-06, ...,
+        -1.59051084e-06, -1.59122948e-06, -1.59082858e-06]])}
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: Data_Handler
+
+NEED HELP: The process to analyze and count the number of square grids in the provided image has been started, but further steps or corrections might be necessary to achieve an accurate result.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 39, 'prompt_tokens': 1784, 'total_tokens': 1823, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 1024}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+Please continue by computing the number of distinct square grids present in the image data by executing the analysis code.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 23, 'prompt_tokens': 1580, 'total_tokens': 1603, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 7
+Total Tokens: 5725
+Prompt Tokens: 5452
+Completion Tokens: 273
+Total Cost (USD): $0.01508
+
+Total time taken: 11.00 seconds

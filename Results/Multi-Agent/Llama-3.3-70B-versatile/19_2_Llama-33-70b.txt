@@ -1,0 +1,127 @@
+('user', 'Change the AFM operation mode to phase contrast mode in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 282, 'total_tokens': 286, 'completion_time': 0.016659339, 'prompt_time': 0.022382227, 'queue_time': 0.060053944, 'total_time': 0.039041566}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_mah8)
+ Call ID: call_mah8
+  Args:
+    query: change AFM operation mode to phase contrast mode
+  Code_Executor (call_hrht)
+ Call ID: call_hrht
+  Args:
+    code: AFM_Handler.set_operation_mode("phase_contrast")
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 117, 'prompt_tokens': 696, 'total_tokens': 813, 'completion_time': 0.425454545, 'prompt_time': 0.052078324, 'queue_time': 0.05399735199999999, 'total_time': 0.477532869}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'AFM_Handler' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'AFM_Handler' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_8saw)
+ Call ID: call_8saw
+  Args:
+    query: change AFM operation mode to phase contrast mode
+  Code_Executor (call_ersa)
+ Call ID: call_ersa
+  Args:
+    code: opmode.OperatingMode = spm.OperatingMode.PhaseContrast
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 54, 'prompt_tokens': 1059, 'total_tokens': 1113, 'completion_time': 0.196363636, 'prompt_time': 0.076422049, 'queue_time': 0.071342741, 'total_time': 0.272785685}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'spm' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'spm' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_63ja)
+ Call ID: call_63ja
+  Args:
+    query: change AFM operation mode to phase contrast mode
+  Code_Executor (call_ygrh)
+ Call ID: call_ygrh
+  Args:
+    code: import nanosurf; spm = nanosurf.SPM(); application = spm.application; opmode = application.OperatingMode; opmode.OperatingMode = spm.OperatingMode.PhaseContrast
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 82, 'prompt_tokens': 1419, 'total_tokens': 1501, 'completion_time': 0.298181818, 'prompt_time': 0.100547425, 'queue_time': 0.055540740000000005, 'total_time': 0.398729243}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_va4n)
+ Call ID: call_va4n
+  Args:
+    query: AFM operation mode changed to phase contrast mode
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 25, 'prompt_tokens': 1803, 'total_tokens': 1828, 'completion_time': 0.090909091, 'prompt_time': 0.130406951, 'queue_time': 0.05934842000000001, 'total_time': 0.221316042}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The AFM operation mode has been successfully changed to phase contrast mode.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 15, 'prompt_tokens': 2121, 'total_tokens': 2136, 'completion_time': 0.054545455, 'prompt_time': 0.182078042, 'queue_time': 0.05553029200000001, 'total_time': 0.236623497}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 10
+Total Tokens: 7677
+Prompt Tokens: 7380
+Completion Tokens: 297
+Total Cost (USD): $0.0
+
+Total time taken: 7.46 seconds

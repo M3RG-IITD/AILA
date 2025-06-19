@@ -1,0 +1,130 @@
+('user', 'Set the P gain to 100 in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 279, 'total_tokens': 283, 'completion_time': 0.017347307, 'prompt_time': 0.018087385, 'queue_time': 0.059258457, 'total_time': 0.035434692}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_3jrw)
+ Call ID: call_3jrw
+  Args:
+    code: AFM_Handler.set_parameter("P_gain", 100)
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 36, 'prompt_tokens': 693, 'total_tokens': 729, 'completion_time': 0.130909091, 'prompt_time': 0.04433118, 'queue_time': 0.054387000000000005, 'total_time': 0.175240271}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'AFM_Handler' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'AFM_Handler' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_sbsz)
+ Call ID: call_sbsz
+  Args:
+    query: set P gain AFM code example
+  Code_Executor (call_twy3)
+ Call ID: call_twy3
+  Args:
+    code: AFM.set_parameter("P_gain", 100)
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 47, 'prompt_tokens': 743, 'total_tokens': 790, 'completion_time': 0.170909091, 'prompt_time': 0.063059168, 'queue_time': 0.05939607400000001, 'total_time': 0.233968259}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'AFM' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'AFM' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_1jd1)
+ Call ID: call_1jd1
+  Args:
+    query: AFM software set P gain example
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 23, 'prompt_tokens': 1112, 'total_tokens': 1135, 'completion_time': 0.083636364, 'prompt_time': 0.086367448, 'queue_time': 0.05515078799999999, 'total_time': 0.170003812}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_1wva)
+ Call ID: call_1wva
+  Args:
+    code: import nanosurf; spm = nanosurf.SPM(); application = spm.application; zcontrol = application.ZController; zcontrol.PGain = 100
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 49, 'prompt_tokens': 1443, 'total_tokens': 1492, 'completion_time': 0.178181818, 'prompt_time': 0.101650437, 'queue_time': 0.05994489400000001, 'total_time': 0.279832255}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The P gain in the AFM software has been set to 100.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 16, 'prompt_tokens': 1505, 'total_tokens': 1521, 'completion_time': 0.058181818, 'prompt_time': 0.105245648, 'queue_time': 0.059795281000000006, 'total_time': 0.163427466}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 10
+Total Tokens: 5950
+Prompt Tokens: 5775
+Completion Tokens: 175
+Total Cost (USD): $0.0
+
+Total time taken: 6.42 seconds

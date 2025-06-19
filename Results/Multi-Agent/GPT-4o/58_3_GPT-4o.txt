@@ -1,0 +1,570 @@
+('user', 'Capture an AFM image of size $\\pu {100 nm} \times \\pu {100 nm}$ and calculate the root mean squared surface roughness.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 272, 'total_tokens': 276, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_d8864f8b6b', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_zVNgj6lnYbGBYy15sXhpe0I1)
+ Call ID: call_zVNgj6lnYbGBYy15sXhpe0I1
+  Args:
+    query: configure scan parameters for 100 nm by 100 nm area
+  Document_Retriever (call_GLDCiLaDo1AKMxrRDZ6ShFJW)
+ Call ID: call_GLDCiLaDo1AKMxrRDZ6ShFJW
+  Args:
+    query: calculate root mean squared surface roughness
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 66, 'prompt_tokens': 453, 'total_tokens': 519, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+We have the code required to set up a scan of the AFM with parameters for an area of size 100 nm x 100 nm, and the code to approach or withdraw the AFM tip.
+
+Let's proceed with configuring the scan parameters for the image size and approaching the AFM tip. After setting these up, we will perform the scan, capture the image, and then calculate the root mean squared (RMS) surface roughness.
+
+I'll modify the retrieved code to match our image size requirements and execute it.
+Tool Calls:
+  Code_Executor (call_TJF2Zv0adw8rt30OEZG4Lbix)
+ Call ID: call_TJF2Zv0adw8rt30OEZG4Lbix
+  Args:
+    code: import nanosurf
+
+# Load application
+spm = nanosurf.SPM()
+application = spm.application
+
+# Set all necessary AFM control variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+# Set scan parameters for 100 nm x 100 nm image
+scan.ImageWidth = 100e-9  # 100 nm in meters
+scan.ImageHeight = 100e-9  # 100 nm in meters
+# Keeping other scan parameters as default or previously set
+
+# Approach the AFM tip
+approach = application.Approach
+approach.StartApproach()
+
+# Wait for approach to complete
+while approach.Status == 1 or approach.Status == 2:
+    time.sleep(1)
+
+# Proceed to perform the scan after approach
+scan.Start()  # Assuming Start() is the correct method to begin the scanning process
+
+# Wait for the scan to be completed
+while scan.Status == 1:
+    time.sleep(1)
+
+# Note: Specific method or attribute to fetch scan data is assumed
+
+# Clean up
+spm.disconnect()  # Assuming disconnect closes the control connection safely
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 378, 'prompt_tokens': 999, 'total_tokens': 1377, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Error: <unknown>.Status
+================================= Tool Message =================================
+Name: Code_Executor
+
+<unknown>.Status
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems there was an error during the execution related to accessing the `.Status` attribute or method, which is not recognized. This might be due to incorrect assumptions about the methods available for the `scan` or `approach` objects, or due to missing import or method definitions in context.
+
+Let's rectify this by properly focusing on the relevant attributes or methods to check the status of the operations, ensuring the scan is conducted successfully. I'll re-evaluate the implementation for any necessary corrections before executing again. If needed, I may consult the manual or helper functions.
+
+First, I'll verify the details and methods related to starting and checking the status of scans and approaching operations from the provided resources. Let me explore those details more carefully.
+Tool Calls:
+  Document_Retriever (call_TUhnIeR48pBosJ09rCnEdMuC)
+ Call ID: call_TUhnIeR48pBosJ09rCnEdMuC
+  Args:
+    query: methods to start and check the status of AFM scan and approach operations using nanosurf Python API
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 182, 'prompt_tokens': 1399, 'total_tokens': 1581, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_mPEdWPMHFKZEbebz0rtZ1Kgr)
+ Call ID: call_mPEdWPMHFKZEbebz0rtZ1Kgr
+  Args:
+    query: AFM image scan methods and status checking nanosurf API
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 27, 'prompt_tokens': 1731, 'total_tokens': 1758, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 1280}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''initiate/start or terminate/stop image scanning process'''
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+
+# Start scan
+# scan.StartFrameDown() #Scanning from up to down or top to bottom
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+
+#scan.stop() #stop sacn
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",(scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+With the correct methods identified for starting the scan and checking its status, I'll update the code and proceed to set the AFM to capture the image. Additionally, I'll ensure we approach the AFM tip properly before scanning:
+
+```python
+import nanosurf
+import time
+
+# Load application
+spm = nanosurf.SPM()
+application = spm.application
+
+# Set all necessary AFM control variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+# Set scan parameters for 100 nm x 100 nm image
+scan.ImageWidth = 100e-9  # 100 nm in meters
+scan.ImageHeight = 100e-9  # 100 nm in meters
+# Keeping other scan parameters as default or previously set
+
+# Approach the AFM tip
+approach = application.Approach
+approach.StartApproach()
+
+# Wait for the approach to complete
+while approach.Status == 1 or approach.Status == 2:
+    print("Approaching...")
+    time.sleep(1)
+print("Approach finished.")
+
+# Initiate scanning
+scan.StartFrameUp()  # Start scanning from bottom to top
+
+# Check scanning status
+scanning = scan.IsScanning
+while scanning:
+    print("Scanning in progress... Remaining lines:", (scan.Lines - scan.Currentline))
+    time.sleep(3)
+    scanning = scan.IsScanning
+print("Scanning finished")
+
+# Clean up
+spm.disconnect()
+```
+
+I'll execute this to capture the image and then move on to calculate the RMS roughness.
+Tool Calls:
+  Code_Executor (call_YwDmwIW1DneRkM6YeNAWBm15)
+ Call ID: call_YwDmwIW1DneRkM6YeNAWBm15
+  Args:
+    code: import nanosurf
+import time
+
+# Load application
+spm = nanosurf.SPM()
+application = spm.application
+
+# Set all necessary AFM control variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+# Set scan parameters for 100 nm x 100 nm image
+scan.ImageWidth = 100e-9  # 100 nm in meters
+scan.ImageHeight = 100e-9  # 100 nm in meters
+# Keeping other scan parameters as default or previously set
+
+# Approach the AFM tip
+approach = application.Approach
+approach.StartApproach()
+
+# Wait for the approach to complete
+while approach.Status == 1 or approach.Status == 2:
+    print("Approaching...")
+    time.sleep(1)
+print("Approach finished.")
+
+# Initiate scanning
+scan.StartFrameUp()  # Start scanning from bottom to top
+
+# Check scanning status
+scanning = scan.IsScanning
+while scanning:
+    print("Scanning in progress... Remaining lines:", (scan.Lines - scan.Currentline))
+    time.sleep(3)
+    scanning = scan.IsScanning
+print("Scanning finished")
+
+# Clean up
+spm.disconnect()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 623, 'prompt_tokens': 1931, 'total_tokens': 2554, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 1664}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Approach finished.
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 11
+Error: <unknown>.IsScanning
+================================= Tool Message =================================
+Name: Code_Executor
+
+<unknown>.IsScanning
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems there is an issue recognizing the `.IsScanning` attribute or method. We need to ensure we are using the correct attribute to check the scanning status in the Nanosurf API.
+
+I'll verify the correct way to determine if a scan is ongoing and how to confirm its completion. Let's consult the documentation for the precise method or attribute to utilize.
+Tool Calls:
+  Document_Retriever (call_gqrh6oP4WBOnF5BWw8szGtLM)
+ Call ID: call_gqrh6oP4WBOnF5BWw8szGtLM
+  Args:
+    query: correct method to check if AFM is scanning using nanosurf Python API
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 102, 'prompt_tokens': 2577, 'total_tokens': 2679, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 1920}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_Vdon8AOsC8Wtjx9uD65PNNa3)
+ Call ID: call_Vdon8AOsC8Wtjx9uD65PNNa3
+  Args:
+    query: nanosurf python check scan status method or attribute
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 26, 'prompt_tokens': 2829, 'total_tokens': 2855, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 1920}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''initiate/start or terminate/stop image scanning process'''
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+
+# Start scan
+# scan.StartFrameDown() #Scanning from up to down or top to bottom
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+
+#scan.stop() #stop sacn
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",(scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It appears that the scanning status check using `scan.IsScanning` is correct according to the available documentation. Still, if the interpreter can't recognize it, it might be due to a missing update or dependency, or it could be related to specific object instantiation issues.
+
+I'll attempt a more direct approach, following closely the same guideline but ensuring no logical or typographical missteps:
+
+Let's retry the execution and debug further if needed. Here is the prepared code for the process:
+
+```python
+import nanosurf
+import time
+
+# Load application
+spm = nanosurf.SPM()
+application = spm.application
+
+# Set all necessary AFM control variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+# Set scan parameters for 100 nm x 100 nm image
+scan.ImageWidth = 100e-9  # 100 nm in meters
+scan.ImageHeight = 100e-9  # 100 nm in meters
+# Keeping other scan parameters as default or previously set
+
+# Approach the AFM tip
+approach = application.Approach
+approach.StartApproach()
+
+# Wait for the approach to complete
+while approach.Status == 1 or approach.Status == 2:
+    print("Approaching...")
+    time.sleep(1)
+print("Approach finished.")
+
+# Initiate scanning
+scan.StartFrameUp()  # Start scanning from bottom to top
+
+# Check scanning status
+while scan.IsScanning:
+    print("Scanning in progress... Remaining lines:", (scan.Lines - scan.Currentline))
+    time.sleep(3)
+print("Scanning finished")
+
+# Clean up
+spm.disconnect()
+```
+
+I'll execute this updated code to capture the image correctly and follow it up with the RMS surface roughness calculation.
+Tool Calls:
+  Code_Executor (call_509iftsLZVmvXAGM6IupxHlu)
+ Call ID: call_509iftsLZVmvXAGM6IupxHlu
+  Args:
+    code: import nanosurf
+import time
+
+# Load application
+spm = nanosurf.SPM()
+application = spm.application
+
+# Set all necessary AFM control variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+# Set scan parameters for 100 nm x 100 nm image
+scan.ImageWidth = 100e-9  # 100 nm in meters
+scan.ImageHeight = 100e-9  # 100 nm in meters
+# Keeping other scan parameters as default or previously set
+
+# Approach the AFM tip
+approach = application.Approach
+approach.StartApproach()
+
+# Wait for the approach to complete
+while approach.Status == 1 or approach.Status == 2:
+    print("Approaching...")
+    time.sleep(1)
+print("Approach finished.")
+
+# Initiate scanning
+scan.StartFrameUp()  # Start scanning from bottom to top
+
+# Check scanning status
+while scan.IsScanning:
+    print("Scanning in progress... Remaining lines:", (scan.Lines - scan.Currentline))
+    time.sleep(3)
+print("Scanning finished")
+
+# Clean up
+spm.disconnect()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 653, 'prompt_tokens': 3028, 'total_tokens': 3681, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 2560}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Waiting for controller startup.......
+Error: CX.Application.ZController
+================================= Tool Message =================================
+Name: Code_Executor
+
+CX.Application.ZController
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+There seems to be a confusion or error related to the `ZController` object. To proceed effectively, I need to address the issue of identifying the correct methods and object paths to handle ZControl and scan API calls. 
+
+I'll narrow down the focus on obtaining the correct ZController configurations, handling status checks, and executing start methods. I'll cross-examine with the manual specifications.
+Tool Calls:
+  Document_Retriever (call_dbheoHNHFmCTYHVPCzeOuyeq)
+ Call ID: call_dbheoHNHFmCTYHVPCzeOuyeq
+  Args:
+    query: correct method to access ZController, start, and check scan in nanosurf API
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 110, 'prompt_tokens': 3703, 'total_tokens': 3813, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 2944}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''initiate/start or terminate/stop image scanning process'''
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+
+# Start scan
+# scan.StartFrameDown() #Scanning from up to down or top to bottom
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+
+#scan.stop() #stop sacn
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",(scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems that the ZController error might have arisen due to an unsuccessful API call or incorrect object initialization pathways; however, specific details like the instantiation or API call aren't clearly leading to a solution through available datasets.
+
+Given this, troubleshooting by verifying proper connection setup or seeking specific documentation modes outside current access may be necessary. Meanwhile, checking the AFM's operational status and recreating workspace parts can alleviate any hidden misconfigurations affecting execution.
+
+Please confirm if another set of functionality or a different approach, such as verifying AFM's exact control sequence and manual adjustments or using software resources specific to ZController metrics, is available in your current environment, ensuring to follow clear support or operational guidelines.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 140, 'prompt_tokens': 3992, 'total_tokens': 4132, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 3584}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 20
+Total Tokens: 25225
+Prompt Tokens: 22914
+Completion Tokens: 2311
+Total Cost (USD): $0.060555000000000005
+
+Total time taken: 183.33 seconds

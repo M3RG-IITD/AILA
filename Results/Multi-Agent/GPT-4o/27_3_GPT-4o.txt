@@ -1,0 +1,123 @@
+('user', 'Change the AFM operation mode to lateral force mode in the AFM software, and then capture an image.')
+================================== Ai Message ==================================
+Name: AILA
+
+'AFM_Handler' should act next to change the AFM operation mode to lateral force mode and capture an image.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 25, 'prompt_tokens': 243, 'total_tokens': 268, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_a6889ffe71', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_PR2HHq5V7rDK0FyPJ1jWkyPI)
+ Call ID: call_PR2HHq5V7rDK0FyPJ1jWkyPI
+  Args:
+    query: change operation mode to lateral force mode
+  Document_Retriever (call_tAQeeGNjmTi9OpqP60Vtc9Hf)
+ Call ID: call_tAQeeGNjmTi9OpqP60Vtc9Hf
+  Args:
+    query: capture image
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 56, 'prompt_tokens': 464, 'total_tokens': 520, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''initiate/start or terminate/stop image scanning process'''
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+
+# Start scan
+# scan.StartFrameDown() #Scanning from up to down or top to bottom
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+
+#scan.stop() #stop sacn
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",(scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_iRgAJHOYr4TadPIsnMJoBnGG)
+ Call ID: call_iRgAJHOYr4TadPIsnMJoBnGG
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+
+# Set Operating mode to Lateral Force mode
+opmode.OperatingMode = spm.OperatingMode.LateralForce
+
+del spm
+  Code_Executor (call_gJmRzywuXm91PKZ2Mzg60PRN)
+ Call ID: call_gJmRzywuXm91PKZ2Mzg60PRN
+  Args:
+    code: import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+
+# Start scan
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+
+#scan.stop() #stop scan
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",(scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 262, 'prompt_tokens': 999, 'total_tokens': 1261, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Connected to running app: CX
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 10
+Scanning in progress... Remaining lines: 9
+Scanning in progress... Remaining lines: 8
+Scanning in progress... Remaining lines: 6
+Scanning in progress... Remaining lines: 5
+Scanning in progress... Remaining lines: 3
+Scanning in progress... Remaining lines: 2
+Scanning finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+FINAL ANSWER: The AFM operation mode has been successfully changed to lateral force mode, and an image has been captured.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 27, 'prompt_tokens': 1284, 'total_tokens': 1311, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 6
+Total Tokens: 3360
+Prompt Tokens: 2990
+Completion Tokens: 370
+Total Cost (USD): $0.011175000000000001
+
+Total time taken: 39.43 seconds

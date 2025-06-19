@@ -1,0 +1,111 @@
+('user', 'Initiate the scanning process in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+The next step should be to handle the AFM scanning process, which falls under the responsibility of the AFM_Handler.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 25, 'prompt_tokens': 234, 'total_tokens': 259, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_hEmPlzvmxglj1RDIueDq32ii)
+ Call ID: call_hEmPlzvmxglj1RDIueDq32ii
+  Args:
+    query: AFM scanning process
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 20, 'prompt_tokens': 457, 'total_tokens': 477, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''initiate/start or terminate/stop image scanning process'''
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+
+# Start scan
+# scan.StartFrameDown() #Scanning from up to down or top to bottom
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+
+#scan.stop() #stop sacn
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",(scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_M04PuRboDVKDCsY5frVyo5Xj)
+ Call ID: call_M04PuRboDVKDCsY5frVyo5Xj
+  Args:
+    code: # Load the AFM software application
+spm = nanosurf.SPM()
+application = spm.application
+
+# Start the scanning process
+scan = application.Scan
+scan.StartFrameUp()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 55, 'prompt_tokens': 656, 'total_tokens': 711, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'nanosurf' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'nanosurf' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems there was an issue with the code execution as the `nanosurf` module needs to be imported before using it. Let me correct that and try again.
+Tool Calls:
+  Code_Executor (call_PH9FlXuVRwvHrIhlhXVqdNZi)
+ Call ID: call_PH9FlXuVRwvHrIhlhXVqdNZi
+  Args:
+    code: import nanosurf
+# Load the AFM software application
+spm = nanosurf.SPM()
+application = spm.application
+
+# Start the scanning process
+scan = application.Scan
+scan.StartFrameUp()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 96, 'prompt_tokens': 732, 'total_tokens': 828, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The scanning process has been initiated successfully. If you need further assistance or information, feel free to ask.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 23, 'prompt_tokens': 849, 'total_tokens': 872, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 8
+Total Tokens: 3147
+Prompt Tokens: 2928
+Completion Tokens: 219
+Total Cost (USD): $0.0017925
+
+Total time taken: 7.77 seconds

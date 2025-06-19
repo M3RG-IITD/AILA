@@ -1,0 +1,259 @@
+('user', "Open the file 'Sample.nid', extract the data corresponding to the Z-axis backward image, plot a line profile across the image, and save as '82_2_Llama-33-70b.png'")
+================================== Ai Message ==================================
+Name: AILA
+
+Data_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 3, 'prompt_tokens': 309, 'total_tokens': 312, 'completion_time': 0.016649615, 'prompt_time': 0.037530574, 'queue_time': 0.053117976, 'total_time': 0.054180189}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: Data_Handler
+Tool Calls:
+  Image_Analyzer (call_8bd5)
+ Call ID: call_8bd5
+  Args:
+    path: /directory/path
+    filename: Sample.nid
+    dynamic_code: import numpy as np; image_data = np.array(image_data); z_axis_backward_image = image_data[:, :, 2]; line_profile = np.mean(z_axis_backward_image, axis=0); import matplotlib.pyplot as plt; plt.plot(line_profile); plt.savefig('82_2_Llama-33-70b.png')
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 123, 'prompt_tokens': 1182, 'total_tokens': 1305, 'completion_time': 0.447272727, 'prompt_time': 0.083926628, 'queue_time': 0.053398058, 'total_time': 0.531199355}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+File not found: /directory/path\Sample.nid
+================================= Tool Message =================================
+Name: Image_Analyzer
+
+{"status": "Error", "message": "The specified file does not exist."}
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: Data_Handler
+Tool Calls:
+  Image_Analyzer (call_neza)
+ Call ID: call_neza
+  Args:
+    path: /home/user/Documents
+    filename: Sample.nid
+    dynamic_code: import numpy as np; image_data = np.array(image_data); z_axis_backward_image = image_data[:, :, 2]; line_profile = np.mean(z_axis_backward_image, axis=0); import matplotlib.pyplot as plt; plt.plot(line_profile); plt.savefig('82_2_Llama-33-70b.png')
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 96, 'prompt_tokens': 1310, 'total_tokens': 1406, 'completion_time': 0.349090909, 'prompt_time': 0.091794699, 'queue_time': 0.057651297000000004, 'total_time': 0.440885608}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+File not found: /home/user/Documents\Sample.nid
+================================= Tool Message =================================
+Name: Image_Analyzer
+
+{"status": "Error", "message": "The specified file does not exist."}
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: Data_Handler
+
+NEED HELP
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 1434, 'total_tokens': 1438, 'completion_time': 0.023896707, 'prompt_time': 0.135811179, 'queue_time': 0.053509416000000004, 'total_time': 0.159707886}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_2czg)
+ Call ID: call_2czg
+  Args:
+    query: open file Sample.nid and extract Z-axis backward image
+  Code_Executor (call_3q8e)
+ Call ID: call_3q8e
+  Args:
+    code: import numpy as np; image_data = np.array(image_data); z_axis_backward_image = image_data[:, :, 2]; line_profile = np.mean(z_axis_backward_image, axis=0); import matplotlib.pyplot as plt; plt.plot(line_profile); plt.savefig('82_2_Llama-33-70b.png')
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 159, 'prompt_tokens': 977, 'total_tokens': 1136, 'completion_time': 0.578181818, 'prompt_time': 0.070774276, 'queue_time': 0.05697055400000001, 'total_time': 0.648956094}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'image_data' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'image_data' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_a5bq)
+ Call ID: call_a5bq
+  Args:
+    query: extract data from Sample.nid for Z-axis backward image
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 27, 'prompt_tokens': 1409, 'total_tokens': 1436, 'completion_time': 0.098181818, 'prompt_time': 0.104938045, 'queue_time': 0.053280855, 'total_time': 0.203119863}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_4tv8)
+ Call ID: call_4tv8
+  Args:
+    query: open Sample.nid and extract data for Z-axis backward image
+  Code_Executor (call_8g67)
+ Call ID: call_8g67
+  Args:
+    code: import numpy as np; image_data = np.array(image_data); z_axis_backward_image = image_data[:, :, 2]; line_profile = np.mean(z_axis_backward_image, axis=0); import matplotlib.pyplot as plt; plt.plot(line_profile); plt.savefig('82_2_Llama-33-70b.png')
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 106, 'prompt_tokens': 1744, 'total_tokens': 1850, 'completion_time': 0.385454545, 'prompt_time': 0.119820243, 'queue_time': 0.053513832, 'total_time': 0.505274788}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'image_data' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'image_data' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_qg86)
+ Call ID: call_qg86
+  Args:
+    query: extract Z-axis backward image data from Sample.nid file
+  Code_Executor (call_6xdf)
+ Call ID: call_6xdf
+  Args:
+    code: import numpy as np; image_data = np.array(image_data); z_axis_backward_image = image_data[:, :, 2]; line_profile = np.mean(z_axis_backward_image, axis=0); import matplotlib.pyplot as plt; plt.plot(line_profile); plt.savefig('82_2_Llama-33-70b.png')
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 105, 'prompt_tokens': 2172, 'total_tokens': 2277, 'completion_time': 0.381818182, 'prompt_time': 0.166492116, 'queue_time': 0.05449646699999999, 'total_time': 0.548310298}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'image_data' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'image_data' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_bncc)
+ Call ID: call_bncc
+  Args:
+    query: Sample.nid file data extraction for Z-axis backward image
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 27, 'prompt_tokens': 2599, 'total_tokens': 2626, 'completion_time': 0.098181818, 'prompt_time': 0.359962633, 'queue_time': 0.054199316, 'total_time': 0.458144451}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_w025)
+ Call ID: call_w025
+  Args:
+    code: import numpy as np; from nanosurf import fileio; file = fileio.open('Sample.nid'); image_data = file['Z-axis backward image'].data; z_axis_backward_image = np.array(image_data); line_profile = np.mean(z_axis_backward_image, axis=0); import matplotlib.pyplot as plt; plt.plot(line_profile); plt.savefig('82_2_Llama-33-70b.png')
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 99, 'prompt_tokens': 2934, 'total_tokens': 3033, 'completion_time': 0.36, 'prompt_time': 0.21496215, 'queue_time': 0.05604136000000001, 'total_time': 0.57496215}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: cannot import name 'fileio' from 'nanosurf' (C:\Users\Admin\.conda\envs\aila3\Lib\site-packages\nanosurf\__init__.py)
+================================= Tool Message =================================
+Name: Code_Executor
+
+cannot import name 'fileio' from 'nanosurf' (C:\Users\Admin\.conda\envs\aila3\Lib\site-packages\nanosurf\__init__.py)
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_40qg)
+ Call ID: call_40qg
+  Args:
+    query: Sample.nid file data extraction for Z-axis backward image using nanosurf library
+  Code_Executor (call_ynar)
+ Call ID: call_ynar
+  Args:
+    code: import numpy as np; from nanosurf import fileio; file = fileio.open('Sample.nid'); image_data = file['Z-axis backward image'].data; z_axis_backward_image = np.array(image_data); line_profile = np.mean(z_axis_backward_image, axis=0); import matplotlib.pyplot as plt; plt.plot(line_profile); plt.savefig('82_2_Llama-33-70b.png')
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 130, 'prompt_tokens': 3083, 'total_tokens': 3213, 'completion_time': 0.472727273, 'prompt_time': 0.231312733, 'queue_time': 0.05492392800000001, 'total_time': 0.704040006}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: cannot import name 'fileio' from 'nanosurf' (C:\Users\Admin\.conda\envs\aila3\Lib\site-packages\nanosurf\__init__.py)
+================================= Tool Message =================================
+Name: Code_Executor
+
+cannot import name 'fileio' from 'nanosurf' (C:\Users\Admin\.conda\envs\aila3\Lib\site-packages\nanosurf\__init__.py)
+
+.............................Metadata..............................
+{}

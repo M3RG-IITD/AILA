@@ -1,0 +1,88 @@
+================================ Human Message =================================
+
+Withdraw the AFM tip from the sample surface.
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Tool Calls:
+  Document_Retriever (call_zvF7Wru3gdmRNUIcgBZi3g9E)
+ Call ID: call_zvF7Wru3gdmRNUIcgBZi3g9E
+  Args:
+    query: withdraw AFM tip from sample surface
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 23, 'prompt_tokens': 623, 'total_tokens': 646, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Tool Calls:
+  Code_Executor (call_O4wpzXz1YtCTYqDYyvnfkaIA)
+ Call ID: call_O4wpzXz1YtCTYqDYyvnfkaIA
+  Args:
+    code: import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+
+approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+    print("Withdrawing... ")
+    time.sleep(1)
+print("Finished withdrawing")
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 102, 'prompt_tokens': 786, 'total_tokens': 888, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Finished withdrawing
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+
+The AFM tip has been successfully withdrawn from the sample surface. If you need further assistance, feel free to ask!
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 26, 'prompt_tokens': 899, 'total_tokens': 925, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 5
+Total Tokens: 2459
+Prompt Tokens: 2308
+Completion Tokens: 151
+Total Cost (USD): $0.00728
+
+Total time taken: 8.12 seconds

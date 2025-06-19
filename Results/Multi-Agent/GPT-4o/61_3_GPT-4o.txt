@@ -1,0 +1,312 @@
+('user', 'Capture two AFM images of size $\\pu{100nm} \times \\pu{100nm}$ in different locations.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 247, 'total_tokens': 251, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_a6889ffe71', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_Hy3mSpQ0jRKx0nwlq1v9gekH)
+ Call ID: call_Hy3mSpQ0jRKx0nwlq1v9gekH
+  Args:
+    query: Set scan size to 100nm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 23, 'prompt_tokens': 447, 'total_tokens': 470, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_jBDzGHESKknypQNSpFSXpdva)
+ Call ID: call_jBDzGHESKknypQNSpFSXpdva
+  Args:
+    query: Approach AFM tip
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 21, 'prompt_tokens': 784, 'total_tokens': 805, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_zVBAJJVsY9Z1jiYXUmVBXIPf)
+ Call ID: call_zVBAJJVsY9Z1jiYXUmVBXIPf
+  Args:
+    query: Scan AFM image
+  Document_Retriever (call_MLkTohIhEvxkw5OCSibbbLxR)
+ Call ID: call_MLkTohIhEvxkw5OCSibbbLxR
+  Args:
+    query: Set scan region or relocate scan area
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 58, 'prompt_tokens': 949, 'total_tokens': 1007, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''initiate/start or terminate/stop image scanning process'''
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+
+# Start scan
+# scan.StartFrameDown() #Scanning from up to down or top to bottom
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+
+#scan.stop() #stop sacn
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",(scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_94MVDv2stP40yBjKVziRRiYj)
+ Call ID: call_94MVDv2stP40yBjKVziRRiYj
+  Args:
+    code: # Step 1: Set the scan size to 100 nm x 100 nm
+import nanosurf
+
+# Load application
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+
+# Set scan size parameters
+scan.ImageWidth = 100e-9  # [m]
+scan.ImageHeight = 100e-9  # [m]
+
+# Approach the AFM tip
+approach = application.Approach
+approach.StartApproach()
+while approach.Status == 1 or approach.Status == 2:
+    print("Approaching... ")
+    time.sleep(1)
+print("Approach finished")
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 165, 'prompt_tokens': 1513, 'total_tokens': 1678, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Approaching... 
+Approach finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_4ad0k2J02bCXsfwoPyI2zRZZ)
+ Call ID: call_4ad0k2J02bCXsfwoPyI2zRZZ
+  Args:
+    code: # Step 2: Capture the first image
+import nanosurf
+import time
+
+# Load application
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+
+# Start the scanning process for the first image
+scan.StartFrameUp() 
+scanning = scan.IsScanning 
+while scanning:
+    print("Scanning first image in progress... Remaining lines:", (scan.Lines-scan.Currentline))
+    time.sleep(3)
+    scanning = scan.IsScanning
+print("First image scanning finished")
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 139, 'prompt_tokens': 1693, 'total_tokens': 1832, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 1408}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Scanning first image in progress... Remaining lines: 11
+Scanning first image in progress... Remaining lines: 10
+Scanning first image in progress... Remaining lines: 9
+Scanning first image in progress... Remaining lines: 8
+Scanning first image in progress... Remaining lines: 6
+Scanning first image in progress... Remaining lines: 5
+Scanning first image in progress... Remaining lines: 3
+Scanning first image in progress... Remaining lines: 2
+First image scanning finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_IpGabUeytI3wqws8BSW82Mki)
+ Call ID: call_IpGabUeytI3wqws8BSW82Mki
+  Args:
+    code: # Step 3: Reposition the scan area for the second image
+import nanosurf
+
+# Load application
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+
+# Move to a new location for a second image
+# For simplicity, we'll just translate the scan center by 200 nm on the x-axis
+current_center_x = scan.CenterPosX
+scan.CenterPosX = current_center_x + 200e-9  # Move by 200 nm
+
+print("Scan area repositioned for second image.")
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 138, 'prompt_tokens': 1847, 'total_tokens': 1985, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 1664}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Scan area repositioned for second image.
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_Aq6BeC8XtjlBpyjvtVrP5msV)
+ Call ID: call_Aq6BeC8XtjlBpyjvtVrP5msV
+  Args:
+    code: # Step 4: Capture the second image
+import nanosurf
+import time
+
+# Load application
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+
+# Start the scanning process for the second image
+scan.StartFrameUp() 
+scanning = scan.IsScanning 
+while scanning:
+    print("Scanning second image in progress... Remaining lines:", (scan.Lines-scan.Currentline))
+    time.sleep(3)
+    scanning = scan.IsScanning
+print("Second image scanning finished")
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 139, 'prompt_tokens': 2000, 'total_tokens': 2139, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 1792}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Scanning second image in progress... Remaining lines: 11
+Scanning second image in progress... Remaining lines: 10
+Scanning second image in progress... Remaining lines: 9
+Scanning second image in progress... Remaining lines: 8
+Scanning second image in progress... Remaining lines: 6
+Scanning second image in progress... Remaining lines: 5
+Scanning second image in progress... Remaining lines: 3
+Scanning second image in progress... Remaining lines: 2
+Second image scanning finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+FINAL ANSWER: Two AFM images of size 100 nm x 100 nm have been successfully captured at different locations.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 27, 'prompt_tokens': 2154, 'total_tokens': 2181, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 16
+Total Tokens: 12348
+Prompt Tokens: 11634
+Completion Tokens: 714
+Total Cost (USD): $0.030145
+
+Total time taken: 84.77 seconds

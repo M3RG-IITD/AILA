@@ -1,0 +1,118 @@
+('user', 'Set image width to \\pu{250 nm}, I gain to 250, and D gain to 50 in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+'AFM_Handler' would be the appropriate team member to set the image width, I gain, and D gain in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 30, 'prompt_tokens': 249, 'total_tokens': 279, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_a6889ffe71', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_6lACqHBFVoh5C7FyTdLGJzhD)
+ Call ID: call_6lACqHBFVoh5C7FyTdLGJzhD
+  Args:
+    query: set image width to 250 nm
+  Document_Retriever (call_3hWMcfRixcD9ficOQMLpEZik)
+ Call ID: call_3hWMcfRixcD9ficOQMLpEZik
+  Args:
+    query: set I gain to 250
+  Document_Retriever (call_zP163kU8a9IOejELSrShNALS)
+ Call ID: call_zP163kU8a9IOejELSrShNALS
+  Args:
+    query: set D gain to 50
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 81, 'prompt_tokens': 475, 'total_tokens': 556, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_bjcqls4YiG13pK09StzHlZX0)
+ Call ID: call_bjcqls4YiG13pK09StzHlZX0
+  Args:
+    code: # Python code to change afm image scan parameters and parameters (P/I/D-gain)
+
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+# Update requested parameters
+scan.ImageWidth = 250e-9  # [m] Set image width to 250 nm
+zcontrol.IGain = 250       # Set I gain to 250
+zcontrol.DGain = 50        # Set D gain to 50
+
+del spm # Clean up
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 182, 'prompt_tokens': 1526, 'total_tokens': 1708, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+FINAL ANSWER: The image width has been set to 250 nm, I gain to 250, and D gain to 50 in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 35, 'prompt_tokens': 1723, 'total_tokens': 1758, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 1408}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 6
+Total Tokens: 4301
+Prompt Tokens: 3973
+Completion Tokens: 328
+Total Cost (USD): $0.011452500000000001
+
+Total time taken: 12.03 seconds

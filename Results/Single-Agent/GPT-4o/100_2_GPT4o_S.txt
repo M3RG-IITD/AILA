@@ -1,0 +1,108 @@
+================================ Human Message =================================
+
+Set image size as $150 	imes 150 \pu{nm}$ and change the cantilever tip to Dyn190Al in the AFM software.
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Tool Calls:
+  Document_Retriever (call_OacM4ENRIBoFPDdqgDKF2ZaA)
+ Call ID: call_OacM4ENRIBoFPDdqgDKF2ZaA
+  Args:
+    query: set image size to 150 nm in AFM
+  Document_Retriever (call_2ishZKW0aIx8qqo05BhKBGTt)
+ Call ID: call_2ishZKW0aIx8qqo05BhKBGTt
+  Args:
+    query: change cantilever tip to Dyn190Al in AFM
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 67, 'prompt_tokens': 645, 'total_tokens': 712, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Tool Calls:
+  Code_Executor (call_YAjAG9NJZCP0wepDSFenZEHH)
+ Call ID: call_YAjAG9NJZCP0wepDSFenZEHH
+  Args:
+    code: import nanosurf
+
+# Load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+# All variables
+scan = application.Scan
+
+# Set scan parameters
+scan.ImageWidth = 150e-9 # [m]
+scan.ImageHeight = 150e-9 # [m]
+
+del spm
+  Code_Executor (call_yGy7CgLouusAYPVzXu6taoc7)
+ Call ID: call_yGy7CgLouusAYPVzXu6taoc7
+  Args:
+    code: import nanosurf
+
+# Load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+head = application.ScanHead
+
+# Choose cantilever
+head.CantileverByGUID = spm.CantileverGUID.Dyn190Al
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 213, 'prompt_tokens': 1333, 'total_tokens': 1546, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+
+The AFM software has been successfully configured with the following changes:
+1. The image size has been set to \(150 \, \text{nm} \times 150 \, \text{nm}\).
+2. The cantilever tip has been changed to Dyn190Al.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 58, 'prompt_tokens': 1565, 'total_tokens': 1623, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 1536}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 5
+Total Tokens: 3881
+Prompt Tokens: 3543
+Completion Tokens: 338
+Total Cost (USD): $0.0103175
+
+Total time taken: 13.99 seconds

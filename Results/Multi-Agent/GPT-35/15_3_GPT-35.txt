@@ -1,0 +1,117 @@
+('user', 'Change the cantilever tip to Multi75AL-G in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+I will pass this task to the AFM_Handler since it involves controlling the AFM machine.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 20, 'prompt_tokens': 240, 'total_tokens': 260, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_32DIP9FfC0485sbmVRqO2jTj)
+ Call ID: call_32DIP9FfC0485sbmVRqO2jTj
+  Args:
+    query: Change cantilever tip to Multi75AL-G
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 26, 'prompt_tokens': 458, 'total_tokens': 484, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_l27YqZBD4MU7k6WvGyiiZhn0)
+ Call ID: call_l27YqZBD4MU7k6WvGyiiZhn0
+  Args:
+    code: # Code to change the cantilever tip to Multi75AL-G
+
+#import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+head = application.ScanHead
+
+head.CantileverByGUID = spm.CantileverGUID.Multi75Al_G
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 83, 'prompt_tokens': 780, 'total_tokens': 863, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'nanosurf' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'nanosurf' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered an error with the code execution. Let me correct it and try again to change the cantilever tip to Multi75AL-G in the AFM software.
+Tool Calls:
+  Code_Executor (call_pIQho9LyKvi5Jbckx0DyGCS0)
+ Call ID: call_pIQho9LyKvi5Jbckx0DyGCS0
+  Args:
+    code: # Code to change the cantilever tip to Multi75AL-G
+
+import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+head = application.ScanHead
+
+head.CantileverByGUID = spm.CantileverGUID.Multi75Al_G
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 119, 'prompt_tokens': 884, 'total_tokens': 1003, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The cantilever tip has been successfully changed to Multi75AL-G in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 22, 'prompt_tokens': 1024, 'total_tokens': 1046, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 8
+Total Tokens: 3656
+Prompt Tokens: 3386
+Completion Tokens: 270
+Total Cost (USD): $0.002098
+
+Total time taken: 9.82 seconds

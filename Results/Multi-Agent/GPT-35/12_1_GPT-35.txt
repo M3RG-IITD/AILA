@@ -1,0 +1,126 @@
+('user', 'Retract the AFM tip from the sample surface.')
+================================== Ai Message ==================================
+Name: AILA
+
+Sure, I will delegate this task to the AFM_Handler.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 14, 'prompt_tokens': 235, 'total_tokens': 249, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_IB1P9H3uGq66GOlSiBE18KzX)
+ Call ID: call_IB1P9H3uGq66GOlSiBE18KzX
+  Args:
+    code: AFM_Handler.retract_tip()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 22, 'prompt_tokens': 447, 'total_tokens': 469, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'AFM_Handler' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'AFM_Handler' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I made an error in calling the `AFM_Handler` module. Let me correct that and retry the operation.
+Tool Calls:
+  Code_Executor (call_TGM9uCV3iml8TC6Rd8L23rpM)
+ Call ID: call_TGM9uCV3iml8TC6Rd8L23rpM
+  Args:
+    code: # Retract the AFM tip
+afm.retract_tip()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 55, 'prompt_tokens': 490, 'total_tokens': 545, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'afm' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'afm' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I apologize for the mistake in my previous attempt. Let me retrieve the necessary code to retract the AFM tip.
+Tool Calls:
+  Document_Retriever (call_PweW4DuiyJzVer6zz9a5Fgge)
+ Call ID: call_PweW4DuiyJzVer6zz9a5Fgge
+  Args:
+    query: retract AFM tip
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 46, 'prompt_tokens': 571, 'total_tokens': 617, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_w7hGk6RYJmpUWhcEQpsEWg9n)
+ Call ID: call_w7hGk6RYJmpUWhcEQpsEWg9n
+  Args:
+    code: # Retract the AFM tip
+import nanosurf
+import time
+
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+
+approach.StartWithdraw()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 61, 'prompt_tokens': 769, 'total_tokens': 830, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The AFM tip has been successfully retracted from the sample surface.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 16, 'prompt_tokens': 845, 'total_tokens': 861, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 10
+Total Tokens: 3571
+Prompt Tokens: 3357
+Completion Tokens: 214
+Total Cost (USD): $0.0019995
+
+Total time taken: 8.72 seconds

@@ -1,0 +1,706 @@
+('user', 'Change the cantilever tip to Multi75AL-G in the AFM software, and then capture an image.')
+================================== Ai Message ==================================
+Name: AILA
+
+The next worker to act should be the AFM_Handler, as they are responsible for capturing images and controlling the AFM machine.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 27, 'prompt_tokens': 246, 'total_tokens': 273, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_7VYybVjqjxB0aW5KK5WQMNdE)
+ Call ID: call_7VYybVjqjxB0aW5KK5WQMNdE
+  Args:
+    query: Change cantilever tip to Multi75AL-G
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 26, 'prompt_tokens': 471, 'total_tokens': 497, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_kmRuc28F3t5xEwj3oAYU5nRr)
+ Call ID: call_kmRuc28F3t5xEwj3oAYU5nRr
+  Args:
+    code: # Code to Change cantilever tip to Multi75AL-G
+
+#import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+# Set cantilever tip to Multi75AL-G
+head.CantileverByGUID = spm.CantileverGUID.Multi75AL_G
+
+# Release the resources
+spm.release()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 107, 'prompt_tokens': 793, 'total_tokens': 900, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'nanosurf' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'nanosurf' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems there was an error with the code execution due to the undefined 'nanosurf' module. Let me make the necessary adjustments and retry executing the code.
+Tool Calls:
+  Document_Retriever (call_0XiA514F18tdqKqxdVBtalrI)
+ Call ID: call_0XiA514F18tdqKqxdVBtalrI
+  Args:
+    query: Set cantilever tip to Multi75AL-G
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 61, 'prompt_tokens': 921, 'total_tokens': 982, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_P4Aucm9LIY1BrGgyGmYjsy32)
+ Call ID: call_P4Aucm9LIY1BrGgyGmYjsy32
+  Args:
+    code: # Code to Set cantilever tip to Multi75AL-G
+
+import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+# Set cantilever tip to Multi75AL-G
+head.CantileverByGUID = spm.CantileverGUID.Multi75AL_G
+
+# Release the resources
+spm.release()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 107, 'prompt_tokens': 1284, 'total_tokens': 1391, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Error: type object 'CantileverGUID' has no attribute 'Multi75AL_G'
+================================= Tool Message =================================
+Name: Code_Executor
+
+type object 'CantileverGUID' has no attribute 'Multi75AL_G'
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered an error with setting the cantilever tip to Multi75AL-G due to the attribute 'Multi75AL_G' not being recognized in the 'CantileverGUID' module. Let me retrieve the correct attribute for the Multi75AL-G cantilever tip and then attempt to execute the code again.
+Tool Calls:
+  Document_Retriever (call_YXXMeLpdSol8otLmZcrRrw3y)
+ Call ID: call_YXXMeLpdSol8otLmZcrRrw3y
+  Args:
+    query: Cantilever tips for AFM
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 91, 'prompt_tokens': 1421, 'total_tokens': 1512, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_ka6YXsQGtOaArtxgRiDoodyV)
+ Call ID: call_ka6YXsQGtOaArtxgRiDoodyV
+  Args:
+    query: Choose cantilever tip Multi75AL-G
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 25, 'prompt_tokens': 1664, 'total_tokens': 1689, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_RMFwpo1RvdiioqCleLsG8iHb)
+ Call ID: call_RMFwpo1RvdiioqCleLsG8iHb
+  Args:
+    code: # Code to Set cantilever tip to Multi75AL-G
+
+import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+# Set cantilever tip to Multi75AL-G
+head.CantileverByGUID = spm.CantileverGUID.Multi75Al_G
+
+# Release the resources
+spm.release()
+  Code_Executor (call_J3niHUuMnPfz52Ey3GLZexto)
+ Call ID: call_J3niHUuMnPfz52Ey3GLZexto
+  Args:
+    code: # Code to Approach the tip before capturing image
+
+import nanosurf
+import time
+
+# Load application
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+
+# Approaching the tip
+approach.StartApproach()
+
+while approach.Status == 1 or approach.Status == 2:
+    print('Approaching...')
+    time.sleep(1)
+
+print('Finished approaching')
+
+# Release the resources
+spm.release()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 244, 'prompt_tokens': 1985, 'total_tokens': 2229, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Connected to running app: CX
+Error: 'SPM' object has no attribute 'release'
+Approaching...
+Approaching...
+Finished approaching
+Error: 'SPM' object has no attribute 'release'
+================================= Tool Message =================================
+Name: Code_Executor
+
+'SPM' object has no attribute 'release'
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems there was an error with releasing the resources in both code executions. Let me correct this issue and rerun the code to set the cantilever tip to Multi75AL-G and approach the tip before capturing the image.
+Tool Calls:
+  Document_Retriever (call_4tBSv5FsTujBmnaeRG9L7jV0)
+ Call ID: call_4tBSv5FsTujBmnaeRG9L7jV0
+  Args:
+    query: Release resources in AFM software
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 70, 'prompt_tokens': 2266, 'total_tokens': 2336, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_IkXXaYTlcvd1iBjy0MMInlDJ)
+ Call ID: call_IkXXaYTlcvd1iBjy0MMInlDJ
+  Args:
+    code: # Code to Release resources
+
+import nanosurf
+
+spm = nanosurf.SPM()
+spm.release()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 40, 'prompt_tokens': 2638, 'total_tokens': 2678, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Error: 'SPM' object has no attribute 'release'
+================================= Tool Message =================================
+Name: Code_Executor
+
+'SPM' object has no attribute 'release'
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered an error with releasing resources using the 'release()' method. Let me adjust the code and attempt to release the resources again.
+Tool Calls:
+  Code_Executor (call_mWSKeZjC9RI8JPL6s8jaexQd)
+ Call ID: call_mWSKeZjC9RI8JPL6s8jaexQd
+  Args:
+    code: # Code to Release resources
+
+import nanosurf
+
+spm = nanosurf.C3000()
+spm.release()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 70, 'prompt_tokens': 2700, 'total_tokens': 2770, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Could not start application C3000.Application
+Error: 'C3000' object has no attribute 'release'
+================================= Tool Message =================================
+Name: Code_Executor
+
+'C3000' object has no attribute 'release'
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I apologize for the confusion. It seems there is an issue with the 'release()' method in the code execution. Let me check the correct way to release resources in the AFM software and make the necessary adjustments.
+Tool Calls:
+  Document_Retriever (call_5z5T4xFARrlpSRv03sWX5ZTF)
+ Call ID: call_5z5T4xFARrlpSRv03sWX5ZTF
+  Args:
+    query: Release resources in AFM software
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 67, 'prompt_tokens': 2799, 'total_tokens': 2866, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_X1gaa1Rs9kT8YBbKHiXA5CgY)
+ Call ID: call_X1gaa1Rs9kT8YBbKHiXA5CgY
+  Args:
+    code: # Code to Release resources
+
+import nanosurf
+
+spm = nanosurf.CoreAFM()
+spm.release()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 41, 'prompt_tokens': 3168, 'total_tokens': 3209, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Could not start application CoreAFM.Application
+Error: 'CoreAFM' object has no attribute 'release'
+================================= Tool Message =================================
+Name: Code_Executor
+
+'CoreAFM' object has no attribute 'release'
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I am unable to find the correct method to release the resources in the AFM software. Let's proceed with capturing the image without releasing the resources for now. I will now run the code to set the cantilever tip to Multi75AL-G and approach the tip in preparation for capturing the image.
+Tool Calls:
+  Code_Executor (call_VHRXMBlVdnLzAFWyutIQg0bo)
+ Call ID: call_VHRXMBlVdnLzAFWyutIQg0bo
+  Args:
+    code: # Code to Set cantilever tip to Multi75AL-G and Approach the tip
+
+import nanosurf
+import time
+
+spm = nanosurf.SPM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+# Set cantilever tip to Multi75AL-G
+head.CantileverByGUID = nanosurf.CantileverGUID.Multi75AL_G
+
+# Approach the tip
+approach = application.Approach
+approach.StartApproach()
+
+while approach.Status == 1 or approach.Status == 2:
+    print('Approaching...')
+    time.sleep(1)
+
+print('Finished approaching')
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 226, 'prompt_tokens': 3233, 'total_tokens': 3459, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Error: module 'nanosurf' has no attribute 'CantileverGUID'
+================================= Tool Message =================================
+Name: Code_Executor
+
+module 'nanosurf' has no attribute 'CantileverGUID'
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered an error due to the 'CantileverGUID' attribute not being available in the 'nanosurf' module. Let me try a different approach to set the cantilever tip to Multi75AL-G and approach the tip in preparation for capturing the image.
+Tool Calls:
+  Document_Retriever (call_Mi3DOygymoeHTeUEAaHDLkwu)
+ Call ID: call_Mi3DOygymoeHTeUEAaHDLkwu
+  Args:
+    query: Set cantilever tip to Multi75AL-G
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 84, 'prompt_tokens': 3493, 'total_tokens': 3577, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_DV2XT3R2RTV9XKJx8jF1I1Dr)
+ Call ID: call_DV2XT3R2RTV9XKJx8jF1I1Dr
+  Args:
+    code: # Code to Set cantilever tip to Multi75AL-G
+
+import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+# Set cantilever tip to Multi75AL-G
+head.Cantilever = 'Multi75AL-G'
+
+# Release the resources
+spm.release()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 100, 'prompt_tokens': 3879, 'total_tokens': 3979, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Error: Property '<unknown>.Cantilever' can not be set.
+================================= Tool Message =================================
+Name: Code_Executor
+
+Property '<unknown>.Cantilever' can not be set.
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered an error while trying to set the cantilever tip to Multi75AL-G. It seems there was an issue with setting the 'Cantilever' property directly. Let me make the necessary corrections and retry running the code.
+Tool Calls:
+  Document_Retriever (call_GsmWgUIzMRBbqhFkBw6UwaFX)
+ Call ID: call_GsmWgUIzMRBbqhFkBw6UwaFX
+  Args:
+    query: Assign cantilever tip in AFM software
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 76, 'prompt_tokens': 4005, 'total_tokens': 4081, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_8RQKg9xkcr8gz1vonEnfGi5O)
+ Call ID: call_8RQKg9xkcr8gz1vonEnfGi5O
+  Args:
+    code: # Code to Assign cantilever tip to Multi75AL-G
+
+import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+# Assign cantilever tip to Multi75AL-G
+head.NumberOfPoints = 'Multi75AL-G'
+
+# Release the resources
+spm.release()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 99, 'prompt_tokens': 4383, 'total_tokens': 4482, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Error: Property '<unknown>.NumberOfPoints' can not be set.
+================================= Tool Message =================================
+Name: Code_Executor
+
+Property '<unknown>.NumberOfPoints' can not be set.
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I apologize for the mistake in the code execution. Let me retrieve the correct attribute or method to assign the cantilever tip to Multi75AL-G and retry running the code.
+Tool Calls:
+  Document_Retriever (call_jZQx6pBx7Zu2GSFOFqJAODLf)
+ Call ID: call_jZQx6pBx7Zu2GSFOFqJAODLf
+  Args:
+    query: Select cantilever tip Multi75AL-G in AFM software
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 67, 'prompt_tokens': 4506, 'total_tokens': 4573, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_9UD9XckyYc9txAG65HBnOtep)
+ Call ID: call_9UD9XckyYc9txAG65HBnOtep
+  Args:
+    code: # Code to Select cantilever tip Multi75AL-G in AFM software
+
+import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+head = application.ScanHead
+
+# Assign cantilever tip to Multi75AL-G
+head.CantileverByGUID = nanosurf.CantileverGUID.Multi75AL_G
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 93, 'prompt_tokens': 4875, 'total_tokens': 4968, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Error: module 'nanosurf' has no attribute 'CantileverGUID'
+================================= Tool Message =================================
+Name: Code_Executor
+
+module 'nanosurf' has no attribute 'CantileverGUID'
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems there was an issue with the code execution as the attribute 'CantileverGUID' is not recognized. Let me retrieve the correct method to select the Multi75AL-G cantilever tip in the AFM software and then retry running the code.
+Tool Calls:
+  Document_Retriever (call_rRho073GY1p6xVzLuOVKCXga)
+ Call ID: call_rRho073GY1p6xVzLuOVKCXga
+  Args:
+    query: Multi75AL-G cantilever tip in AFM software
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 83, 'prompt_tokens': 4996, 'total_tokens': 5079, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}

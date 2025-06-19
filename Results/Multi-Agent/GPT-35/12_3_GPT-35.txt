@@ -1,0 +1,185 @@
+('user', 'Retract the AFM tip from the sample surface.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 235, 'total_tokens': 239, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_sdAgHxxt8UQctqoFsOHPvDhI)
+ Call ID: call_sdAgHxxt8UQctqoFsOHPvDhI
+  Args:
+    query: Retract AFM tip from the sample surface
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 26, 'prompt_tokens': 437, 'total_tokens': 463, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_hROOF92Mri2cRamKWu1b4SBN)
+ Call ID: call_hROOF92Mri2cRamKWu1b4SBN
+  Args:
+    code: # Retracting the AFM tip from the sample surface
+
+import nanosurf
+import time
+
+# Loading the application
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+
+# Retracting the tip
+approach.StartWithdraw()
+
+# Checking the status until the tip is fully retracted
+while approach.Status == 1 or approach.Status == 2:
+    print('Retracting...')
+    time.sleep(1)
+
+print('Retraction finished')
+
+# Releasing the resources
+spm.close()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 142, 'prompt_tokens': 609, 'total_tokens': 751, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Retraction finished
+Error: 'SPM' object has no attribute 'close'
+================================= Tool Message =================================
+Name: Code_Executor
+
+'SPM' object has no attribute 'close'
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered an issue with closing the resources. Let me correct it and run the code again.
+Tool Calls:
+  Code_Executor (call_hIxZwIpz1ZO97flVZ3v1ES7u)
+ Call ID: call_hIxZwIpz1ZO97flVZ3v1ES7u
+  Args:
+    code: # Retracting the AFM tip from the sample surface
+
+import nanosurf
+import time
+
+# Loading the application
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+
+# Retracting the tip
+approach.StartWithdraw()
+
+# Checking the status until the tip is fully retracted
+while approach.Status == 1 or approach.Status == 2:
+    print('Retracting...')
+    time.sleep(1)
+
+print('Retraction finished')
+
+# Releasing the resources
+spm.release()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 163, 'prompt_tokens': 773, 'total_tokens': 936, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Retraction finished
+Error: 'SPM' object has no attribute 'release'
+================================= Tool Message =================================
+Name: Code_Executor
+
+'SPM' object has no attribute 'release'
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I apologize for the error. Let me correct it and execute the code again.
+Tool Calls:
+  Code_Executor (call_LAL3U125nuiIYpJki7hBsS7E)
+ Call ID: call_LAL3U125nuiIYpJki7hBsS7E
+  Args:
+    code: # Retracting the AFM tip from the sample surface
+
+import nanosurf
+import time
+
+# Loading the application
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+
+# Retracting the tip
+approach.StartWithdraw()
+
+# Checking the status until the tip is fully retracted
+while approach.Status == 1 or approach.Status == 2:
+    print('Retracting...')
+    time.sleep(1)
+
+print('Retraction finished')
+
+# Releasing the resources
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 161, 'prompt_tokens': 964, 'total_tokens': 1125, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Retraction finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The AFM tip has been successfully retracted from the sample surface.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 16, 'prompt_tokens': 1146, 'total_tokens': 1162, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 10
+Total Tokens: 4676
+Prompt Tokens: 4164
+Completion Tokens: 512
+Total Cost (USD): $0.0028499999999999997
+
+Total time taken: 14.71 seconds

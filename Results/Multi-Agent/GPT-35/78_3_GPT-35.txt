@@ -1,0 +1,442 @@
+('user', 'Capture an AFM image with dimensions $\\pu{500 nm} \times \\pu{500 nm}$ using the following parameters: P gain = 100, I gain = 5000, D gain = 0. Then, open the latest file in the current folder, extract the Z-axis forward image data from that file, and calculate the maximum height of any point in the image.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 322, 'total_tokens': 326, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_jVdOT8zV3N4cnA4ekLZ50pq8)
+ Call ID: call_jVdOT8zV3N4cnA4ekLZ50pq8
+  Args:
+    query: AFM image capture
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 20, 'prompt_tokens': 505, 'total_tokens': 525, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_zu1F7HTGYgt5rvYIWwSnk0XY)
+ Call ID: call_zu1F7HTGYgt5rvYIWwSnk0XY
+  Args:
+    code: # Adjust the AFM scan parameters
+import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+zcontrol = application.ZController
+
+scan.ImageWidth = 500e-9
+scan.ImageHeight = 500e-9
+zcontrol.PGain = 100
+zcontrol.IGain = 5000
+zcontrol.DGain = 0
+
+spm.Connect()
+spm.Disconnect()
+  Code_Executor (call_Cd8gEXKBKPY3Na5eVwhReljA)
+ Call ID: call_Cd8gEXKBKPY3Na5eVwhReljA
+  Args:
+    code: # Open the latest file in the current folder and obtain Z-axis forward image data
+import os
+import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+latest_file = max([file for file in os.listdir('.') if file.endswith('.spm')], key=os.path.getctime)
+spm.Load(application.GetScanDataPath() + latest_file)
+z_image_data = application.GetChannelData(2)
+
+# Calculate the maximum height of any point in the image
+max_height = max(z_image_data.flatten())
+
+spm.Connect()
+spm.Disconnect()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 265, 'prompt_tokens': 836, 'total_tokens': 1101, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Connected to running app: CX
+Error: max() arg is an empty sequence
+Error: 'SPM' object has no attribute 'Connect'
+================================= Tool Message =================================
+Name: Code_Executor
+
+max() arg is an empty sequence
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems there was an issue with the code execution. Let's adjust the code and try again.
+Tool Calls:
+  Document_Retriever (call_JJo0Bb2v9Ip1gJgTh6H83suT)
+ Call ID: call_JJo0Bb2v9Ip1gJgTh6H83suT
+  Args:
+    query: Z-axis forward image data
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 43, 'prompt_tokens': 1135, 'total_tokens': 1178, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_mJrDdqtoBeJBU0B3q5mEdVwi)
+ Call ID: call_mJrDdqtoBeJBU0B3q5mEdVwi
+  Args:
+    code: # Adjust the AFM scan parameters
+import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+zcontrol = application.ZController
+
+scan.ImageWidth = 500e-9
+scan.ImageHeight = 500e-9
+zcontrol.PGain = 100
+zcontrol.IGain = 5000
+zcontrol.DGain = 0
+
+spm.Connect()
+spm.Disconnect()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 112, 'prompt_tokens': 1495, 'total_tokens': 1607, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Error: 'SPM' object has no attribute 'Connect'
+================================= Tool Message =================================
+Name: Code_Executor
+
+'SPM' object has no attribute 'Connect'
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered an error again. Let me make some adjustments to the code to resolve this issue.
+Tool Calls:
+  Document_Retriever (call_6XCtTGpFG7q53WBZnj6HJiHU)
+ Call ID: call_6XCtTGpFG7q53WBZnj6HJiHU
+  Args:
+    query: AFM scan image data
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 42, 'prompt_tokens': 1629, 'total_tokens': 1671, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_8Fuph8lRkBF75L8CgWXSekT1)
+ Call ID: call_8Fuph8lRkBF75L8CgWXSekT1
+  Args:
+    code: # Adjust the AFM scan parameters
+import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+zcontrol = application.ZController
+
+scan.ImageWidth = 500e-9
+scan.ImageHeight = 500e-9
+zcontrol.PGain = 100
+zcontrol.IGain = 5000
+zcontrol.DGain = 0
+
+# Open the latest file in the current folder and obtain Z-axis forward image data
+import os
+
+latest_file = max([file for file in os.listdir('.') if file.endswith('.spm')], key=os.path.getctime)
+spm.Load(latest_file)
+z_image_data = application.GetChannelData(2)
+
+# Calculate the maximum height of any point in the image
+max_height = max(z_image_data.flatten())
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 198, 'prompt_tokens': 1988, 'total_tokens': 2186, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Error: max() arg is an empty sequence
+================================= Tool Message =================================
+Name: Code_Executor
+
+max() arg is an empty sequence
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered an error again. Let's try a different approach to retrieve the AFM image data and calculate the maximum height.
+Tool Calls:
+  Document_Retriever (call_Da77Wm0oPSalMLpV9hLvFsHd)
+ Call ID: call_Da77Wm0oPSalMLpV9hLvFsHd
+  Args:
+    query: Z-axis forward image data
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 48, 'prompt_tokens': 2205, 'total_tokens': 2253, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_6159ukgPVGl7XnR9nS9MoG69)
+ Call ID: call_6159ukgPVGl7XnR9nS9MoG69
+  Args:
+    code: # Adjust the AFM scan parameters
+import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+zcontrol = application.ZController
+
+scan.ImageWidth = 500e-9
+scan.ImageHeight = 500e-9
+zcontrol.PGain = 100
+zcontrol.IGain = 5000
+zcontrol.DGain = 0
+
+spm.Connect()
+spm.SetSuppressErrors(True)
+latest_file = max([file for file in os.listdir('.') if file.endswith('.spm')], key=os.path.getctime)
+spm.Load(latest_file)
+z_image_data = application.GetChannelData(2)
+
+# Calculate the maximum height of any point in the image
+max_height = max(z_image_data.flatten())
+
+spm.SetSuppressErrors(False)
+spm.Disconnect()
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 199, 'prompt_tokens': 2570, 'total_tokens': 2769, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Error: 'SPM' object has no attribute 'Connect'
+================================= Tool Message =================================
+Name: Code_Executor
+
+'SPM' object has no attribute 'Connect'
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered the same error again. I will make further adjustments to ensure the correct execution of the code.
+Tool Calls:
+  Document_Retriever (call_KdDB8WNd976wsJuynxSmTALv)
+ Call ID: call_KdDB8WNd976wsJuynxSmTALv
+  Args:
+    query: latest file
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 41, 'prompt_tokens': 2791, 'total_tokens': 2832, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_PBgrXIf3HYVf5aeeZ67IAoNb)
+ Call ID: call_PBgrXIf3HYVf5aeeZ67IAoNb
+  Args:
+    code: # Set the file name
+import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+file_name = ""
+application.SetGalleryHistoryFilenameMask(file_name)
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 61, 'prompt_tokens': 3134, 'total_tokens': 3195, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}

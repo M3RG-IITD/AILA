@@ -1,0 +1,194 @@
+('user', 'Change the cantilever tip to Dyn190Al in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 239, 'total_tokens': 243, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_CHJO9DteEUFpGQBvcMcmNQDa)
+ Call ID: call_CHJO9DteEUFpGQBvcMcmNQDa
+  Args:
+    query: Change cantilever tip
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 21, 'prompt_tokens': 441, 'total_tokens': 462, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_swpQyEfAH5NJcg2WiG7HE58N)
+ Call ID: call_swpQyEfAH5NJcg2WiG7HE58N
+  Args:
+    code: # Updating the cantilever tip to Dyn190Al in the AFM software
+
+#import nanosurf
+
+spm = nanosurf.SPM()  
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+# Choose cantilever
+cantilever = 'Dyn190Al'
+head.CantileverByGUID = spm.CantileverGUID[cantilever]
+
+# Remove other comments and update any required parameters
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 125, 'prompt_tokens': 758, 'total_tokens': 883, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'nanosurf' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'nanosurf' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems there was an error in the execution. Let me correct that and try running the code again.
+Tool Calls:
+  Code_Executor (call_tMQ6xIyquRwsNxgfeumc7xyv)
+ Call ID: call_tMQ6xIyquRwsNxgfeumc7xyv
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()  
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+# Choose cantilever
+cantilever = 'Dyn190Al'
+head.CantileverByGUID = spm.CantileverGUID[cantilever]
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 119, 'prompt_tokens': 904, 'total_tokens': 1023, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Error: type 'CantileverGUID' is not subscriptable
+================================= Tool Message =================================
+Name: Code_Executor
+
+type 'CantileverGUID' is not subscriptable
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered another issue with the code execution due to the 'CantileverGUID' attribute being unsubscriptable. Let me correct the code and retry the execution.
+Tool Calls:
+  Document_Retriever (call_chXZskwhhHhS4dH2pZSEYHEO)
+ Call ID: call_chXZskwhhHhS4dH2pZSEYHEO
+  Args:
+    query: AFM set cantilever
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 58, 'prompt_tokens': 1053, 'total_tokens': 1111, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_PtpuNcALOXIPzRtTCBWAMHzC)
+ Call ID: call_PtpuNcALOXIPzRtTCBWAMHzC
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()  
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+# Choose cantilever
+head.CantileverByGUID = spm.CantileverGUID.Dyn190Al
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 84, 'prompt_tokens': 1413, 'total_tokens': 1497, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The cantilever tip has been successfully changed to Dyn190Al in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 21, 'prompt_tokens': 1512, 'total_tokens': 1533, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 12
+Total Tokens: 6752
+Prompt Tokens: 6320
+Completion Tokens: 432
+Total Cost (USD): $0.0038079999999999998
+
+Total time taken: 13.94 seconds

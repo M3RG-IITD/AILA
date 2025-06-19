@@ -1,0 +1,119 @@
+('user', 'Change the cantilever tip to Tap190Al-G in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 283, 'total_tokens': 287, 'completion_time': 0.017181341, 'prompt_time': 0.021252971, 'queue_time': 0.060215814000000006, 'total_time': 0.038434312}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_t67c)
+ Call ID: call_t67c
+  Args:
+    code: AFM_Handler.set_cantilever_tip("Tap190Al-G")
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 43, 'prompt_tokens': 697, 'total_tokens': 740, 'completion_time': 0.156363636, 'prompt_time': 0.051840601, 'queue_time': 0.055599545, 'total_time': 0.208204237}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'AFM_Handler' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'AFM_Handler' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_tcxf)
+ Call ID: call_tcxf
+  Args:
+    query: change cantilever tip code
+  Code_Executor (call_ts85)
+ Call ID: call_ts85
+  Args:
+    code: Nanosurf_AFM.set_cantilever_tip("Tap190Al-G")
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 53, 'prompt_tokens': 751, 'total_tokens': 804, 'completion_time': 0.192727273, 'prompt_time': 0.128113144, 'queue_time': 0.055235334, 'total_time': 0.320840417}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'Nanosurf_AFM' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'Nanosurf_AFM' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_ree7)
+ Call ID: call_ree7
+  Args:
+    query: python code for changing cantilever tip in Nanosurf AFM software
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 31, 'prompt_tokens': 1114, 'total_tokens': 1145, 'completion_time': 0.112727273, 'prompt_time': 0.08637195, 'queue_time': 0.060063420000000006, 'total_time': 0.199099223}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_nmck)
+ Call ID: call_nmck
+  Args:
+    code: import nanosurf; spm = nanosurf.SPM(); application = spm.application; head = application.ScanHead; head.CantileverByGUID = spm.CantileverGUID.Tap190Al_G
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 61, 'prompt_tokens': 1438, 'total_tokens': 1499, 'completion_time': 0.221818182, 'prompt_time': 0.115398279, 'queue_time': 0.054249262000000006, 'total_time': 0.337216461}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The cantilever tip has been successfully changed to Tap190Al-G in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 21, 'prompt_tokens': 1512, 'total_tokens': 1533, 'completion_time': 0.076363636, 'prompt_time': 0.11345226, 'queue_time': 0.06543844800000001, 'total_time': 0.189815896}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 10
+Total Tokens: 6008
+Prompt Tokens: 5795
+Completion Tokens: 213
+Total Cost (USD): $0.0
+
+Total time taken: 5.18 seconds

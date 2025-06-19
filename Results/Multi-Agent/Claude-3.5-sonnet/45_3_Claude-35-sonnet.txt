@@ -1,0 +1,123 @@
+('user', 'Set the image size to $150 \times 100 \\pu{nm}$, P gain to 75, I gain to 4500, D gain to 0, and $\x0crac{time}{line}$ to \\pu{1 s} in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'id': 'msg_017V7YQ1ieQ7xfSWYiUH88pJ', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'end_turn', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 342, 'output_tokens': 7}}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+[{'text': ": I'll help you set those specific parameters for the AFM. Let me retrieve the relevant code for parameter settings and then execute it with your specified values.\n\nFirst, let me get the reference code:", 'type': 'text'}, {'id': 'toolu_015Qdj2WaEgw9BGn53rA2U4Z', 'input': {'query': 'set AFM parameters image size PID gains time per line'}, 'name': 'Document_Retriever', 'type': 'tool_use'}]
+Tool Calls:
+  Document_Retriever (toolu_015Qdj2WaEgw9BGn53rA2U4Z)
+ Call ID: toolu_015Qdj2WaEgw9BGn53rA2U4Z
+  Args:
+    query: set AFM parameters image size PID gains time per line
+
+.............................Metadata..............................
+{'id': 'msg_014eDA2dnGn6hQuv6Pjo4eUA', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'tool_use', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 883, 'output_tokens': 109}}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+[{'text': "Now I'll modify and execute the code with your specified parameters:", 'type': 'text'}, {'id': 'toolu_01BCPpNMNLmDPmmxC628BBug', 'input': {'code': 'import nanosurf\n\n# Initialize SPM\nspm = nanosurf.SPM()\napplication = spm.application\n\n# Get necessary components\nscan = application.Scan\nzcontrol = application.ZController\n\n# Set image size (150 nm x 100 nm)\nscan.ImageWidth = 150e-9  # 150 nm in meters\nscan.ImageHeight = 100e-9  # 100 nm in meters\n\n# Set time per line to 1 second\nscan.Scantime = 1.0  # 1 second per line\n\n# Set PID gains\nzcontrol.PGain = 75\nzcontrol.IGain = 4500\nzcontrol.DGain = 0\n\ndel spm'}, 'name': 'Code_Executor', 'type': 'tool_use'}]
+Tool Calls:
+  Code_Executor (toolu_01BCPpNMNLmDPmmxC628BBug)
+ Call ID: toolu_01BCPpNMNLmDPmmxC628BBug
+  Args:
+    code: import nanosurf
+
+# Initialize SPM
+spm = nanosurf.SPM()
+application = spm.application
+
+# Get necessary components
+scan = application.Scan
+zcontrol = application.ZController
+
+# Set image size (150 nm x 100 nm)
+scan.ImageWidth = 150e-9  # 150 nm in meters
+scan.ImageHeight = 100e-9  # 100 nm in meters
+
+# Set time per line to 1 second
+scan.Scantime = 1.0  # 1 second per line
+
+# Set PID gains
+zcontrol.PGain = 75
+zcontrol.IGain = 4500
+zcontrol.DGain = 0
+
+del spm
+
+.............................Metadata..............................
+{'id': 'msg_01VZf1mE7eBxnFSFeEacnNEG', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'tool_use', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 1371, 'output_tokens': 244}}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+FINAL ANSWER: I have successfully set all the parameters you requested:
+- Image size: 150 nm × 100 nm
+- P gain: 75
+- I gain: 4500
+- D gain: 0
+- Time per line: 1 second
+
+The parameters have been updated in the AFM software. The system is now configured with these new settings. Is there anything else you would like me to adjust?
+
+.............................Metadata..............................
+{'id': 'msg_01R6vZJqknhFfcATNpgi77EB', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'end_turn', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 1629, 'output_tokens': 98}}
+
+Total Steps: 6
+Total Tokens: 4683
+Prompt Tokens: 4225
+Completion Tokens: 458
+Total Cost (USD): $0.0
+
+Total time taken: 17.33 seconds

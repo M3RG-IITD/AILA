@@ -1,0 +1,231 @@
+('user', "Acquire an AFM image with dimensions $\\pu{100 nm} \times \\pu{100 nm}$ at a scan angle of $ 5 degrees $, using the following parameters: P gain = 100, I gain = 5000, D gain = 0, and setpoint = 0.1 V. Save the image with the filename '73_1_GPT-4o'. Then, open the latest file in the folder, plot the Z-axis forward image, and save the plot as '73_1_GPT-4o.png'.")
+================================== Ai Message ==================================
+Name: AILA
+
+['AFM_Handler']
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 6, 'prompt_tokens': 355, 'total_tokens': 361, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_d8864f8b6b', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_SexEZiVSpjJCpruhvq8E1iP1)
+ Call ID: call_SexEZiVSpjJCpruhvq8E1iP1
+  Args:
+    query: set scan size to 100 nm x 100 nm
+  Document_Retriever (call_xAx7BW017Le1GZaI1jN5hyga)
+ Call ID: call_xAx7BW017Le1GZaI1jN5hyga
+  Args:
+    query: set scan angle to 5 degrees
+  Document_Retriever (call_jkf9s59fanYmbh3uLZi0kjHA)
+ Call ID: call_jkf9s59fanYmbh3uLZi0kjHA
+  Args:
+    query: set P gain to 100
+  Document_Retriever (call_5DQcZbHwnHIa5IwlUdGvf5RZ)
+ Call ID: call_5DQcZbHwnHIa5IwlUdGvf5RZ
+  Args:
+    query: set I gain to 5000
+  Document_Retriever (call_L1gswHoCp3mmuGojHlskMUtT)
+ Call ID: call_L1gswHoCp3mmuGojHlskMUtT
+  Args:
+    query: set D gain to 0
+  Document_Retriever (call_koiHPmiVpgXnkQmfU2ptOAFe)
+ Call ID: call_koiHPmiVpgXnkQmfU2ptOAFe
+  Args:
+    query: set setpoint to 0.1 V
+  Document_Retriever (call_IBw1Bg5bR4LdsuSswMLORpWz)
+ Call ID: call_IBw1Bg5bR4LdsuSswMLORpWz
+  Args:
+    query: save image with filename '73_1_GPT-4o'
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 182, 'prompt_tokens': 538, 'total_tokens': 720, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_zDpebqqeMRsHhtNrL2epmAIh)
+ Call ID: call_zDpebqqeMRsHhtNrL2epmAIh
+  Args:
+    code: import nanosurf
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+zcontrol = application.ZController
+
+# Set scan parameters
+scan.ImageWidth = 100e-9  # 100 nm
+scan.ImageHeight = 100e-9  # 100 nm
+scan.Rotation = 5  # 5 degrees
+
+# Set Z controller parameters
+zcontrol.PGain = 100
+zcontrol.IGain = 5000
+zcontrol.DGain = 0
+zcontrol.SetPoint = 0.1
+
+del spm
+  Code_Executor (call_PgNMMHFe9UsP5D19uWim8kxS)
+ Call ID: call_PgNMMHFe9UsP5D19uWim8kxS
+  Args:
+    code: import nanosurf
+spm = nanosurf.SPM()
+application = spm.application
+
+# Save image with filename '73_1_GPT-4o'
+file_name = '73_1_GPT-4o'
+application.SetGalleryHistoryFilenameMask(file_name)
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 235, 'prompt_tokens': 2939, 'total_tokens': 3174, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_Cegs4ROF7mL1k05hkOCoBbgj)
+ Call ID: call_Cegs4ROF7mL1k05hkOCoBbgj
+  Args:
+    code: import os
+import matplotlib.pyplot as plt
+from nanosurf import SPM
+
+# Initialize the AFM
+spm = SPM()
+application = spm.application
+
+# Get the latest file in the directory
+files = os.listdir('.')
+files = [f for f in files if f.endswith('.nid')]
+latest_file = max(files, key=os.path.getctime) if files else None
+
+# If there's no file, we can't plot
+if latest_file is None:
+    print("No file found.")
+else:
+    # Open the file
+    document = application.Documents.Open(latest_file)
+
+    # Plotting the Z-axis forward image
+    forward_channel = document.Channels['Z-Axis Forward']
+    plt.imshow(forward_channel.Data, cmap='gray')
+    plt.title('Z-Axis Forward Image')
+    plt.colorbar()
+    plt.savefig('73_1_GPT-4o.png')
+    plt.show()
+    
+# Cleanup
+if latest_file:
+    document.Close()
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 248, 'prompt_tokens': 3197, 'total_tokens': 3445, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 2816}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Error: CX.Application.Documents
+================================= Tool Message =================================
+Name: Code_Executor
+
+CX.Application.Documents
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+NEED HELP: The code execution requires opening and interacting with specific file types typically produced by AFM instruments (.nid files). The nanosurf API, and by extension, the Code Executor, may not support this directly, leading to complications. Another assistant with access to the relevant file handling and plotting capabilities should proceed with loading the image file data, plotting, and saving the plot as outlined.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 80, 'prompt_tokens': 3459, 'total_tokens': 3539, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 3072}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: Data_Handler
+Tool Calls:
+  Image_Analyzer (call_xl119aqF17rwaqxRL99A1WXd)
+ Call ID: call_xl119aqF17rwaqxRL99A1WXd
+  Args:
+    path: None
+    filename: 73_1_GPT-4o
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 27, 'prompt_tokens': 3793, 'total_tokens': 3820, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Image_Analyzer
+
+Error: 1 validation error for Image_Analyzer
+path
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.10/v/string_type
+ Please fix your mistakes.
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: Data_Handler
+Tool Calls:
+  Image_Analyzer (call_rerkmEDt7tHZ1GO2ByPACwpE)
+ Call ID: call_rerkmEDt7tHZ1GO2ByPACwpE
+  Args:
+    filename: 73_1_GPT-4o
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 23, 'prompt_tokens': 3891, 'total_tokens': 3914, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 3712}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+File not found: C:\Users\Admin\Desktop\Automation\AILA2\AILA\Results\app\73_1_GPT-4o
+================================= Tool Message =================================
+Name: Image_Analyzer
+
+{"status": "Error", "message": "The specified file does not exist."}
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: Data_Handler
+
+It seems there is an issue locating the file '73_1_GPT-4o'. Please make sure the file has been saved properly and is located in the correct directory. Lets ensure that, we have access to the file.
+
+Could you please verify the file creation or share the directory path if it is stored in a specific location?
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 70, 'prompt_tokens': 3943, 'total_tokens': 4013, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 3840}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 13
+Total Tokens: 22986
+Prompt Tokens: 22115
+Completion Tokens: 871
+Total Cost (USD): $0.0471975
+
+Total time taken: 30.87 seconds

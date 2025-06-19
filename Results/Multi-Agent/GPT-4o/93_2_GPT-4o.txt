@@ -1,0 +1,105 @@
+('user', 'Change the cantilever tip to ANSCM in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+'AFM_Handler'
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 6, 'prompt_tokens': 236, 'total_tokens': 242, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_a6889ffe71', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_wlENtEEDJwezu5I6ubcYqMaY)
+ Call ID: call_wlENtEEDJwezu5I6ubcYqMaY
+  Args:
+    query: change cantilever tip ANSCM
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 23, 'prompt_tokens': 438, 'total_tokens': 461, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+To change the cantilever tip to ANSCM in the AFM software, I found the required code snippet. Here's how to modify and execute it:
+
+```python
+import nanosurf
+
+spm = nanosurf.SPM()  # Initialize the connection with the SPM instrument
+application = spm.application
+head = application.ScanHead
+
+# Set the cantilever to ANSCM
+head.CantileverByGUID = spm.CantileverGUID.ANSCM
+
+del spm  # Clean up the connection
+```
+
+I will now execute this code to change the cantilever tip to ANSCM.
+Tool Calls:
+  Code_Executor (call_yqQ4eV3Wmx7dLSGVKOdUkXYg)
+ Call ID: call_yqQ4eV3Wmx7dLSGVKOdUkXYg
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()  # Initialize the connection with the SPM instrument
+application = spm.application
+head = application.ScanHead
+
+# Set the cantilever to ANSCM
+head.CantileverByGUID = spm.CantileverGUID.ANSCM
+
+del spm  # Clean up the connection
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 217, 'prompt_tokens': 750, 'total_tokens': 967, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The cantilever tip has been successfully changed to ANSCM in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 20, 'prompt_tokens': 988, 'total_tokens': 1008, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 6
+Total Tokens: 2678
+Prompt Tokens: 2412
+Completion Tokens: 266
+Total Cost (USD): $0.00869
+
+Total time taken: 11.90 seconds

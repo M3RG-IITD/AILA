@@ -1,0 +1,92 @@
+('user', 'Change the cantilever tip to ContAL-G in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'id': 'msg_0135NZgjSJTFdsSBnYsCDvKC', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'end_turn', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 294, 'output_tokens': 7}}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+[{'text': ": I'll help you change the cantilever tip to ContAL-G in the AFM software. Let me retrieve the relevant code for changing the cantilever type.", 'type': 'text'}, {'id': 'toolu_01SzFrFc1ggroRDf3DkogzqC', 'input': {'query': 'change cantilever type ContAL-G code'}, 'name': 'Document_Retriever', 'type': 'tool_use'}]
+Tool Calls:
+  Document_Retriever (toolu_01SzFrFc1ggroRDf3DkogzqC)
+ Call ID: toolu_01SzFrFc1ggroRDf3DkogzqC
+  Args:
+    query: change cantilever type ContAL-G code
+
+.............................Metadata..............................
+{'id': 'msg_01UsCuktRP5y21TZyYW6WmVf', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'tool_use', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 835, 'output_tokens': 103}}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+[{'text': "Based on the retrieved code, I'll modify it to specifically change the cantilever type to ContAL-G. Let me execute the modified code:", 'type': 'text'}, {'id': 'toolu_01NLP5gmibALavX4LiAyi4Ba', 'input': {'code': 'import nanosurf\n\nspm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()\napplication = spm.application\nhead = application.ScanHead\n\n# Set cantilever to ContAL-G\nhead.CantileverByGUID = spm.CantileverGUID.ContAl_G\n\ndel spm'}, 'name': 'Code_Executor', 'type': 'tool_use'}]
+Tool Calls:
+  Code_Executor (toolu_01NLP5gmibALavX4LiAyi4Ba)
+ Call ID: toolu_01NLP5gmibALavX4LiAyi4Ba
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+head = application.ScanHead
+
+# Set cantilever to ContAL-G
+head.CantileverByGUID = spm.CantileverGUID.ContAl_G
+
+del spm
+
+.............................Metadata..............................
+{'id': 'msg_01SKo6ejEkvKGu1SfjqDeLuy', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'tool_use', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 1311, 'output_tokens': 181}}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+FINAL ANSWER: The cantilever type has been successfully changed to ContAL-G in the AFM software. The change has been confirmed through the successful execution of the code. The system is now ready to use with the new cantilever type. Is there anything else you would like me to help you with?
+
+.............................Metadata..............................
+{'id': 'msg_015iHQHAZppFK6EMJK7vVRqg', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'end_turn', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 1506, 'output_tokens': 71}}
+
+Total Steps: 6
+Total Tokens: 4308
+Prompt Tokens: 3946
+Completion Tokens: 362
+Total Cost (USD): $0.0
+
+Total time taken: 16.08 seconds

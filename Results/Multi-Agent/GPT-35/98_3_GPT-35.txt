@@ -1,0 +1,168 @@
+('user', 'Set image width to \\pu{250 nm}, I gain to 250, and D gain to 50 in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 251, 'total_tokens': 255, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_q1E41KRb2IKvzxaAul5s0z8A)
+ Call ID: call_q1E41KRb2IKvzxaAul5s0z8A
+  Args:
+    query: Set image width to 250 nm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 23, 'prompt_tokens': 453, 'total_tokens': 476, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_udaHElbZI4Uo83cH5B91Sq3t)
+ Call ID: call_udaHElbZI4Uo83cH5B91Sq3t
+  Args:
+    code: scan.ImageWidth = 250e-9
+zcontrol.IGain = 250
+zcontrol.DGain = 50
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 41, 'prompt_tokens': 787, 'total_tokens': 828, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'scan' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'scan' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered an error because I didn't define the `scan` object before setting the `ImageWidth` parameter. Let me correct that and execute the code again.
+Tool Calls:
+  Code_Executor (call_FcxDipK16iEcY85oqNAhQGbO)
+ Call ID: call_FcxDipK16iEcY85oqNAhQGbO
+  Args:
+    code: scan.ImageWidth = 250e-9
+zcontrol.IGain = 250
+zcontrol.DGain = 50
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 76, 'prompt_tokens': 847, 'total_tokens': 923, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'scan' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'scan' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered the same error again. Let me redefine the `scan` object and then set the parameters.
+Tool Calls:
+  Code_Executor (call_zBepcWiGNFS9wcByapjaxFUu)
+ Call ID: call_zBepcWiGNFS9wcByapjaxFUu
+  Args:
+    code: scan = application.Scan
+scan.ImageWidth = 250e-9
+zcontrol.IGain = 250
+zcontrol.DGain = 50
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 69, 'prompt_tokens': 948, 'total_tokens': 1017, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'application' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'application' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered an error because the `application` object was not defined. Let me initialize the `application` object and then set the parameters.
+Tool Calls:
+  Code_Executor (call_CGDbeHsxIPuWXwsZQEyS0wQX)
+ Call ID: call_CGDbeHsxIPuWXwsZQEyS0wQX
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+zcontrol = application.ZController
+
+scan.ImageWidth = 250e-9
+zcontrol.IGain = 250
+zcontrol.DGain = 50
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 111, 'prompt_tokens': 1042, 'total_tokens': 1153, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I have successfully set the image width to \(\pu{250 nm}\), I gain to 250, and D gain to 50 in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 36, 'prompt_tokens': 1174, 'total_tokens': 1210, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 12
+Total Tokens: 5862
+Prompt Tokens: 5502
+Completion Tokens: 360
+Total Cost (USD): $0.0032909999999999997
+
+Total time taken: 11.08 seconds

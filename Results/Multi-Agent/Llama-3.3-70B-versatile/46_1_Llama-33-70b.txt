@@ -1,0 +1,127 @@
+('user', 'Change the AFM operation mode to dynamic mode in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 281, 'total_tokens': 285, 'completion_time': 0.017148061, 'prompt_time': 0.017856809, 'queue_time': 0.053590134, 'total_time': 0.03500487}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_xprm)
+ Call ID: call_xprm
+  Args:
+    query: set operation mode to dynamic in AFM software
+  Code_Executor (call_naka)
+ Call ID: call_naka
+  Args:
+    code: AFM_Handler.set_operation_mode("dynamic")
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 83, 'prompt_tokens': 695, 'total_tokens': 778, 'completion_time': 0.301818182, 'prompt_time': 0.053295373, 'queue_time': 0.054310040999999996, 'total_time': 0.355113555}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'AFM_Handler' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'AFM_Handler' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_whm3)
+ Call ID: call_whm3
+  Args:
+    query: change AFM operation mode to dynamic mode
+  Code_Executor (call_7g6j)
+ Call ID: call_7g6j
+  Args:
+    code: application = spm.application; opmode = application.OperatingMode; opmode.OperatingMode = spm.OperatingMode.DynamicAFM
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 66, 'prompt_tokens': 1056, 'total_tokens': 1122, 'completion_time': 0.24, 'prompt_time': 0.081974461, 'queue_time': 0.055667929000000005, 'total_time': 0.321974461}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'spm' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'spm' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_fbbj)
+ Call ID: call_fbbj
+  Args:
+    query: change AFM operation mode to dynamic mode using nanosurf python API
+  Code_Executor (call_yeg1)
+ Call ID: call_yeg1
+  Args:
+    code: import nanosurf; spm = nanosurf.SPM(); application = spm.application; opmode = application.OperatingMode; opmode.OperatingMode = spm.OperatingMode.DynamicAFM
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 86, 'prompt_tokens': 1428, 'total_tokens': 1514, 'completion_time': 0.312727273, 'prompt_time': 0.105665923, 'queue_time': 0.054404446999999995, 'total_time': 0.418393196}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_664w)
+ Call ID: call_664w
+  Args:
+    query: confirm AFM operation mode changed to dynamic mode
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 25, 'prompt_tokens': 1816, 'total_tokens': 1841, 'completion_time': 0.090909091, 'prompt_time': 0.131844317, 'queue_time': 0.055352023, 'total_time': 0.222753408}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The AFM operation mode has been successfully changed to dynamic mode.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 14, 'prompt_tokens': 2134, 'total_tokens': 2148, 'completion_time': 0.050909091, 'prompt_time': 0.154303519, 'queue_time': 0.06035132900000001, 'total_time': 0.20521261}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 10
+Total Tokens: 7688
+Prompt Tokens: 7410
+Completion Tokens: 278
+Total Cost (USD): $0.0
+
+Total time taken: 6.48 seconds

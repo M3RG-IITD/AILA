@@ -1,0 +1,119 @@
+('user', 'Change the AFM operation mode to tapping mode in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 281, 'total_tokens': 285, 'completion_time': 0.024690852, 'prompt_time': 0.025306616, 'queue_time': 0.058873598, 'total_time': 0.049997468}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_j7yp)
+ Call ID: call_j7yp
+  Args:
+    code: AFM_Handler.set_mode("tapping")
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 31, 'prompt_tokens': 695, 'total_tokens': 726, 'completion_time': 0.112727273, 'prompt_time': 0.052030816, 'queue_time': 0.058289338, 'total_time': 0.164758089}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'AFM_Handler' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'AFM_Handler' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_a0rw)
+ Call ID: call_a0rw
+  Args:
+    query: set AFM operation mode to tapping mode
+  Code_Executor (call_pb80)
+ Call ID: call_pb80
+  Args:
+    code: AFM.set_mode("tapping")
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 46, 'prompt_tokens': 743, 'total_tokens': 789, 'completion_time': 0.167272727, 'prompt_time': 0.083437986, 'queue_time': 0.055104610999999984, 'total_time': 0.250710713}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'AFM' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'AFM' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_wcjg)
+ Call ID: call_wcjg
+  Args:
+    query: change AFM operation mode to tapping mode
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 24, 'prompt_tokens': 1096, 'total_tokens': 1120, 'completion_time': 0.087272727, 'prompt_time': 0.077675063, 'queue_time': 0.054362335, 'total_time': 0.16494779}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_t8rr)
+ Call ID: call_t8rr
+  Args:
+    code: import nanosurf; spm = nanosurf.SPM(); application = spm.application; opmode = application.OperatingMode; opmode.OperatingMode = spm.OperatingMode.PhaseContrast
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 58, 'prompt_tokens': 1413, 'total_tokens': 1471, 'completion_time': 0.210909091, 'prompt_time': 0.106979918, 'queue_time': 0.059668452, 'total_time': 0.317889009}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The AFM operation mode has been successfully changed to tapping mode.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 14, 'prompt_tokens': 1484, 'total_tokens': 1498, 'completion_time': 0.050909091, 'prompt_time': 0.113464422, 'queue_time': 0.055686519000000004, 'total_time': 0.164373513}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 10
+Total Tokens: 5889
+Prompt Tokens: 5712
+Completion Tokens: 177
+Total Cost (USD): $0.0
+
+Total time taken: 5.20 seconds

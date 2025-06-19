@@ -1,0 +1,119 @@
+('user', 'Change the cantilever tip to MFMR in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 281, 'total_tokens': 285, 'completion_time': 0.017425122, 'prompt_time': 0.017881565, 'queue_time': 0.05497418999999999, 'total_time': 0.035306687}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_jctd)
+ Call ID: call_jctd
+  Args:
+    code: AFM_Handler.set_cantilever_tip("MFMR")
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 39, 'prompt_tokens': 695, 'total_tokens': 734, 'completion_time': 0.141818182, 'prompt_time': 0.05137064, 'queue_time': 0.053922543999999996, 'total_time': 0.193188822}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'AFM_Handler' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'AFM_Handler' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_wjp4)
+ Call ID: call_wjp4
+  Args:
+    query: change cantilever tip code
+  Code_Executor (call_8tz6)
+ Call ID: call_8tz6
+  Args:
+    code: Nanosurf_AFM.set_cantilever_tip("MFMR")
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 51, 'prompt_tokens': 747, 'total_tokens': 798, 'completion_time': 0.185454545, 'prompt_time': 0.053048668, 'queue_time': 0.053643935999999996, 'total_time': 0.238503213}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'Nanosurf_AFM' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'Nanosurf_AFM' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_fjcn)
+ Call ID: call_fjcn
+  Args:
+    query: change cantilever tip python code
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 23, 'prompt_tokens': 1108, 'total_tokens': 1131, 'completion_time': 0.083636364, 'prompt_time': 0.079384904, 'queue_time': 0.05983860599999999, 'total_time': 0.163021268}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_9h4t)
+ Call ID: call_9h4t
+  Args:
+    code: import nanosurf; spm = nanosurf.SPM(); application = spm.application; head = application.ScanHead; head.CantileverByGUID = spm.CantileverGUID.MFMR
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 59, 'prompt_tokens': 1424, 'total_tokens': 1483, 'completion_time': 0.214545455, 'prompt_time': 0.105727681, 'queue_time': 0.05557564799999999, 'total_time': 0.320273136}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The cantilever tip has been successfully changed to MFMR in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 19, 'prompt_tokens': 1496, 'total_tokens': 1515, 'completion_time': 0.069090909, 'prompt_time': 0.11234374, 'queue_time': 0.05505780099999999, 'total_time': 0.181434649}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 10
+Total Tokens: 5946
+Prompt Tokens: 5751
+Completion Tokens: 195
+Total Cost (USD): $0.0
+
+Total time taken: 5.05 seconds

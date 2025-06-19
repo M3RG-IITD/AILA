@@ -1,0 +1,226 @@
+('user', "Open the file named 'Glass_NAP.nid' from the current directory, extract the z-axis forward image data, plot it, and save the resulting plot as '48_3_Llama-33-70b.png'.")
+================================== Ai Message ==================================
+Name: AILA
+
+Data_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 3, 'prompt_tokens': 312, 'total_tokens': 315, 'completion_time': 0.016545157, 'prompt_time': 0.021831993, 'queue_time': 0.056498456999999995, 'total_time': 0.03837715}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: Data_Handler
+Tool Calls:
+  Image_Analyzer (call_rdk8)
+ Call ID: call_rdk8
+  Args:
+    path: ./
+    filename: Glass_NAP.nid
+    dynamic_code: import matplotlib.pyplot as plt; plt.imshow(image_data); plt.savefig('48_3_Llama-33-70b.png')
+    calculate_friction: False
+    calculate_mean_roughness: False
+    calculate_rms_roughness: False
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 109, 'prompt_tokens': 1185, 'total_tokens': 1294, 'completion_time': 0.396363636, 'prompt_time': 0.085431449, 'queue_time': 0.06407735099999999, 'total_time': 0.481795085}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+File to display: ./Glass_NAP.nid
+Dynamic code executed successfully.
+================================= Tool Message =================================
+Name: Image_Analyzer
+
+{'status': 'Success', 'message': 'Raw Image ./Glass_NAP.nid processed successfully.', 'image_data': array([[-1.57592402e-06, -1.57658299e-06, -1.57804242e-06, ...,
+        -1.55737489e-06, -1.55485838e-06, -1.55219555e-06],
+       [-1.57253033e-06, -1.57350106e-06, -1.57482191e-06, ...,
+        -1.55786689e-06, -1.55616961e-06, -1.55422902e-06],
+       [-1.57156173e-06, -1.57230188e-06, -1.57331133e-06, ...,
+        -1.55798018e-06, -1.55666434e-06, -1.55554591e-06],
+       ...,
+       [-1.19630338e-06, -1.19784325e-06, -1.20185347e-06, ...,
+        -1.19226799e-06, -1.19011014e-06, -1.18756756e-06],
+       [-1.19357995e-06, -1.19518113e-06, -1.19799695e-06, ...,
+        -1.20394492e-06, -1.20409559e-06, -1.20602132e-06],
+       [-1.19991835e-06, -1.20131622e-06, -1.20339602e-06, ...,
+        -1.19228548e-06, -1.19285229e-06, -1.19417659e-06]])}
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: Data_Handler
+Tool Calls:
+  Image_optimizer (call_x479)
+ Call ID: call_x479
+  Args:
+    baseline: True
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 13, 'prompt_tokens': 1696, 'total_tokens': 1709, 'completion_time': 0.047272727, 'prompt_time': 0.120928438, 'queue_time': 0.055556152, 'total_time': 0.168201165}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Current working directory: C:\Users\Admin\AppData\Local\Nanosurf\Nanosurf CX\AI-Optimization
+/Users/Admin/AppData/Local/Nanosurf/Nanosurf CX/AI-Optimization\23_1_GPT-4o.png
+Returned to original working directory: C:\Users\Admin\Desktop\Automation\AILA2\AILA\Results\app
+================================= Tool Message =================================
+Name: Image_optimizer
+
+Error: NameError("name 'nanosurf' is not defined")
+ Please fix your mistakes.
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: Data_Handler
+
+NEED HELP
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 1739, 'total_tokens': 1743, 'completion_time': 0.014545455, 'prompt_time': 0.121640137, 'queue_time': 0.059434797, 'total_time': 0.136185592}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_x0p5)
+ Call ID: call_x0p5
+  Args:
+    query: plotting z-axis forward image data
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 23, 'prompt_tokens': 1282, 'total_tokens': 1305, 'completion_time': 0.083636364, 'prompt_time': 0.094823012, 'queue_time': 0.054237888, 'total_time': 0.178459376}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_yr0r)
+ Call ID: call_yr0r
+  Args:
+    code: import matplotlib.pyplot as plt; plt.imshow(image_data); plt.savefig('48_3_Llama-33-70b.png')
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 41, 'prompt_tokens': 1618, 'total_tokens': 1659, 'completion_time': 0.149090909, 'prompt_time': 0.188969767, 'queue_time': 0.06491324300000001, 'total_time': 0.338060676}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'image_data' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'image_data' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_afg1)
+ Call ID: call_afg1
+  Args:
+    query: extract z-axis forward image data
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 22, 'prompt_tokens': 1676, 'total_tokens': 1698, 'completion_time': 0.08, 'prompt_time': 0.129943165, 'queue_time': 0.054152969999999995, 'total_time': 0.209943165}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_4rtj)
+ Call ID: call_4rtj
+  Args:
+    code: import matplotlib.pyplot as plt; image_data = spm.application.Scan.ZAxisForward; plt.imshow(image_data); plt.savefig('48_3_Llama-33-70b.png')
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 51, 'prompt_tokens': 2006, 'total_tokens': 2057, 'completion_time': 0.185454545, 'prompt_time': 0.157458098, 'queue_time': 0.054285732, 'total_time': 0.342912643}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'spm' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'spm' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+NEED HELP
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 2074, 'total_tokens': 2078, 'completion_time': 0.014545455, 'prompt_time': 0.158892466, 'queue_time': 0.056048773999999996, 'total_time': 0.173437921}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: Data_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 1, 'prompt_tokens': 2537, 'total_tokens': 2538, 'completion_time': 0.00778743, 'prompt_time': 0.179113733, 'queue_time': -9223372037.03389, 'total_time': 0.186901163}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 16
+Total Tokens: 16396
+Prompt Tokens: 16125
+Completion Tokens: 271
+Total Cost (USD): $0.0
+
+Total time taken: 6.92 seconds

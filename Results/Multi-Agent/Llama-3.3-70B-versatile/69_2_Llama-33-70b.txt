@@ -1,0 +1,137 @@
+('user', "Open the file 'Sample.nid,' extract the z-axis forward image data, and calculate the area of the image in pixels.")
+================================== Ai Message ==================================
+Name: AILA
+
+Data_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 3, 'prompt_tokens': 292, 'total_tokens': 295, 'completion_time': 0.024562913, 'prompt_time': 0.018462571, 'queue_time': 0.057040969, 'total_time': 0.043025484}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: Data_Handler
+Tool Calls:
+  Image_Analyzer (call_q923)
+ Call ID: call_q923
+  Args:
+    path: /directory/path
+    filename: Sample.nid
+    calculate_friction: False
+    calculate_mean_roughness: False
+    calculate_rms_roughness: False
+    dynamic_code: import numpy as np; z_axis_forward = np.array(image_data); area = np.size(z_axis_forward); print(area)
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 107, 'prompt_tokens': 1165, 'total_tokens': 1272, 'completion_time': 0.389090909, 'prompt_time': 0.087439811, 'queue_time': 0.05351067500000001, 'total_time': 0.47653072}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+File not found: /directory/path\Sample.nid
+================================= Tool Message =================================
+Name: Image_Analyzer
+
+{"status": "Error", "message": "The specified file does not exist."}
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: Data_Handler
+Tool Calls:
+  Image_Analyzer (call_p4n8)
+ Call ID: call_p4n8
+  Args:
+    path: /directory/path
+    filename: Sample.nid
+    calculate_friction: False
+    calculate_mean_roughness: False
+    calculate_rms_roughness: False
+    dynamic_code: import numpy as np; z_axis_forward = np.array(image_data); area = np.size(z_axis_forward); print(area)
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 81, 'prompt_tokens': 1279, 'total_tokens': 1360, 'completion_time': 0.294545455, 'prompt_time': 0.11691228, 'queue_time': 0.05367575000000001, 'total_time': 0.411457735}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+File not found: /directory/path\Sample.nid
+================================= Tool Message =================================
+Name: Image_Analyzer
+
+{"status": "Error", "message": "The specified file does not exist."}
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: Data_Handler
+
+NEED HELP
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 1388, 'total_tokens': 1392, 'completion_time': 0.014545455, 'prompt_time': 0.097267124, 'queue_time': 0.053276526000000005, 'total_time': 0.111812579}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_c2zn)
+ Call ID: call_c2zn
+  Args:
+    query: Sample.nid file path
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 91, 'prompt_tokens': 931, 'total_tokens': 1022, 'completion_time': 0.330909091, 'prompt_time': 0.067345229, 'queue_time': 0.05351832799999999, 'total_time': 0.39825432}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_kz3j)
+ Call ID: call_kz3j
+  Args:
+    query: AFM Python API for opening Sample.nid file
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 26, 'prompt_tokens': 1250, 'total_tokens': 1276, 'completion_time': 0.094545455, 'prompt_time': 0.101930243, 'queue_time': 0.05836213700000001, 'total_time': 0.196475698}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}

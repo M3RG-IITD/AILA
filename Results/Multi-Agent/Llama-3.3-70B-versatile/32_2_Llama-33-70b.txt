@@ -1,0 +1,119 @@
+('user', "Set the file name to 'Glass_NAP_2024' in the AFM software.")
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 285, 'total_tokens': 289, 'completion_time': 0.016602791, 'prompt_time': 0.025893336, 'queue_time': 0.060879482, 'total_time': 0.042496127}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_3z4t)
+ Call ID: call_3z4t
+  Args:
+    code: AFM_Handler.set_file_name('Glass_NAP_2024')
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 40, 'prompt_tokens': 699, 'total_tokens': 739, 'completion_time': 0.145454545, 'prompt_time': 0.052422212, 'queue_time': 0.055116345000000004, 'total_time': 0.197876757}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'AFM_Handler' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'AFM_Handler' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_5m9k)
+ Call ID: call_5m9k
+  Args:
+    query: set file name in AFM software
+  Code_Executor (call_mvfm)
+ Call ID: call_mvfm
+  Args:
+    code: afm.set_file_name('Glass_NAP_2024')
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 50, 'prompt_tokens': 751, 'total_tokens': 801, 'completion_time': 0.181818182, 'prompt_time': 0.056235152, 'queue_time': 0.056855455, 'total_time': 0.238053334}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'afm' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'afm' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_dxte)
+ Call ID: call_dxte
+  Args:
+    query: set file name in AFM software using nanosurf
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 27, 'prompt_tokens': 1107, 'total_tokens': 1134, 'completion_time': 0.098181818, 'prompt_time': 0.079632013, 'queue_time': 0.054336122999999986, 'total_time': 0.177813831}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_zgrz)
+ Call ID: call_zgrz
+  Args:
+    code: import nanosurf; spm = nanosurf.SPM(); application = spm.application; application.SetGalleryHistoryFilenameMask('Glass_NAP_2024')
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 48, 'prompt_tokens': 1427, 'total_tokens': 1475, 'completion_time': 0.174545455, 'prompt_time': 0.09956138, 'queue_time': 0.05570931600000001, 'total_time': 0.274106835}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The file name has been set to 'Glass_NAP_2024' in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 22, 'prompt_tokens': 1488, 'total_tokens': 1510, 'completion_time': 0.08, 'prompt_time': 0.201617303, 'queue_time': 0.059607296999999976, 'total_time': 0.281617303}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 10
+Total Tokens: 5948
+Prompt Tokens: 5757
+Completion Tokens: 191
+Total Cost (USD): $0.0
+
+Total time taken: 7.02 seconds

@@ -1,0 +1,91 @@
+('user', 'Withdraw the AFM tip from the sample surface.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 276, 'total_tokens': 280, 'completion_time': 0.016612923, 'prompt_time': 0.019734287, 'queue_time': 0.053837662999999994, 'total_time': 0.03634721}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_1jp1)
+ Call ID: call_1jp1
+  Args:
+    code: AFM_Handler.withdraw_tip()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 29, 'prompt_tokens': 690, 'total_tokens': 719, 'completion_time': 0.105454545, 'prompt_time': 0.049649971, 'queue_time': 0.055572499, 'total_time': 0.155104516}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'AFM_Handler' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'AFM_Handler' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_9pdq)
+ Call ID: call_9pdq
+  Args:
+    query: AFM tip withdrawal code
+  Code_Executor (call_77qn)
+ Call ID: call_77qn
+  Args:
+    code: ### Insert the retrieved code here ###
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 42, 'prompt_tokens': 735, 'total_tokens': 777, 'completion_time': 0.152727273, 'prompt_time': 0.053925602, 'queue_time': 0.055852518000000004, 'total_time': 0.206652875}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_c4dp)
+ Call ID: call_c4dp
+  Args:
+    code: import nanosurf
+import time
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+approach.StartWithdraw()
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 90, 'prompt_tokens': 928, 'total_tokens': 1018, 'completion_time': 0.327272727, 'prompt_time': 0.067761055, 'queue_time': 0.055523883999999996, 'total_time': 0.395033782}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The AFM tip has been successfully withdrawn from the sample surface.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 14, 'prompt_tokens': 1030, 'total_tokens': 1044, 'completion_time': 0.050909091, 'prompt_time': 0.071186889, 'queue_time': 0.05913381100000001, 'total_time': 0.12209598}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 8
+Total Tokens: 3838
+Prompt Tokens: 3659
+Completion Tokens: 179
+Total Cost (USD): $0.0
+
+Total time taken: 4.68 seconds

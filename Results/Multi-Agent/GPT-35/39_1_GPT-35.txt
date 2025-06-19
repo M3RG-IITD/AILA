@@ -1,0 +1,140 @@
+('user', 'Withdraw the AFM tip from the sample surface.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 233, 'total_tokens': 237, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_vnRYdPAHyEZeLeqIPc9elAE6)
+ Call ID: call_vnRYdPAHyEZeLeqIPc9elAE6
+  Args:
+    query: withdraw AFM tip from the sample surface
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 24, 'prompt_tokens': 435, 'total_tokens': 459, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_RPBH3HL9Sg27wb6uQw79sCPo)
+ Call ID: call_RPBH3HL9Sg27wb6uQw79sCPo
+  Args:
+    code: # Code to withdraw the AFM tip from the sample surface
+
+# Imports
+import nanosurf
+import time
+
+# Load the application
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+
+# Withdraw the tip
+approach.StartWithdraw()
+
+while approach.Status == 1 or approach.Status == 2:
+    print('Withdrawing... ')
+    time.sleep(1)
+
+print('Tip withdrawn')
+
+# Clean up
+ del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 127, 'prompt_tokens': 605, 'total_tokens': 732, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: unexpected indent (<string>, line 22)
+================================= Tool Message =================================
+Name: Code_Executor
+
+unexpected indent (<string>, line 22)
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems there was an error in the code indentation. Let me correct it and try running the code again.
+Tool Calls:
+  Code_Executor (call_HMvSTCjhjeWGiStlJHJF1F5A)
+ Call ID: call_HMvSTCjhjeWGiStlJHJF1F5A
+  Args:
+    code: # Code to withdraw the AFM tip from the sample surface
+
+# Imports
+import nanosurf
+import time
+
+# Load the application
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+
+# Withdraw the tip
+approach.StartWithdraw()
+
+while approach.Status == 1 or approach.Status == 2:
+    print('Withdrawing... ')
+    time.sleep(1)
+
+print('Tip withdrawn')
+
+# Clean up
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 152, 'prompt_tokens': 753, 'total_tokens': 905, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Tip withdrawn
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The AFM tip has been successfully withdrawn from the sample surface.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 15, 'prompt_tokens': 926, 'total_tokens': 941, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 8
+Total Tokens: 3274
+Prompt Tokens: 2952
+Completion Tokens: 322
+Total Cost (USD): $0.001959
+
+Total time taken: 8.91 seconds

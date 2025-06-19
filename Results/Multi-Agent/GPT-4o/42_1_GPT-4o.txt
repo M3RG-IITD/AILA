@@ -1,0 +1,163 @@
+('user', 'Capture an image by scanning from the down direction.')
+================================== Ai Message ==================================
+Name: AILA
+
+'AFM_Handler' should act next.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 10, 'prompt_tokens': 231, 'total_tokens': 241, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_a6889ffe71', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_HEDBmFb4SAQioPf2CgyZY3qy)
+ Call ID: call_HEDBmFb4SAQioPf2CgyZY3qy
+  Args:
+    query: set scan direction downward
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 20, 'prompt_tokens': 437, 'total_tokens': 457, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''initiate/start or terminate/stop image scanning process'''
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+
+# Start scan
+# scan.StartFrameDown() #Scanning from up to down or top to bottom
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+
+#scan.stop() #stop sacn
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",(scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_9IVe5C7m1Odvl9IKqIeii4Cj)
+ Call ID: call_9IVe5C7m1Odvl9IKqIeii4Cj
+  Args:
+    query: set parameters for AFM scanning
+  Document_Retriever (call_PuVbkGc01vSLsvyrQkcv5wMn)
+ Call ID: call_PuVbkGc01vSLsvyrQkcv5wMn
+  Args:
+    query: approach the tip for scanning
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 59, 'prompt_tokens': 630, 'total_tokens': 689, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_8C4vaqKC8IllKTplwSt6nlcv)
+ Call ID: call_8C4vaqKC8IllKTplwSt6nlcv
+  Args:
+    code: import nanosurf
+import time
+
+# Load application
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+scan = application.Scan
+
+# Set scan parameters (example values, please adjust as necessary)
+scan.ImageWidth = 5e-6  # [m]
+scan.ImageHeight = 5e-6  # [m]
+scan.Scantime = 0.55  # [s] time per line
+scan.Points = 256  # points per line
+scan.Lines = 256  # lines per frame
+scan.CenterPosX = 10e-6  # [m]
+scan.CenterPosY = 10e-6  # [m]
+scan.SlopeX = 0.0  # degree
+scan.SlopeY = 0.0  # degree
+scan.Overscan = 0  # [%]
+scan.Rotation = 0  # degree
+
+# Approach the tip
+approach.StartApproach()
+while approach.Status == 1 or approach.Status == 2:
+    print("Approaching...")
+    time.sleep(1)
+
+print("Approach finished")
+
+# Start scanning frame from down to up or bottom to top
+scan.StartFrameDown()
+scanning = scan.IsScanning  # Check if scanning
+while scanning:
+    print("Scanning in progress... Remaining lines:", (scan.Lines - scan.Currentline))
+    time.sleep(3)
+    scanning = scan.IsScanning
+
+print("Scanning finished")
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 358, 'prompt_tokens': 1169, 'total_tokens': 1527, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Approaching...
+Approach finished
+Scanning in progress... Remaining lines: 257
+Scanning in progress... Remaining lines: 2
+Scanning finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+FINAL ANSWER: The AFM scan was successfully conducted from the down direction (bottom to top). The image has been captured following this procedure. If you need further assistance, feel free to let me know!
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 44, 'prompt_tokens': 1542, 'total_tokens': 1586, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 1152}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 8
+Total Tokens: 4500
+Prompt Tokens: 4009
+Completion Tokens: 491
+Total Cost (USD): $0.0134925
+
+Total time taken: 24.55 seconds

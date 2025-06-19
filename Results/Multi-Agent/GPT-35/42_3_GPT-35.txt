@@ -1,0 +1,128 @@
+('user', 'Capture an image by scanning from the down direction.')
+================================== Ai Message ==================================
+Name: AILA
+
+The AFM_Handler should act next to capture an image by scanning from the down direction.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 19, 'prompt_tokens': 233, 'total_tokens': 252, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_ManU2uTQT6svfoF6iCVjzAsZ)
+ Call ID: call_ManU2uTQT6svfoF6iCVjzAsZ
+  Args:
+    query: Scan from down direction
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 20, 'prompt_tokens': 450, 'total_tokens': 470, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''initiate/start or terminate/stop image scanning process'''
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+
+# Start scan
+# scan.StartFrameDown() #Scanning from up to down or top to bottom
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+
+#scan.stop() #stop sacn
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",(scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_HsxXsKfIAY9pplQudNd827kd)
+ Call ID: call_HsxXsKfIAY9pplQudNd827kd
+  Args:
+    code: spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+scan.StartFrameUp()
+dlif spm
+	 del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 49, 'prompt_tokens': 649, 'total_tokens': 698, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: invalid syntax (<string>, line 5)
+================================= Tool Message =================================
+Name: Code_Executor
+
+invalid syntax (<string>, line 5)
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems there was a syntax error in the code. Let me correct it and run it again.
+Tool Calls:
+  Code_Executor (call_PIFTPlqBQG5oKWByXYRenrIq)
+ Call ID: call_PIFTPlqBQG5oKWByXYRenrIq
+  Args:
+    code: import nanosurf
+import time
+
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+
+scan.StartFrameUp()
+
+scanning = scan.IsScanning
+while scanning:
+    print('Scanning in progress... Remaining lines:', (scan.Lines - scan.Currentline))
+    time.sleep(3)
+    scanning = scan.IsScanning
+
+print('Scanning finished')
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 134, 'prompt_tokens': 719, 'total_tokens': 853, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 10
+Scanning in progress... Remaining lines: 9
+Scanning in progress... Remaining lines: 8
+Scanning in progress... Remaining lines: 6
+Scanning in progress... Remaining lines: 5
+Scanning in progress... Remaining lines: 3
+Scanning in progress... Remaining lines: 2
+Scanning finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The image capture process by scanning from the down direction has been successfully initiated. The scanning is in progress, and it will finish shortly.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 29, 'prompt_tokens': 874, 'total_tokens': 903, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 8
+Total Tokens: 3176
+Prompt Tokens: 2925
+Completion Tokens: 251
+Total Cost (USD): $0.0018390000000000001
+
+Total time taken: 36.37 seconds

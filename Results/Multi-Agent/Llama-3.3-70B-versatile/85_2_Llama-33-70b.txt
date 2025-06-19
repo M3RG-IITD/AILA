@@ -1,0 +1,99 @@
+('user', "Open the file 'Sample.nid', extract the data corresponding to the forward friction force image, plot a line profile across the image, and save as '85_2_Llama-33-70b.png'")
+================================== Ai Message ==================================
+Name: AILA
+
+Data_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 3, 'prompt_tokens': 309, 'total_tokens': 312, 'completion_time': 0.016528124, 'prompt_time': 0.020714109, 'queue_time': 0.053533831, 'total_time': 0.037242233}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: Data_Handler
+Tool Calls:
+  Image_Analyzer (call_9569)
+ Call ID: call_9569
+  Args:
+    path: /directory/path
+    filename: Sample.nid
+    dynamic_code: import numpy as np; import matplotlib.pyplot as plt; data = np.array(image_data); plt.plot(data[:, 0]); plt.savefig('85_2_Llama-33-70b.png')
+    calculate_friction: True
+    calculate_mean_roughness: False
+    calculate_rms_roughness: False
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 123, 'prompt_tokens': 1182, 'total_tokens': 1305, 'completion_time': 0.447272727, 'prompt_time': 0.083649606, 'queue_time': 0.06510019399999999, 'total_time': 0.530922333}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+File not found: /directory/path\Sample.nid
+================================= Tool Message =================================
+Name: Image_Analyzer
+
+{"status": "Error", "message": "The specified file does not exist."}
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: Data_Handler
+Tool Calls:
+  Image_Analyzer (call_16f2)
+ Call ID: call_16f2
+  Args:
+    path: /home/user/Documents
+    filename: Sample.nid
+    dynamic_code: import numpy as np; import matplotlib.pyplot as plt; data = np.array(image_data); plt.plot(data[:, 0]); plt.savefig('85_2_Llama-33-70b.png')
+    calculate_friction: True
+    calculate_mean_roughness: False
+    calculate_rms_roughness: False
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 97, 'prompt_tokens': 1311, 'total_tokens': 1408, 'completion_time': 0.352727273, 'prompt_time': 0.091829399, 'queue_time': 0.07775190099999998, 'total_time': 0.444556672}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+File not found: /home/user/Documents\Sample.nid
+================================= Tool Message =================================
+Name: Image_Analyzer
+
+{"status": "Error", "message": "The specified file does not exist."}
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: Data_Handler
+
+NEED HELP
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 1436, 'total_tokens': 1440, 'completion_time': 0.016623798, 'prompt_time': 0.115699524, 'queue_time': 0.05817751600000001, 'total_time': 0.132323322}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_bzga)
+ Call ID: call_bzga
+  Args:
+    query: open file and plot line profile
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 175, 'prompt_tokens': 979, 'total_tokens': 1154, 'completion_time': 0.636363636, 'prompt_time': 0.069878259, 'queue_time': 0.058901201000000014, 'total_time': 0.706241895}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}

@@ -1,0 +1,141 @@
+('user', 'Set the image size to $150 \times 100 \\pu{nm}$, P gain to 75, I gain to 4500, D gain to 0, and $\x0crac{time}{line}$ to \\pu{1 s} in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 282, 'total_tokens': 286, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_aU0pW04HhGd9omgLccleD5CB)
+ Call ID: call_aU0pW04HhGd9omgLccleD5CB
+  Args:
+    query: image size, P gain, I gain, D gain, time per line
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 31, 'prompt_tokens': 484, 'total_tokens': 515, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_WtnXcc8ab44UnwT5rNL7p0yy)
+ Call ID: call_WtnXcc8ab44UnwT5rNL7p0yy
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+
+scan = application.Scan
+zcontrol = application.ZController
+
+scan.ImageWidth = 150e-9
+scan.ImageHeight = 100e-9
+
+zcontrol.PGain = 75
+zcontrol.IGain = 4500
+zcontrol.DGain = 0
+scan.Scantime = 1
+
+spm.disconnect()
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 109, 'prompt_tokens': 826, 'total_tokens': 935, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Error: 'SPM' object has no attribute 'disconnect'
+================================= Tool Message =================================
+Name: Code_Executor
+
+'SPM' object has no attribute 'disconnect'
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I encountered an error, but it seems to be due to a disconnect command that is not recognized. I will proceed with executing the code without disconnect command to avoid interruption.
+Tool Calls:
+  Code_Executor (call_8QwTe8K4Rb5lZwT2SUqXaFrR)
+ Call ID: call_8QwTe8K4Rb5lZwT2SUqXaFrR
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()
+application = spm.application
+
+scan = application.Scan
+zcontrol = application.ZController
+
+scan.ImageWidth = 150e-9
+scan.ImageHeight = 100e-9
+
+zcontrol.PGain = 75
+zcontrol.IGain = 4500
+zcontrol.DGain = 0
+scan.Scantime = 1
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 140, 'prompt_tokens': 957, 'total_tokens': 1097, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The image size has been set to $150 \times 100 \, \text{nm}$, P gain to 75, I gain to 4500, D gain to 0, and the time per line to 1 second in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 57, 'prompt_tokens': 1118, 'total_tokens': 1175, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 8
+Total Tokens: 4008
+Prompt Tokens: 3667
+Completion Tokens: 341
+Total Cost (USD): $0.002345
+
+Total time taken: 11.50 seconds

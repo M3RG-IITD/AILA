@@ -1,0 +1,154 @@
+('user', 'Set image width to \\pu{250 nm}, D gain to 250, and P gain to 5000 in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler should act next.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 8, 'prompt_tokens': 250, 'total_tokens': 258, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_a6889ffe71', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_zLtMaRJWZlLFYkeXGM2Auncn)
+ Call ID: call_zLtMaRJWZlLFYkeXGM2Auncn
+  Args:
+    query: set image width in AFM
+  Document_Retriever (call_OzLsWTRldqWY4hJK2VoTc9dd)
+ Call ID: call_OzLsWTRldqWY4hJK2VoTc9dd
+  Args:
+    query: set D gain in AFM
+  Document_Retriever (call_h7tKaZE1qx4SE4m9H3sU13ax)
+ Call ID: call_h7tKaZE1qx4SE4m9H3sU13ax
+  Args:
+    query: set P gain in AFM
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 80, 'prompt_tokens': 454, 'total_tokens': 534, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I have the relevant Python code needed to adjust the AFM parameters, specifically image width, D gain, and P gain. I'll update the values as requested and execute the code.
+
+Here's how the modifications will be made:
+
+1. Set the image width to **250 nm**.
+2. Set the **D gain** to **250**.
+3. Set the **P gain** to **5000**.
+
+```python
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+scan.ImageWidth = 250e-9 # [m] converted from nm to m
+
+# Set Z controller parameters
+zcontrol.DGain = 250
+zcontrol.PGain = 5000
+
+del spm
+```
+
+I'll execute this code to apply the settings.
+Tool Calls:
+  Code_Executor (call_Zcs2P8vCIXV1uJBgyFUaAhPJ)
+ Call ID: call_Zcs2P8vCIXV1uJBgyFUaAhPJ
+  Args:
+    code: #imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+scan.ImageWidth = 250e-9 # [m] converted from nm to m
+
+# Set Z controller parameters
+zcontrol.DGain = 250
+zcontrol.PGain = 5000
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 396, 'prompt_tokens': 1504, 'total_tokens': 1900, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+FINAL ANSWER: The image width has been set to 250 nm, the D gain to 250, and the P gain to 5000 in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 38, 'prompt_tokens': 1921, 'total_tokens': 1959, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 1408}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 6
+Total Tokens: 4651
+Prompt Tokens: 4129
+Completion Tokens: 522
+Total Cost (USD): $0.0137825
+
+Total time taken: 15.56 seconds

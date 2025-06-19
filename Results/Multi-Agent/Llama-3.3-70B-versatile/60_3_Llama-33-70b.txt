@@ -1,0 +1,321 @@
+('user', "Capture an AFM image of size $\\pu {100 nm} \times \\pu {100 nm}$ with the filename '60_3_Llama-33-70b'. Open the latest file from the current folder and calculate the average friction and surface roughness")
+================================== Ai Message ==================================
+Name: AILA
+
+Data_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 3, 'prompt_tokens': 320, 'total_tokens': 323, 'completion_time': 0.017087763, 'prompt_time': 0.021009598, 'queue_time': 0.0601073, 'total_time': 0.038097361}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: Data_Handler
+Tool Calls:
+  Image_Analyzer (call_q6kv)
+ Call ID: call_q6kv
+  Args:
+    path: ./
+    filename: 60_3_Llama-33-70b
+    calculate_friction: True
+    calculate_mean_roughness: True
+    calculate_rms_roughness: True
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 63, 'prompt_tokens': 1193, 'total_tokens': 1256, 'completion_time': 0.229090909, 'prompt_time': 0.100545253, 'queue_time': 0.068076317, 'total_time': 0.329636162}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+File not found: ./60_3_Llama-33-70b
+================================= Tool Message =================================
+Name: Image_Analyzer
+
+{"status": "Error", "message": "The specified file does not exist."}
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: Data_Handler
+Tool Calls:
+  Image_Analyzer (call_2za6)
+ Call ID: call_2za6
+  Args:
+    path: ./
+    calculate_friction: True
+    calculate_mean_roughness: True
+    calculate_rms_roughness: True
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 40, 'prompt_tokens': 1281, 'total_tokens': 1321, 'completion_time': 0.145454545, 'prompt_time': 0.182474468, 'queue_time': 0.056478055, 'total_time': 0.327929013}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+File to display: .\60_3_Llama-33-70b.txt
+Not a valid filetype
+An error occurred: 'NoneType' object is not subscriptable
+================================= Tool Message =================================
+Name: Image_Analyzer
+
+{"status": "Error", "message": "An error occurred: 'NoneType' object is not subscriptable"}
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: Data_Handler
+Tool Calls:
+  Image_Analyzer (call_ry1e)
+ Call ID: call_ry1e
+  Args:
+    path: ./
+    filename: 60_3_Llama-33-70b
+    calculate_friction: True
+    calculate_mean_roughness: True
+    calculate_rms_roughness: True
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 55, 'prompt_tokens': 1355, 'total_tokens': 1410, 'completion_time': 0.2, 'prompt_time': 0.1101796, 'queue_time': 0.060132704999999995, 'total_time': 0.3101796}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+File not found: ./60_3_Llama-33-70b
+================================= Tool Message =================================
+Name: Image_Analyzer
+
+{"status": "Error", "message": "The specified file does not exist."}
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: Data_Handler
+
+NEED HELP 
+The provided functions are insufficient to capture an AFM image. Additional tools or functions are required to complete this task.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 28, 'prompt_tokens': 1438, 'total_tokens': 1466, 'completion_time': 0.144644114, 'prompt_time': 0.201351412, 'queue_time': 0.06037357799999998, 'total_time': 0.345995526}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_z8qj)
+ Call ID: call_z8qj
+  Args:
+    query: AFM parameter configuration code and scan code for 100 nm x 100 nm image capture
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 118, 'prompt_tokens': 1005, 'total_tokens': 1123, 'completion_time': 0.429090909, 'prompt_time': 0.100246501, 'queue_time': 0.053632273999999994, 'total_time': 0.52933741}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_0t3j)
+ Call ID: call_0t3j
+  Args:
+    code: import nanosurf
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+scan.ImageWidth = 100e-9 
+scan.ImageHeight = 100e-9 
+scan.Scantime = 0.55 
+scan.Points = 256 
+scan.Lines = 256 
+scan.CenterPosX = 10e-6 
+scan.CenterPosY = 10e-6 
+scan.SlopeX = 0.0 
+scan.SlopeY = 0.0 
+scan.Overscan = 0 
+scan.Rotation=0
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 171, 'prompt_tokens': 1352, 'total_tokens': 1523, 'completion_time': 0.621818182, 'prompt_time': 0.119118213, 'queue_time': 0.063159622, 'total_time': 0.740936395}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_dw8a)
+ Call ID: call_dw8a
+  Args:
+    query: AFM tip approach code
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 21, 'prompt_tokens': 1536, 'total_tokens': 1557, 'completion_time': 0.076363636, 'prompt_time': 0.120245061, 'queue_time': 0.05437584399999999, 'total_time': 0.196608697}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_a66n)
+ Call ID: call_a66n
+  Args:
+    code: import nanosurf
+import time
+spm = nanosurf.SPM()
+application = spm.application
+approach = application.Approach
+approach.StartApproach()
+while approach.Status==1 or approach.Status==2:
+	print("Approaching... ")
+	time.sleep(1)
+print("finished")
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 90, 'prompt_tokens': 1699, 'total_tokens': 1789, 'completion_time': 0.327272727, 'prompt_time': 0.123919373, 'queue_time': 0.05579780200000001, 'total_time': 0.4511921}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Approaching... 
+finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_zze3)
+ Call ID: call_zze3
+  Args:
+    query: AFM scan code
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 20, 'prompt_tokens': 1802, 'total_tokens': 1822, 'completion_time': 0.072727273, 'prompt_time': 0.158202534, 'queue_time': 0.062276787, 'total_time': 0.230929807}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_qma9)
+ Call ID: call_qma9
+  Args:
+    code: import nanosurf
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+scan.ImageWidth = 100e-9 
+scan.ImageHeight = 100e-9 
+scan.Scantime = 0.55 
+scan.Points = 256 
+scan.Lines = 256 
+scan.CenterPosX = 10e-6 
+scan.CenterPosY = 10e-6 
+scan.SlopeX = 0.0 
+scan.SlopeY = 0.0 
+scan.Overscan = 0 
+scan.Rotation=0
+application.StartScan()
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 175, 'prompt_tokens': 2130, 'total_tokens': 2305, 'completion_time': 0.636363636, 'prompt_time': 0.173620442, 'queue_time': 0.054894941999999974, 'total_time': 0.809984078}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Error: CX.Application.StartScan
+================================= Tool Message =================================
+Name: Code_Executor
+
+CX.Application.StartScan
+
+.............................Metadata..............................
+{}

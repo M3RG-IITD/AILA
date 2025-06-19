@@ -1,0 +1,119 @@
+('user', 'Change the AFM operation mode to lateral force mode in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 282, 'total_tokens': 286, 'completion_time': 0.023417344, 'prompt_time': 0.019173444, 'queue_time': 0.054267749000000004, 'total_time': 0.042590788}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_rf16)
+ Call ID: call_rf16
+  Args:
+    code: AFM_Handler.set_operation_mode("lateral_force_mode")
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 37, 'prompt_tokens': 696, 'total_tokens': 733, 'completion_time': 0.134545455, 'prompt_time': 0.05236469, 'queue_time': 0.060323430000000004, 'total_time': 0.186910145}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'AFM_Handler' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'AFM_Handler' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_cd3j)
+ Call ID: call_cd3j
+  Args:
+    query: set operation mode to lateral force mode
+  Code_Executor (call_rpf2)
+ Call ID: call_rpf2
+  Args:
+    code: AFM.set_operation_mode('lateral_force_mode')
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 48, 'prompt_tokens': 747, 'total_tokens': 795, 'completion_time': 0.174545455, 'prompt_time': 0.05913602, 'queue_time': 0.05536998, 'total_time': 0.233681475}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'AFM' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'AFM' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_pky5)
+ Call ID: call_pky5
+  Args:
+    query: change AFM operation mode to lateral force mode
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 25, 'prompt_tokens': 1101, 'total_tokens': 1126, 'completion_time': 0.090909091, 'prompt_time': 0.078077825, 'queue_time': 0.058172607, 'total_time': 0.168986916}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_03dt)
+ Call ID: call_03dt
+  Args:
+    code: import nanosurf; spm = nanosurf.SPM(); application = spm.application; opmode = application.OperatingMode; opmode.OperatingMode = spm.OperatingMode.LateralForce
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 57, 'prompt_tokens': 1419, 'total_tokens': 1476, 'completion_time': 0.207272727, 'prompt_time': 0.152443327, 'queue_time': 0.06106582400000002, 'total_time': 0.359716054}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The operation mode of the AFM has been successfully changed to lateral force mode.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 17, 'prompt_tokens': 1489, 'total_tokens': 1506, 'completion_time': 0.061818182, 'prompt_time': 0.127761182, 'queue_time': 0.05467138799999999, 'total_time': 0.189579364}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 10
+Total Tokens: 5922
+Prompt Tokens: 5734
+Completion Tokens: 188
+Total Cost (USD): $0.0
+
+Total time taken: 5.88 seconds

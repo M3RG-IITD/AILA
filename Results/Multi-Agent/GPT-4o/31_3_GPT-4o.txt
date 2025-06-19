@@ -1,0 +1,393 @@
+('user', 'Set image rotation to \\pu{20 degrees} in the AFM software, and then capture an image.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler should act next.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 8, 'prompt_tokens': 243, 'total_tokens': 251, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_a6889ffe71', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_6nrmbFVAWxivqSYVRn8XvpBm)
+ Call ID: call_6nrmbFVAWxivqSYVRn8XvpBm
+  Args:
+    query: set image rotation AFM
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 21, 'prompt_tokens': 447, 'total_tokens': 468, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_fv0pa8zekIoa8tuezEwjAPvB)
+ Call ID: call_fv0pa8zekIoa8tuezEwjAPvB
+  Args:
+    query: approaching tip
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 19, 'prompt_tokens': 782, 'total_tokens': 801, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_iK0Yv6w0DQYpcWxCK5FbBw5X)
+ Call ID: call_iK0Yv6w0DQYpcWxCK5FbBw5X
+  Args:
+    query: image capture AFM
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 20, 'prompt_tokens': 945, 'total_tokens': 965, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_vgB0U68Q4aU3fnmxPVKVMYcH)
+ Call ID: call_vgB0U68Q4aU3fnmxPVKVMYcH
+  Args:
+    code: #imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+
+#get all parameters
+scan.Rotation = 20 #degree
+
+
+
+del spm
+  Code_Executor (call_FhSG6ZozTUxtxJtxZJYzbh5V)
+ Call ID: call_FhSG6ZozTUxtxJtxZJYzbh5V
+  Args:
+    code: #imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 254, 'prompt_tokens': 1279, 'total_tokens': 1533, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Connected to running app: CX
+Approaching... 
+finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_c4Uk1NJzUkb3zpW2P4adOKQZ)
+ Call ID: call_c4Uk1NJzUkb3zpW2P4adOKQZ
+  Args:
+    code: #imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+
+scan.Start() # Start the scan
+
+# Wait for the scan to complete
+while scan.IsRunning:
+    time.sleep(1)
+
+print("Scan completed.")
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 116, 'prompt_tokens': 1556, 'total_tokens': 1672, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 1152}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Error: <unknown>.IsRunning
+================================= Tool Message =================================
+Name: Code_Executor
+
+<unknown>.IsRunning
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+NEED HELP. The code executor returned an error related to the "IsRunning" attribute. This attribute seems to be not recognized, which might indicate that it is either improperly implemented or not available in the used API.
+
+Another assistant should assist in verifying the correct attribute or method for checking the scan status and re-executing the code.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 70, 'prompt_tokens': 1689, 'total_tokens': 1759, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 1536}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: Data_Handler
+
+I will check for the correct method to verify the completion of the scan in the AFM software and ensure the image is captured. Let's proceed with this.
+Tool Calls:
+  Image_Analyzer (call_QgTIqKA6dtvyW9kFp5RtrPQT)
+ Call ID: call_QgTIqKA6dtvyW9kFp5RtrPQT
+  Args:
+    filename: None
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 49, 'prompt_tokens': 2013, 'total_tokens': 2062, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Image_Analyzer
+
+Error: 1 validation error for Image_Analyzer
+filename
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.10/v/string_type
+ Please fix your mistakes.
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: Data_Handler
+
+It appears that there was an error trying to retrieve the latest image. Let's try this again with the correct parameters.
+Tool Calls:
+  Image_Analyzer (call_gKJzG2oIUZIJu62zwysurYy5)
+ Call ID: call_gKJzG2oIUZIJu62zwysurYy5
+  Args:
+    path: /images
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 42, 'prompt_tokens': 2138, 'total_tokens': 2180, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 1920}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+No files found in the specified directory.
+================================= Tool Message =================================
+Name: Image_Analyzer
+
+{"status": "Error", "message": "No files found in the directory."}
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: Data_Handler
+
+It seems that there is no image available in the specified directory. I will go ahead and attempt to execute the scan using a more appropriate method to capture the image and store it correctly. 
+
+Let's proceed with writing and executing the code to perform the image capture with rotation.
+Tool Calls:
+  Image_optimizer (call_FvVjBztdrRxdkWyvUIlU4BV2)
+ Call ID: call_FvVjBztdrRxdkWyvUIlU4BV2
+  Args:
+    baseline: True
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 71, 'prompt_tokens': 2214, 'total_tokens': 2285, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 2048}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Current working directory: C:\Users\Admin\AppData\Local\Nanosurf\Nanosurf CX\AI-Optimization
+/Users/Admin/AppData/Local/Nanosurf/Nanosurf CX/AI-Optimization\20241115_Faizan_Glass in DI_M75_Set1_TC2_01864.nid
+Returned to original working directory: C:\Users\Admin\Desktop\Automation\AILA2\AILA\Results\app
+================================= Tool Message =================================
+Name: Image_optimizer
+
+Error: NameError("name 'nanosurf' is not defined")
+ Please fix your mistakes.
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: Data_Handler
+
+It seems like there was a misunderstanding. The Image_optimizer is not the correct function for capturing images. Let me proceed with directly capturing the image with the proper settings. I will intervene in the process with the necessary Python code to initiate a scan in the AFM software.
+Tool Calls:
+  Image_Analyzer (call_F3PV8t4EOeD9tTZshNgkPeB7)
+ Call ID: call_F3PV8t4EOeD9tTZshNgkPeB7
+  Args:
+    path: ./images
+    calculate_friction: False
+    calculate_mean_roughness: False
+    calculate_rms_roughness: False
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 96, 'prompt_tokens': 2320, 'total_tokens': 2416, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 2176}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+No files found in the specified directory.
+================================= Tool Message =================================
+Name: Image_Analyzer
+
+{"status": "Error", "message": "No files found in the directory."}
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: Data_Handler
+
+It seems there is still an issue with capturing the AFM image. We need to ensure the image capture command is executed properly in the AFM software. Let's make sure to adjust the previous Python AFM code accordingly and capture the image. 
+
+Here is a revised code snippet that attempts an image capture:
+
+```python
+import nanosurf
+import time
+
+# Load application
+spm = nanosurf.SPM()  # could be .C3000(), .CX(), or .CoreAFM()
+application = spm.application
+
+# All variables
+scan = application.Scan
+
+# Set rotation
+scan.Rotation = 20  # degree
+
+# Start approach
+approach = application.Approach
+approach.StartApproach()
+
+while approach.Status in (1, 2):  # 1 and 2 indicate approach is ongoing
+    time.sleep(1)
+
+print("Approach completed.")
+
+# Start scan
+scan.Start()
+
+# Wait for scan to complete
+while scan.Status in (1, 2):  # Replace with the correct status checking mechanism
+    time.sleep(1)
+
+print("Scan completed.")
+
+# Save image (implement saving logic if necessary)
+
+del spm
+```
+
+Please execute this code in the AFM software environment to capture the image. If this still fails, we'll need to confirm the correct API usage for status checking and saving images in your setup.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 282, 'prompt_tokens': 2450, 'total_tokens': 2732, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 2304}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 21
+Total Tokens: 19124
+Prompt Tokens: 18076
+Completion Tokens: 1048
+Total Cost (USD): $0.04175
+
+Total time taken: 46.87 seconds

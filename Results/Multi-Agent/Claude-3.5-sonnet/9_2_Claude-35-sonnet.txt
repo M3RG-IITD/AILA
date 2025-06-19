@@ -1,0 +1,104 @@
+('user', 'Set image rotation to \\pu{20 degree} in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'id': 'msg_01Hk7xYRfMXT9f1am7gxibzN', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'end_turn', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 294, 'output_tokens': 7}}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+[{'text': ": I'll help you set the image rotation to 20 degrees in the AFM software. Let me retrieve the relevant code for image rotation settings.", 'type': 'text'}, {'id': 'toolu_01CNa4xqpJRgcSGZjh8XkLed', 'input': {'query': 'set image rotation angle code'}, 'name': 'Document_Retriever', 'type': 'tool_use'}]
+Tool Calls:
+  Document_Retriever (toolu_01CNa4xqpJRgcSGZjh8XkLed)
+ Call ID: toolu_01CNa4xqpJRgcSGZjh8XkLed
+  Args:
+    query: set image rotation angle code
+
+.............................Metadata..............................
+{'id': 'msg_01TFTaJNYyK7AzNVzsoPEeJr', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'tool_use', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 835, 'output_tokens': 91}}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+[{'text': "Based on the retrieved code, I can now execute the command to set the image rotation to 20 degrees. I'll modify and execute the relevant portion of the code:", 'type': 'text'}, {'id': 'toolu_01DfNFUyuY3MEpoUGQ359jTu', 'input': {'code': 'import nanosurf\n\n# Initialize the SPM application\nspm = nanosurf.SPM()\napplication = spm.application\n\n# Set the rotation to 20 degrees\napplication.Scan.Rotation = 20\n\n# Clean up\ndel spm'}, 'name': 'Code_Executor', 'type': 'tool_use'}]
+Tool Calls:
+  Code_Executor (toolu_01DfNFUyuY3MEpoUGQ359jTu)
+ Call ID: toolu_01DfNFUyuY3MEpoUGQ359jTu
+  Args:
+    code: import nanosurf
+
+# Initialize the SPM application
+spm = nanosurf.SPM()
+application = spm.application
+
+# Set the rotation to 20 degrees
+application.Scan.Rotation = 20
+
+# Clean up
+del spm
+
+.............................Metadata..............................
+{'id': 'msg_01B9sfRsXDnTNXnWADJrQb7T', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'tool_use', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 1305, 'output_tokens': 150}}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+FINAL ANSWER: I have successfully set the image rotation to 20 degrees in the AFM software. The command has been executed and confirmed. The scan images will now be rotated by 20 degrees from their original orientation. Is there anything else you would like me to help you with?
+
+.............................Metadata..............................
+{'id': 'msg_01AoYRMnBCcRoRE3bAYZHjX8', 'model': 'claude-3-5-sonnet-20241022', 'stop_reason': 'end_turn', 'stop_sequence': None, 'usage': {'cache_creation_input_tokens': 0, 'cache_read_input_tokens': 0, 'input_tokens': 1469, 'output_tokens': 66}}
+
+Total Steps: 6
+Total Tokens: 4217
+Prompt Tokens: 3903
+Completion Tokens: 314
+Total Cost (USD): $0.0
+
+Total time taken: 11.61 seconds

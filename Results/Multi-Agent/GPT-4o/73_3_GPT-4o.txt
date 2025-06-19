@@ -1,0 +1,420 @@
+('user', "Acquire an AFM image with dimensions $\\pu{100 nm} \times \\pu{100 nm}$ at a scan angle of $ 5 degrees $, using the following parameters: P gain = 100, I gain = 5000, D gain = 0, and setpoint = 0.1 V. Save the image with the filename '73_3_GPT-4o'. Then, open the latest file in the folder, plot the Z-axis forward image, and save the plot as '73_3_GPT-4o.png'.")
+================================== Ai Message ==================================
+Name: AILA
+
+'AFM_Handler'
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 6, 'prompt_tokens': 355, 'total_tokens': 361, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_d8864f8b6b', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_JqTgL452Dw3NlVD4ILZYOiWe)
+ Call ID: call_JqTgL452Dw3NlVD4ILZYOiWe
+  Args:
+    query: Set scan size to 100 nm x 100 nm
+  Document_Retriever (call_KJHrCOaHdmfgLMlBWHMXLlJc)
+ Call ID: call_KJHrCOaHdmfgLMlBWHMXLlJc
+  Args:
+    query: Set scan angle to 5 degrees
+  Document_Retriever (call_wCEDAEBItTIKuICRfqVXXEYQ)
+ Call ID: call_wCEDAEBItTIKuICRfqVXXEYQ
+  Args:
+    query: Set P gain to 100, I gain to 5000, D gain to 0
+  Document_Retriever (call_WWpqTZSECZLFGrpUQOvYv19c)
+ Call ID: call_WWpqTZSECZLFGrpUQOvYv19c
+  Args:
+    query: Set setpoint to 0.1 V
+  Document_Retriever (call_u6NdPgHcdcdDgH1QN75OcRI9)
+ Call ID: call_u6NdPgHcdcdDgH1QN75OcRI9
+  Args:
+    query: Command to save image with specific filename
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 145, 'prompt_tokens': 538, 'total_tokens': 683, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_YJ584fM6XLt26OYvxNZnLswl)
+ Call ID: call_YJ584fM6XLt26OYvxNZnLswl
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000, .CX, or .CoreAFM
+application = spm.application
+
+scan = application.Scan
+zcontrol = application.ZController
+
+# Set scan parameters
+scan.ImageWidth = 100e-9  # 100 nm in meters
+scan.ImageHeight = 100e-9  # 100 nm in meters
+scan.SlopeX = 5.0  # 5 degrees
+
+# Set Z controller parameters
+zcontrol.PGain = 100
+zcontrol.IGain = 5000
+zcontrol.DGain = 0
+zcontrol.SetPoint = 0.1  # Setpoint in volts
+del spm
+  Code_Executor (call_FK0z403bLALnu8zAJ2DwtZRo)
+ Call ID: call_FK0z403bLALnu8zAJ2DwtZRo
+  Args:
+    code: import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000, .CX, or .CoreAFM
+application = spm.application
+
+# Set file name
+file_name = "73_3_GPT-4o"
+application.SetGalleryHistoryFilenameMask(file_name)
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 271, 'prompt_tokens': 2264, 'total_tokens': 2535, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_gPcu8tqVMZnC8lIUVQViJGEU)
+ Call ID: call_gPcu8tqVMZnC8lIUVQViJGEU
+  Args:
+    query: Approach tip
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 19, 'prompt_tokens': 2558, 'total_tokens': 2577, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 2176}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''approach/withdraw/retract the AFM tip''' 
+#imports 
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+approach = application.Approach
+
+# approach.StartRetract() #retract the tip
+# approach.StartApproach() #approach the tip
+# approach.StartWithdraw() #withdraw the tip
+
+while approach.Status==1 or approach.Status==2:
+        print("Approaching... ")
+        time.sleep(1)
+print("finished")
+
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_b9sLabw5t6ufBWKyHrDb1b19)
+ Call ID: call_b9sLabw5t6ufBWKyHrDb1b19
+  Args:
+    code: import nanosurf
+import time
+
+spm = nanosurf.SPM()  # or .C3000, .CX, or .CoreAFM
+application = spm.application
+approach = application.Approach
+
+# Start approach
+approach.StartApproach()
+
+while approach.Status == 1 or approach.Status == 2:
+    print("Approaching...")
+    time.sleep(1)
+print("Approach finished")
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 117, 'prompt_tokens': 2721, 'total_tokens': 2838, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 2432}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Approaching...
+Approaching...
+Approaching...
+Approaching...
+Approach finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_qvZrSPRB0Rstt9u140o2hfDW)
+ Call ID: call_qvZrSPRB0Rstt9u140o2hfDW
+  Args:
+    query: Execute a scan
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 19, 'prompt_tokens': 2853, 'total_tokens': 2872, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 2688}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''initiate/start or terminate/stop image scanning process'''
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+
+# Start scan
+# scan.StartFrameDown() #Scanning from up to down or top to bottom
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+
+#scan.stop() #stop sacn
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",(scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_fdQsrg3Qmrsis22SrHcDRENS)
+ Call ID: call_fdQsrg3Qmrsis22SrHcDRENS
+  Args:
+    code: import nanosurf
+import time
+
+spm = nanosurf.SPM()  # or .C3000, .CX, or .CoreAFM
+application = spm.application
+scan = application.Scan
+
+# Start scan
+scan.StartFrameUp()  # Scanning from down to up or bottom to top
+
+scanning = scan.IsScanning  # Check if scanning
+while scanning:
+    print("Scanning in progress... Remaining lines:", (scan.Lines - scan.Currentline))
+    time.sleep(3)
+    scanning = scan.IsScanning
+print("Scanning finished")
+
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 147, 'prompt_tokens': 3045, 'total_tokens': 3192, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 2816}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+Scanning in progress... Remaining lines: 11
+Scanning in progress... Remaining lines: 10
+Scanning in progress... Remaining lines: 9
+Scanning in progress... Remaining lines: 8
+Scanning in progress... Remaining lines: 6
+Scanning in progress... Remaining lines: 5
+Scanning in progress... Remaining lines: 3
+Scanning in progress... Remaining lines: 2
+Scanning finished
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_PxVff9lbgruqrlw6vvtUWmy2)
+ Call ID: call_PxVff9lbgruqrlw6vvtUWmy2
+  Args:
+    query: Open the latest file and plot Z-axis forward image
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 26, 'prompt_tokens': 3207, 'total_tokens': 3233, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''initiate/start or terminate/stop image scanning process'''
+import nanosurf
+import time
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+scan = application.Scan
+
+# Start scan
+# scan.StartFrameDown() #Scanning from up to down or top to bottom
+scan.StartFrameUp() #Scanning from down to up or bottom to top
+
+#scan.stop() #stop sacn
+scanning = scan.IsScanning # Check if scanning
+while scanning:
+        print("Scanning in progress... Remaining lines:",(scan.Lines-scan.Currentline))
+        time.sleep(3)
+        scanning = scan.IsScanning
+print("Scanning finished")
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+It seems there has been a mistake in retrieving the command for opening the latest file and plotting the Z-axis forward image. Let me correct that. I will now retrieve the correct command.
+Tool Calls:
+  Document_Retriever (call_hxZtDcO5rS2XNynFEAUWb2lW)
+ Call ID: call_hxZtDcO5rS2XNynFEAUWb2lW
+  Args:
+    query: Python code to open the latest AFM file, plot Z-axis forward image, and save the plot
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 75, 'prompt_tokens': 3406, 'total_tokens': 3481, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 3200}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I apologize for the miscommunication. Let me try retrieving the right information again regarding how to open the latest file, plot the Z-axis forward image, and save the plot.
+Tool Calls:
+  Document_Retriever (call_ZUdNHB5SxIIeyuxy1xTmvZLg)
+ Call ID: call_ZUdNHB5SxIIeyuxy1xTmvZLg
+  Args:
+    query: Python code to load the latest AFM image file, plot the Z-axis forward image, and save as PNG
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 75, 'prompt_tokens': 3801, 'total_tokens': 3876, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 3328}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I am experiencing difficulty retrieving the specific code to load the latest AFM image file, plot the Z-axis forward image, and save it as a PNG. I recommend seeking help to complete these tasks manually using the Nanosurf AFM software tools or checking if someone else on your team can assist with this final step. If you have any further questions or need additional help, please feel free to ask.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 83, 'prompt_tokens': 4196, 'total_tokens': 4279, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 3712}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f5bdcc3276', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 20
+Total Tokens: 29927
+Prompt Tokens: 28944
+Completion Tokens: 983
+Total Cost (USD): $0.056749999999999995
+
+Total time taken: 65.27 seconds

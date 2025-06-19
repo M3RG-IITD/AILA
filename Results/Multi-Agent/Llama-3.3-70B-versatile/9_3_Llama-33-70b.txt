@@ -1,0 +1,192 @@
+('user', 'Set image rotation to \\pu{20 degree} in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 282, 'total_tokens': 286, 'completion_time': 0.01649561, 'prompt_time': 0.024768404, 'queue_time': 0.055985226000000006, 'total_time': 0.041264014}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_ab1m)
+ Call ID: call_ab1m
+  Args:
+    code: AFM_Handler.set_image_rotation(20)
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 30, 'prompt_tokens': 696, 'total_tokens': 726, 'completion_time': 0.109090909, 'prompt_time': 0.072583526, 'queue_time': 0.057969443999999995, 'total_time': 0.181674435}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'AFM_Handler' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'AFM_Handler' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_xfzp)
+ Call ID: call_xfzp
+  Args:
+    query: set image rotation in AFM software using python API
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 26, 'prompt_tokens': 743, 'total_tokens': 769, 'completion_time': 0.097577698, 'prompt_time': 0.05858782, 'queue_time': 0.05597564000000001, 'total_time': 0.156165518}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_42ss)
+ Call ID: call_42ss
+  Args:
+    code: scan.Rotation = 20
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 21, 'prompt_tokens': 1077, 'total_tokens': 1098, 'completion_time': 0.076363636, 'prompt_time': 0.077113537, 'queue_time': 0.05455808299999999, 'total_time': 0.153477173}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'scan' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'scan' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_q5v4)
+ Call ID: call_q5v4
+  Args:
+    query: set image rotation in AFM software using python API
+  Code_Executor (call_nec2)
+ Call ID: call_nec2
+  Args:
+    code: application.Scan.Rotation = 20
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 48, 'prompt_tokens': 1115, 'total_tokens': 1163, 'completion_time': 0.174545455, 'prompt_time': 0.080865366, 'queue_time': 0.05491774099999999, 'total_time': 0.255410821}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'application' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'application' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_apc0)
+ Call ID: call_apc0
+  Args:
+    query: initialize AFM application using python API
+  Code_Executor (call_p0qq)
+ Call ID: call_p0qq
+  Args:
+    code: spm = nanosurf.SPM(); application = spm.application; application.Scan.Rotation = 20
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 58, 'prompt_tokens': 1483, 'total_tokens': 1541, 'completion_time': 0.210909091, 'prompt_time': 0.103721842, 'queue_time': 0.05538051000000001, 'total_time': 0.314630933}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'nanosurf' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'nanosurf' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_75dn)
+ Call ID: call_75dn
+  Args:
+    query: import nanosurf library in python
+  Code_Executor (call_hezv)
+ Call ID: call_hezv
+  Args:
+    code: import nanosurf; spm = nanosurf.SPM(); application = spm.application; application.Scan.Rotation = 20
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 64, 'prompt_tokens': 1864, 'total_tokens': 1928, 'completion_time': 0.232727273, 'prompt_time': 0.151084496, 'queue_time': 0.056880874, 'total_time': 0.383811769}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_0mqc)
+ Call ID: call_0mqc
+  Args:
+    code: import nanosurf; spm = nanosurf.SPM(); application = spm.application; application.Scan.Rotation = 20
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 42, 'prompt_tokens': 2079, 'total_tokens': 2121, 'completion_time': 0.152727273, 'prompt_time': 0.149026873, 'queue_time': 0.05458848699999999, 'total_time': 0.301754146}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_9a8b91ba77', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The image rotation in the AFM software has been set to 20 degrees.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 17, 'prompt_tokens': 2134, 'total_tokens': 2151, 'completion_time': 0.061818182, 'prompt_time': 0.152055648, 'queue_time': 0.05475781200000002, 'total_time': 0.21387383}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 16
+Total Tokens: 11783
+Prompt Tokens: 11473
+Completion Tokens: 310
+Total Cost (USD): $0.0
+
+Total time taken: 7.97 seconds

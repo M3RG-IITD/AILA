@@ -1,0 +1,115 @@
+('user', 'Set image height to \\pu{50 nm} and P gain to 175 in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 288, 'total_tokens': 292, 'completion_time': 0.01648314, 'prompt_time': 0.025884828, 'queue_time': 0.060100561, 'total_time': 0.042367968}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_yqxh)
+ Call ID: call_yqxh
+  Args:
+    code: AFM_Handler.set_image_height("50 nm")
+AFM_Handler.set_proportional_gain(175)
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 44, 'prompt_tokens': 702, 'total_tokens': 746, 'completion_time': 0.16, 'prompt_time': 0.049173156, 'queue_time': 0.065259707, 'total_time': 0.209173156}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Error: name 'AFM_Handler' is not defined
+================================= Tool Message =================================
+Name: Code_Executor
+
+name 'AFM_Handler' is not defined
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_7t84)
+ Call ID: call_7t84
+  Args:
+    query: set image height and P gain in AFM software using python API
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 29, 'prompt_tokens': 763, 'total_tokens': 792, 'completion_time': 0.11263601, 'prompt_time': 0.060003931, 'queue_time': 0.054255901, 'total_time': 0.172639941}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_htct)
+ Call ID: call_htct
+  Args:
+    code: import nanosurf
+spm = nanosurf.SPM()
+application = spm.application
+scan = application.Scan
+zcontrol = application.ZController
+scan.ImageHeight = 50e-9 # [m]
+zcontrol.PGain = 175
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 67, 'prompt_tokens': 1100, 'total_tokens': 1167, 'completion_time': 0.243636364, 'prompt_time': 0.078191709, 'queue_time': 0.05601219199999999, 'total_time': 0.321828073}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The image height has been set to 50 nm and the P gain has been set to 175 in the AFM software.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 27, 'prompt_tokens': 1180, 'total_tokens': 1207, 'completion_time': 0.098181818, 'prompt_time': 0.089915382, 'queue_time': 0.05998685199999999, 'total_time': 0.1880972}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 8
+Total Tokens: 4204
+Prompt Tokens: 4033
+Completion Tokens: 171
+Total Cost (USD): $0.0
+
+Total time taken: 4.29 seconds

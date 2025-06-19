@@ -1,0 +1,85 @@
+('user', 'Change the AFM operation mode to dynamic mode in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 281, 'total_tokens': 285, 'completion_time': 0.023165309, 'prompt_time': 0.017869542, 'queue_time': 0.06085244299999999, 'total_time': 0.041034851}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_zfez)
+ Call ID: call_zfez
+  Args:
+    query: change AFM operation mode to dynamic mode
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 65, 'prompt_tokens': 695, 'total_tokens': 760, 'completion_time': 0.261133081, 'prompt_time': 0.061543081, 'queue_time': 0.05888471000000001, 'total_time': 0.322676162}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_3f3b593e33', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''python code to rename file, udpate cantilever tip and Operating mode in AFM''' 
+#imports 
+import nanosurf
+
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+
+# Operating mode
+# opmode.OperatingMode = spm.OperatingMode.DynamicAFM #[set any of:{'.ContPhase' for Static mode},{'.DynamicAFM' for Dynamic mode},{'.ForceModulation'},{'.LateralForce' for Contact mode},{'.PhaseContrast' for tapping mode}] 
+# opmode.VibratingAmpl = 1 # [V] 
+
+# Set file name
+# file_name = "TestSample-"
+# application.SetGalleryHistoryFilenameMask(file_name)
+
+# Choose cantilever
+#head.CantileverByGUID = spm.CantileverGUID.Dyn190Al #[set any of:{'.Multi75Al_G'},{'.ContAl_G'},{'.Tap190Al_G'},{'.MFMR'},{'.ANSCM'},{'.ACL_A'},{'.NCLR'},{'.Multi75M_G'},{'.Multi75E_G'}]
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Code_Executor (call_8k9f)
+ Call ID: call_8k9f
+  Args:
+    code: import nanosurf
+spm = nanosurf.SPM()
+application = spm.application
+opmode = application.OperatingMode
+head = application.ScanHead
+opmode.OperatingMode = spm.OperatingMode.DynamicAFM
+del spm
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 68, 'prompt_tokens': 1017, 'total_tokens': 1085, 'completion_time': 0.247272727, 'prompt_time': 0.073202581, 'queue_time': 0.061046136999999986, 'total_time': 0.320475308}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+The AFM operation mode has been successfully changed to dynamic mode.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 14, 'prompt_tokens': 1098, 'total_tokens': 1112, 'completion_time': 0.050909091, 'prompt_time': 0.095304325, 'queue_time': 0.05925630500000001, 'total_time': 0.146213416}, 'model_name': 'llama-3.3-70b-versatile', 'system_fingerprint': 'fp_6507bcfb6f', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 6
+Total Tokens: 3242
+Prompt Tokens: 3091
+Completion Tokens: 151
+Total Cost (USD): $0.0
+
+Total time taken: 4.63 seconds

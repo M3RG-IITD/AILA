@@ -1,0 +1,142 @@
+('user', 'Set image height to \\pu{50 nm} and P gain to 175 in the AFM software.')
+================================== Ai Message ==================================
+Name: AILA
+
+AFM_Handler
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 4, 'prompt_tokens': 243, 'total_tokens': 247, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_a6889ffe71', 'finish_reason': 'stop', 'logprobs': None}
+================================== Ai Message ==================================
+Name: AFM_Handler
+Tool Calls:
+  Document_Retriever (call_v0ECTzVMjAaSwAAXpQoYv9HD)
+ Call ID: call_v0ECTzVMjAaSwAAXpQoYv9HD
+  Args:
+    query: set image height
+  Document_Retriever (call_FtgwVBDO7hH7IfsJLGDIXQ02)
+ Call ID: call_FtgwVBDO7hH7IfsJLGDIXQ02
+  Args:
+    query: set P gain
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 53, 'prompt_tokens': 443, 'total_tokens': 496, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'tool_calls', 'logprobs': None}
+================================= Tool Message =================================
+Name: Document_Retriever
+
+'''Python code to change afm image scan parameters and parameters (P/I/D-gain)''' 
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+opmode = application.OperatingMode
+zcontrol = application.ZController
+head = application.ScanHead
+
+#Remove comments and update only requested parameters; leave other untouched.
+# Set scan parameters
+# scan.ImageWidth = 5e-6 # [m]
+# scan.ImageHeight = 5e-6 # [m]
+# scan.Scantime = 0.55 # [s] time per line 
+# scan.Points = 256 # points per line
+# scan.Lines = 256 # lines per frame
+# scan.CenterPosX = 10e-6 # [m]
+# scan.CenterPosY = 10e-6 # [m]
+# scan.SlopeX = 0.0 # degree
+# scan.SlopeY = 0.0 # degree
+# scan.Overscan = 0 # [%]
+# scan.Rotation=0 #degree
+
+# Set Z controller parameters
+# zcontrol.SetPoint = 1 # [%/V]
+# zcontrol.PGain = 3100
+# zcontrol.IGain = 3500
+del spm
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+I have retrieved the relevant code snippets for setting the image height and P gain in the AFM software. Below are the steps to modify and execute the code to make these changes.
+
+### 1. Image Height
+- **Parameter to modify:** `scan.ImageHeight`
+- **New value:** \pu{50 nm} = 50e-9 meters
+
+### 2. P Gain
+- **Parameter to modify:** `zcontrol.PGain`
+- **New value:** 175
+
+Let's prepare the code for execution: 
+
+```python
+#imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+zcontrol = application.ZController
+
+# Set scan and Z controller parameters
+scan.ImageHeight = 50e-9  # Set image height to 50 nm 
+zcontrol.PGain = 175      # Set P gain to 175
+
+del spm  # Clean up
+```
+
+I will execute this code to apply the settings.
+Tool Calls:
+  Code_Executor (call_EoXQxaODaFfaz6KS5Ias4Esh)
+ Call ID: call_EoXQxaODaFfaz6KS5Ias4Esh
+  Args:
+    code: #imports 
+import nanosurf
+
+#load application
+spm = nanosurf.SPM()  # or .C3000() or .CX(), or .CoreAFM()
+application = spm.application
+
+#all variables
+scan = application.Scan
+zcontrol = application.ZController
+
+# Set scan and Z controller parameters
+scan.ImageHeight = 50e-9  # Set image height to 50 nm 
+zcontrol.PGain = 175      # Set P gain to 175
+
+del spm  # Clean up
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 367, 'prompt_tokens': 1147, 'total_tokens': 1514, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'tool_calls', 'logprobs': None}
+Connected to running app: CX
+================================= Tool Message =================================
+Name: Code_Executor
+
+code executed successfully
+
+.............................Metadata..............................
+{}
+================================== Ai Message ==================================
+Name: AFM_Handler
+
+FINAL ANSWER: The image height has been set to \pu{50 nm} and the P gain has been set to 175 in the AFM software successfully.
+
+.............................Metadata..............................
+{'token_usage': {'completion_tokens': 36, 'prompt_tokens': 1535, 'total_tokens': 1571, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 1024}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_f7a584cf1f', 'finish_reason': 'stop', 'logprobs': None}
+
+Total Steps: 6
+Total Tokens: 3828
+Prompt Tokens: 3368
+Completion Tokens: 460
+Total Cost (USD): $0.01174
+
+Total time taken: 18.41 seconds
