@@ -1,5 +1,17 @@
 # AILA: Artificially Intelligent Laboratory Assistant
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![ChatGPT](https://img.shields.io/badge/ChatGPT-4o-74aa9c?logo=openai&logoColor=white)](#)
+[![ChatGPT](https://img.shields.io/badge/ChatGPT-3.5-74aa9c?logo=openai&logoColor=white)](#)
+[![Claude](https://img.shields.io/badge/Claude-D97757?logo=claude&logoColor=fff)](#)
+![LLaMA](https://img.shields.io/badge/LLaMA-3.3-ffce00?logo=meta&logoColor=black)
+[![Windows](https://custom-icon-badges.demolab.com/badge/Windows-11-0078D6?logo=windows11&logoColor=white)](#)
+[![macOS](https://img.shields.io/badge/macOS-000000?logo=apple&logoColor=F0F0F0)](#)
+[![Linux](https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black)](#)
+[![Python](https://img.shields.io/badge/Python-3.10-3776AB?logo=python&logoColor=fff)](#)
+[![Langchain](https://img.shields.io/badge/LangChain-ffffff?logo=langchain&logoColor=black)](#)
+![Streamlit](https://img.shields.io/badge/Built%20with-Streamlit-ff4b4b?logo=streamlit&logoColor=white)
+
 AILA (Artificially Intelligent Laboratory Assistant) is a streamlined framework designed for laboratory automation and assistance. This guide provides details on how to set up and run AILA on both Windows and macOS platforms, and where to find the benchmark data and results.
 
 ---
