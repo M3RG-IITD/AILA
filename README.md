@@ -87,6 +87,24 @@ The benchmark data and results for AILA are available in the `Data` and `Results
 
 ---
 
+## Citation
+
+If you find our work useful, please cite
+
+```
+@misc{mandal2025autonomousmicroscopyexperimentslarge,
+      title={Autonomous Microscopy Experiments through Large Language Model Agents}, 
+      author={Indrajeet Mandal and Jitendra Soni and Mohd Zaki and Morten M. Smedskjaer and Katrin Wondraczek and Lothar Wondraczek and Nitya Nand Gosvami and N. M. Anoop Krishnan},
+      year={2025},
+      eprint={2501.10385},
+      archivePrefix={arXiv},
+      primaryClass={cs.CY},
+      url={https://arxiv.org/abs/2501.10385}, 
+}
+```
+
+---
+
 ## **Support**
 If you encounter any issues or have questions, please open an issue on the [GitHub Repository](https://github.com/M3RG-IITD/AILA) or contact the project maintainer.
 
