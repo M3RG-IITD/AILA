@@ -11,6 +11,7 @@
 [![Python](https://img.shields.io/badge/Python-3.10-3776AB?logo=python&logoColor=fff)](#)
 [![Langchain](https://img.shields.io/badge/LangChain-ffffff?logo=langchain&logoColor=black)](#)
 ![Streamlit](https://img.shields.io/badge/Built%20with-Streamlit-ff4b4b?logo=streamlit&logoColor=white)
+[![DOI](https://zenodo.org/badge/896959062.svg)](https://doi.org/10.5281/zenodo.16793992)
 
 AILA (Artificially Intelligent Laboratory Assistant) is a streamlined framework designed for laboratory automation and assistance. This guide provides details on how to set up and run AILA on both Windows and macOS platforms, and where to find the benchmark data and results.
 
