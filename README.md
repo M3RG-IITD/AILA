@@ -93,14 +93,18 @@ The benchmark data and results for AILA are available in the `Data` and `Results
 If you find our work useful, please cite
 
 ```
-@misc{mandal2025autonomousmicroscopyexperimentslarge,
-      title={Autonomous Microscopy Experiments through Large Language Model Agents}, 
-      author={Indrajeet Mandal and Jitendra Soni and Mohd Zaki and Morten M. Smedskjaer and Katrin Wondraczek and Lothar Wondraczek and Nitya Nand Gosvami and N. M. Anoop Krishnan},
-      year={2025},
-      eprint={2501.10385},
-      archivePrefix={arXiv},
-      primaryClass={cs.CY},
-      url={https://arxiv.org/abs/2501.10385}, 
+@article{mandal_evaluating_2025,
+	title = {Evaluating large language model agents for automation of atomic force microscopy},
+	volume = {16},
+	issn = {2041-1723},
+	url = {https://doi.org/10.1038/s41467-025-64105-7},
+	doi = {10.1038/s41467-025-64105-7},
+	number = {1},
+	journal = {Nature Communications},
+	author = {Mandal, Indrajeet and Soni, Jitendra and Zaki, Mohd and Smedskjaer, Morten M. and Wondraczek, Katrin and Wondraczek, Lothar and Gosvami, Nitya Nand and Krishnan, N. M. Anoop},
+	month = oct,
+	year = {2025},
+	pages = {9104},
 }
 ```
 
